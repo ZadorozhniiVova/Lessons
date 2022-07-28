@@ -1,0 +1,152 @@
+h2{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 26px;    
+    color:rgba(0, 37, 123, 0.676);
+    text-transform: uppercase;    
+    margin-bottom: 10px;
+}
+
+
+.body{
+    margin: 0;
+}
+
+header{
+    width: 100%;
+    height: 250px;
+    background-image: url(./img/ships.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto; 
+    border-radius: 20px 20px 0 0;
+    background-position:center;
+}
+
+header ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    margin: 0;
+}
+
+.lang{
+    padding: 10px 0 0 15px;
+    position: absolute;
+}
+
+.lang_type:hover{
+    color:white;
+    text-decoration: underline;
+}
+.user_img__logo{   
+    border-radius: 100px;
+    height: 200px;
+    margin: 10% 20% 10% 80%;
+    
+}
+
+.user_name{
+    display: block;
+    margin-left: 52%;
+}
+.user_name .name{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 32px;    
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 20%;
+}
+
+.user_name .job{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 20px;
+}
+
+
+.social_logo{
+    height: 40px;
+    margin:10px 0 0 0;
+}
+
+.info_block__social ul{
+    list-style: none;  
+    text-decoration: none;  
+    text-transform: uppercase;
+    padding: 0;
+    display: flex;
+}
+.info_block__social li{
+    margin-left: -40px;
+    margin-right:50px
+    
+}
+
+a {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: rgba(0, 37, 123, 0.9);
+    text-decoration: none;
+}
+
+.cv{
+    display: flex;
+    margin: auto;
+}
+
+hr {
+    position: relative;
+    float: left;
+    width: 50px;
+    height: 6px;
+    background-color:rgba(0, 37, 123, 0.3);
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+}
+
+p {
+    margin: 10px 0 10px 0;
+    inline-size: auto;
+}
+
+.personal{
+    width: 1100px;
+    display: block;
+    align-items: center;
+    margin-right: 100px;
+}
+
+.about{
+    background-color: rgba(149, 144, 254, 0.1);
+    margin:0;
+    width: 100%;
+}
+
+.info_block{
+    display: flex;
+    flex-direction: column;  
+    align-items:left;
+    justify-content: center;
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 40px;    
+    width: 500px;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: rgba(0, 37, 123, 0.9);
+
+}

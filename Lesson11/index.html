@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Fonts Start-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Font End -->
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+</head>
+<body>
+    <main>
+        <div class="container_form Create_Account">
+            <form action="#" method="post" class="CreateAccountForm form">
+                <div class="form_name">
+                    <h2>Create an Account</h2>
+                </div>
+                <div class="container__input ">
+                    <div class="input__left input">
+                        <label for="User_name_input" class="form_label">First Name</label>
+                        <input type="text" name="Name" id="User_name_input" class="input_form" value="" required autocomplete="off">
+                    </div>
+                    
+                    <div class="input" name="Last_name">
+                        <label for="Last_name_input" class="form_label">Last Name</label>
+                        <input type="text" name="LastName" id="Last_name_input" class="input_form" value="" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="container__input input">
+                    <label for="Email_input" class="form_label">E-mail</label>
+                    <input type="email" name="LastName" id="Email_input" class="input_form email" value="" required autocomplete="off">
+                    <span class="bottom_text">We'll never share your email with anyone else.</span>
+                </div>
+                <div class="radioButton gender_check">
+                    <div>
+                        <input type="radio" name="gender" id="check_male" value="male">
+                        <label for="check_male">
+                            <span class="checkbox">Male</span>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" name="gender" id="check_female" value="female" requested>
+                        <label for="check_female">
+                            <span class="checkbox">Female</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="container__input adress">
+                    <div class="Country input">
+                        <label for="Country_name" class="form_label">Country</label>
+                        <select name="Country_name" id="Country_name" class="input_form">
+                            <option value="#">Select</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Ukraine">Ukraine</option>
+                        </select>
+                    </div>
+                    <div class="input__City input">
+                        <label for="City_name" class="form_label">City</label>
+                        <input type="text" name="Name" id="City_name" class="input_form" value="" required autocomplete="off">
+                    </div>
+                </div>
+                <button class="button SignUp" type="submit">
+                    <span>Sign Up</span>
+                </button>
+            </form>
+            <div class="SignUpPolicy">
+                <span class="bottom_text">
+                    By clicking the 'Sign Up' button, you confirm that you accept our 
+                    <a href="#">
+                        Terms of Use
+                    </a>
+                    and 
+                    <a href="#">
+                        Privacy Policy
+                    </a>
+                </span>
+            </div>
+            <div class="LogIn">
+                <span>Have an account?</span>
+                <a href="#">Log In</a>
+            </div>
+        </div>
+       
+        <div class="container_form Profile">
+            <form action="#" method="post" class="form">
+                <div class="form_name">
+                    <h2>Profile</h2>
+                </div>
+                <div class="container__input">
+                    <img src="./assets/img/Profile_img.png" alt="Profile_img">
+                    <div class="load_img_container">
+                        <div class="loadFile">
+                            <input type="file" name="UserPhoto" id="loadProfileImg" class="ProfileImg cursor" accept="images/*"   required>
+                            <label for="loadProfileImg" class="cursor"></label>               
+                        </div>
+                        <button type="button" class="delete__img__button">
+                            <img src="./assets/img/Delete.png" alt="">
+                        </button>
+                        <span class="bottom_text bottom_text_img">Up to 1 MB (300x300 px)</span> 
+                    </div>
+                </div>
+                <div class="container__input ">
+                    <div class="input__left input">
+                        <label for="User_name_input--profile" class="form_label">Name</label>
+                        <input type="text" name="Name" id="User_name_input--profile" class="input_form" value="" required autocomplete="off">
+                    </div>
+                    
+                    <div class="input">
+                        <label for="Email_input--profile" class="form_label">E-mail</label>
+                        <input type="email" name="LastName" id="Email_input--profile" class="input_form email" value="" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="container__input adress">
+                    <div class="Country input">
+                        <label for="Country_name--profile" class="form_label">Country</label>
+                        <select name="Country_name" id="Country_name--profile" class="input_form">
+                            <option value="#">Select</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Israel">Israel</option>
+                            <option value="Jordan">Jordan</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Ukraine">Ukraine</option>
+                        </select>
+                    </div>
+                    <div class="input__City input">
+                        <label for="City_name" class="form_label">City</label>
+                        <input type="text" name="Name" id="City_name" class="input_form" value="" required autocomplete="off">
+                    </div>
+                </div>
+                <div class="container__input ">
+                    <div class="input__left input">
+                        <label for="Zip_code_input--profile" class="form_label">Zip Code</label>
+                        <input type="text" name="Name" id="Zip_code_input--profile" class="input_form" value="" required autocomplete="off">
+                    </div>
+                    
+                    <div class="input">
+                        <label for="Tel_input_profile--profile" class="form_label">Phone Number</label>
+                        <input type="tel" name="LastName" id="Tel_input_profile--profile" class="input_form" value="" required autocomplete="off">
+                    </div>
+                </div>
+                <button class="button Update" type="submit">
+                    <span>Update</span>
+                </button>
+            </form>
+
+        </div>
+    </main>
+
+    
+</body>
+</html>

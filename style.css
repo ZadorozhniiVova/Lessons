@@ -1,0 +1,128 @@
+*{
+    box-sizing:border-box;
+}
+
+main{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    margin: 0 auto;
+    width: 1200px;
+    
+}
+
+h1, h2, h3{
+    text-transform: uppercase;
+    padding: 12px 25px;
+    color: #2F281E;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius:100px;
+    border: 1px solid #BCD0E5;
+    background-color: #FFFFFF;  
+    width: 400px;
+    margin: 0 auto;
+}
+
+.main_title{
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    width: 100%;
+    
+}
+
+.Homework{
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    justify-content: space-between;
+    align-items:center;
+    margin: 0 auto;
+}
+
+.Homework_number{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    text-align:center;
+    padding: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+
+.homework__number-box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.box__number{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:center;
+}
+
+
+
+main a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    width: 150px;
+    text-align: center;
+    vertical-align:middle;;
+    background-color: #FF9900;
+    margin-bottom: 7px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+
+    
+}
+
+a:hover{ 
+    
+    box-shadow: 0 0 15px #FF9900;
+}
+
+a:active{
+    background-color: #FFFFFF;
+    color: #FF9900;
+    transition: 0.05s;
+}
+
+/* .Homework_number{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+    text-align: center; 
+    
+}
+
+.Homework_number>div{
+    height: 20px;
+    margin: 10px auto;
+    padding: 10px 10px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius:4px;
+    color: #FFFFFF;
+    border:none;
+    background-color: #FF9900;
+    margin: 0;
+} */

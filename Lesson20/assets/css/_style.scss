@@ -1,0 +1,386 @@
+
+.main{
+
+    &__container{
+        @include container($Dc);
+        padding: 120px 0;
+
+        @include maxWidth(960px){
+           width: 95%;
+           padding-top: 100px;
+           padding-bottom: 100px;
+        }
+        @include maxWidth(800px){
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        @include maxWidth(650px){
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        
+
+        .container__item{
+            
+            
+
+            + .container__item{
+                margin: 120px auto;
+            }
+
+            &-title{
+                text-align: center;
+                margin-bottom: 80px;
+                @include maxWidth(800px){
+                    margin-bottom: 60px;
+                }
+                
+                .title__text{
+                    font-family: $Title;
+                    font-style: normal;
+                    font-weight: $fwTitle;
+                    font-size: $fsTitle;
+                    line-height: 45px;
+                    letter-spacing: 0.05em;
+                    color: $clTitle;
+
+                    @include maxWidth(960px){
+                        font-size: 30px;
+                    }
+
+                    @include maxWidth(600px){
+                        font-size: 28px;
+                    }
+
+                    @include maxWidth(550px){
+                        font-size: 24px;
+                    }
+                }
+            }
+
+            &-grid{
+                display: grid;
+                grid-template-columns: repeat(3, minmax(370px, auto));
+                grid-auto-rows: 370px;
+                gap: 30px; 
+                justify-content: center;
+                
+                
+                @include maxWidth(1300px){
+                    grid-template-columns: repeat(3, minmax(350px, auto));
+                    grid-auto-rows: 350px;
+                    gap: 20px;
+                }
+
+                @include maxWidth(1300px){
+                    grid-template-columns: repeat(3, minmax(330px, auto));
+                    grid-auto-rows: 330px;
+                    gap: 20px;
+                }
+                
+
+                @include maxWidth(1150px){
+                    grid-template-columns: repeat(3, minmax(300px, auto));
+                    grid-auto-rows: 300px;
+                    gap: 20px;
+                }
+
+                @include maxWidth(1050px){
+                    grid-template-columns: repeat(3, minmax(270px, auto));
+                    grid-auto-rows: 270px;
+                }
+
+                @include maxWidth(960px){
+                    grid-template-columns: repeat(2, minmax(350px, auto));
+                    grid-auto-rows: 350px;
+                    gap: 15px;  
+                }
+
+                @include maxWidth(800px){
+                    grid-template-columns: repeat(2, minmax(300px, auto));
+                    grid-auto-rows: 300px;    
+                }
+
+                @include maxWidth(650px){
+                    grid-template-columns: repeat(2, minmax(250px, auto));
+                    grid-auto-rows: 250px;    
+                }
+                @include maxWidth(550px){
+                    grid-template-columns: repeat(1, minmax(370px, auto));
+                    grid-auto-rows: 370px;    
+                }
+                
+
+                .grid__el{
+                    
+                    position: relative;
+                    cursor: pointer;
+                    overflow: hidden;
+                    @include border-radius(20px);
+                    
+                    &:hover {
+
+                        & .grid__el-blur{
+                            opacity:0;
+                            z-index:-1;
+                        }
+
+                        & .grid__el-img{
+                            @include resize(1.05);
+                        }
+
+                        & .text__header{
+                            opacity:1;
+                        }
+                        
+                    }
+
+                    &:active {
+
+                        & .grid__el-blur{
+                            opacity:0;
+                            z-index:-1;
+                        }
+
+                        & .grid__el-img{
+                            @include resize(1.05);
+                        }
+                        
+                    }
+
+                    
+
+                    &-img{
+                        @include border-radius(20px);
+                        position: absolute;
+                        max-width: 100%;
+                        @include transition(0.5s);
+                        @include flexCenter;
+                        display: flex;
+                        justify-content: center;
+                        align-items:center;
+                    }
+                    &-blur{
+                        width: 100%;
+                        height: 100%;
+                        z-index:0;
+                        opacity: 0.4;
+                        background: $clImgBgDef;
+                        position: absolute;
+                        @include border-radius(20px);
+                        background-color:  #FFFFFF;
+                        display: flex;
+                        justify-content: center;
+                        align-items:center;
+                        @include transition(0.5s);
+                    }
+                    &-text{
+                        height: 100%;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        z-index: 3;
+                        position: absolute;
+                        justify-content: space-between;
+                        padding: 20px;
+                        @include transition(0.5s);
+
+                        @include maxWidth(1150px){
+                            padding: 15px;
+                        }
+
+                        .text__header{
+                            display: flex;
+                            width: 100%;
+                            justify-content:space-between;
+                            opacity: 0;
+                            
+                            @include transition(0.5s);
+                            
+
+                            :hover{
+                                background-color: $clIconBGHov;
+                            }
+
+                            :active{
+                                background-color: $clIconBGHov;
+                            }
+
+                            &-el{
+                                padding: 10px;
+                                background-color: $clIconBgDef;
+                                @include flexCenter;
+                                border-radius: 8px;
+                                @include transition(0.5s);
+
+                                
+                            }
+
+                        }
+
+                        .text__footer{
+                            display: flex;
+                            width: 100%;
+                            justify-content:space-between;
+
+                            .text__name{
+                                font-family: $Subtitle;
+                                font-style: normal;
+                                font-weight: $fwSubName;
+                                font-size: $fsSubtitle;
+                                line-height: 23px;
+                                color: $clSubName;
+
+                                @include maxWidth(1150px){
+                                    font-size: 16px;
+                                }
+                                @include maxWidth(960px){
+                                    font-size: 14px;
+                                }
+                            }
+    
+                            .text__date{
+                                font-family: $Subtitle;
+                                font-style: normal;
+                                font-weight: $fwSubDate;
+                                font-size: $fsSubtitle;
+                                line-height: 23px;
+                                color: $clSubDate;
+
+                                @include maxWidth(1150px){
+                                    font-size: 16px;
+                                }
+                                @include maxWidth(960px){
+                                    font-size: 14px;
+                                }
+                            }
+                            
+                        }
+                    }
+                }  
+                
+                &--arch{
+                    .grid__el:nth-child(2){
+                        grid-column: span 2;
+                        grid-row: span 1; 
+                        @include maxWidth(960px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                    
+                    .grid__el:nth-child(3){
+                        grid-column: span 2;
+                        grid-row: span 1; 
+
+                        @include maxWidth(960px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+
+                    .grid__el:nth-child(4){
+                        grid-column: span 1;
+                        grid-row: span 1; 
+                        
+                    }    
+                    .grid__el:nth-child(6){
+                        grid-column: span 2;
+                        grid-row: span 1; 
+                        @include maxWidth(960px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                        
+                        
+                    }
+                }
+
+                &--photo{
+                    .grid__el:nth-child(2){
+                        grid-column: span 2;
+                        grid-row: span 1; 
+                        @include maxWidth(960px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                    .grid__el:nth-child(3){
+                        grid-column: span 2;
+                        grid-row: span 2; 
+                        @include maxWidth(960px){
+                            grid-column: span 1;
+                            grid-row: span 2; 
+                        }
+                        @include maxWidth(550px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                        
+                    }
+                    .grid__el:nth-child(4){
+                        grid-column: span 1;
+                        grid-row: span 2; 
+                        @include maxWidth(550px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                    .grid__el:nth-child(5){
+                        grid-column: span 2;
+                        grid-row: span 1; 
+                        @include maxWidth(960px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                }
+
+                &--style{
+                    .grid__el:nth-child(2){
+                        grid-column: span 1;
+                        grid-row: span 2; 
+                        @include maxWidth(550px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                    .grid__el:nth-child(5){
+                        grid-column: span 1;
+                        grid-row: span 2; 
+                        @include maxWidth(550px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                    .grid__el:nth-child(6){
+                        grid-column: span 1;
+                        grid-row: span 2; 
+                        @include maxWidth(550px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                    .grid__el:nth-child(8){
+                        grid-column: span 2;
+                        grid-row: span 1; 
+                        @include maxWidth(550px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                        
+                    }
+                    .grid__el:nth-child(9){
+                        grid-column: span 2;
+                        grid-row: span 1; 
+                        @include maxWidth(960px){
+                            grid-column: span 1;
+                            grid-row: span 1; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

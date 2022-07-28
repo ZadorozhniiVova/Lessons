@@ -1,0 +1,249 @@
+h1{
+    margin-top: -10px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgba(39, 46, 174, 0.582); 
+    margin: 0;
+    font-size: 80px;
+    text-decoration: none;
+    padding: 3px;
+}
+
+    
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 4px;
+    padding: 4px ;
+}
+
+h3{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.782);
+    margin: 0 20px 20px 20px;
+    font-size: 40px;
+}
+
+h4{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 5px;
+}
+body{
+    margin: auto;
+    margin-top: 10px;
+    background-image: url(../img/nebo.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;  
+    width: 95%;  
+}
+
+header{
+    margin: 0;
+    border-radius: 60px 0 60px 0;
+    border: 5px solid rgba(39, 46, 174, 0.582); 
+    display: block; 
+}
+
+.login_field{
+    margin-top: 5px;
+    margin-right: 5px;
+    float: right;
+}
+
+.login_field input{
+    border: solid 2px rgba(39, 46, 174, 0.8);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 6px;
+    text-align: center;
+    color: rgba(246, 226, 9, 1);
+    background-color: rgba(39, 46, 174, 0.4); 
+}
+
+.lables_passreg_text a{
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.site_title h1{
+    margin: 20px 20px -15px 20px;
+    width: auto;
+    font-style: italic;
+}
+.site_title span{
+    margin: 0 20px 40px 20px;
+    padding-left: 3px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration:underline;
+    font-size: 14px;
+    color:rgba(246, 226, 9, 0.782);
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+nav li:hover{
+    color: rgba(246, 226, 9, 0.782);
+    background-color: rgba(39, 46, 174, 0.582); 
+    border-radius: 15px 0;
+}
+
+
+ul,li, td {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    list-style: none;
+    line-height: 1;
+    margin:auto;
+    padding: 0;
+    color:rgba(255, 255, 255, 0.782);
+}
+
+a.contacts_box{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:rgba(255, 255, 255, 0.782);
+    text-decoration: none;
+}
+
+.site_menu{
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+.site_menu_list a{
+    color:white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    text-decoration: none;
+}
+
+.site_menu_list a:hover{
+    color: rgba(246, 226, 9, 0.9);
+    background-color: rgba(39, 46, 174, 0.582); 
+}
+
+.site_menu ul{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+main{
+    margin:auto;
+    width: 90%;
+    text-align: center;
+}
+
+.hello_msg{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:rgba(246, 226, 9, 0.782);
+    font-size: 20px;
+    border-bottom: solid 5px rgba(39, 46, 174, 0.583);
+    border-top: solid 5px rgba(39, 46, 174, 0.583); ;
+    border-radius: 20px;
+    margin-bottom: -40px;
+
+}
+.content_field{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 20px;
+    margin: 100px 0 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.content_field_title{
+    text-align: center;
+}
+table{
+    border: solid 2px rgba(39, 46, 174, 0.582);
+    border-radius: 6px;
+}
+
+
+.content_field table tr td{
+    border: solid 2px rgba(39, 46, 174, 0.582);
+    border-radius: 4px;
+    word-wrap: normal;
+    position: relative;
+    margin: 0;
+    padding: 4px;
+}
+
+.row_names p{
+    font-size: 18px;
+    margin: auto;    
+}
+
+#work_city{
+    width: 100%;
+}
+.work_city_type{
+    display:flex;
+    min-width: fit-content;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap
+}
+.work_city_type_link{
+    width: 300px;
+    height: 60px;
+    background-color:rgba(246, 226, 9, 0.6);
+    margin: 5px;
+    border:none;
+    border-radius: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.work_city_type_link a{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+    font-size: 18px;   
+    color: rgba(39, 46, 174, 1);
+}
+
+.work_city_type_link:hover{
+    box-shadow: rgba(39, 46, 174, 0.582) 0 0 20px 5px;
+}
+
+.content_field_articles{
+    display: flex;
+}
+.article_box{
+    margin: 3px;
+    border: rgba(255, 255, 255, 0.4) solid 3px;
+    border-radius: 10px;
+    width: 25%;
+}
+.article_box p{
+    padding: 4px;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    font-size: 13px;
+}
+
+footer{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.582);
+    height: 200px;
+    border-radius:40px 40px 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+.Workers_cv{
+    width: 1400px;
+    height:1000px;
+}
+.cv{
+    width: 85%;
+    height: 100%;
+    border:0;
+}
+
+.video_footer{
+    border: 0;
+    margin-top: 5px;
+}
+
+

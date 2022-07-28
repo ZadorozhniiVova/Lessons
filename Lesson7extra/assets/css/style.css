@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    border: 25px solid #2b81AC;
+    background-color:#3399CC;
+    padding-top: 40px;
+    padding-bottom: 94px;
+    margin: 0 auto;
+    color: white;
+    font-family: 'Lucida Sans', sans-serif;
+}
+
+.container{
+    max-width: 1126px; 
+    margin: 0 auto;
+     
+}
+
+h1{
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+}
+
+.weather{
+    margin: 40px auto 35px;
+    border: 1px solid #ffff;
+    font-size: 0;  
+}
+
+.weather-type{
+    width: 25%;
+    display: inline-block;
+}
+
+.weather_inside{
+    border: 2px solid #ffff;
+    padding-top: 26px;
+    padding-bottom: 27px;
+    text-align: center; 
+}
+
+.weather_inside p{
+    display: inline-block;
+    font-weight: 400;
+    font-size: 22px;    
+    vertical-align: middle;
+}
+
+.weather_inside:hover{
+    opacity: 0.7;
+}
+.weather_icon{
+    display: inline-block;
+    vertical-align: middle;
+}
+.weather_info{
+    color: rgb(255, 255, 255);
+    margin-top: 4px;
+    vertical-align: middle;
+    line-height: 61px;
+}
+
+.cels{
+    margin-right: 13px;
+    display: inline-block;
+}
+
+
+.icon_box{
+    height: 60px;
+    width: 60px;
+    vertical-align: middle;
+    display:inline-block;
+}
+
+.middle{
+    width: 50%;
+}
+
+.big{
+    width: 100%;
+}
+
+.lissabon{
+    background-color: #3399CC;
+}
+
+
+.paris{
+    background-color: #33CCCC;
+}
+
+.belgrade{
+    background-color: #996699;
+}
+
+.venice{
+    background-color: #C24747;
+}
+
+.Tel-avive{
+    background-color: #E2674A;
+}
+
+.Cair{
+    background-color: #FFCC66;
+}
+
+.NY{
+    background-color: #99CC99;
+}
+
+.ND{
+    background-color: #669999;
+}
+
+.SF{
+    background-color: #CC6699;
+}
+
+.Tokyo{
+    background-color: #339966;
+}
+
+.Sydney{
+    background-color: #666699;
+}
+
+.bottom_text{
+    font-size: 16px;
+    line-height: 19px;
+    font-family: 'Lucida Sans Unicode';
+}

@@ -1,0 +1,89 @@
+//Screen
+    $Dc: 1170px;
+    $Tb: 768px;
+    $Mb: 580px;
+
+//Fonts type
+    $fontLogo: 'Lato', sans-serif;
+    $fontTitle: 'Red Hat Display', sans-serif;
+    $fontText: 'Lato', sans-serif;
+
+//Font Weight
+    $fwLogo: 400;
+    $fwTitle: 600;
+    $fwText: 400;
+
+//Font Size
+    //Desctop
+    $fsLogoDc: 16px;
+    $fsMnTitleDc: 48px;
+    $fsTitleDc: 28px;
+    $fsTextDc: 19px;
+    $fsFtTitleDc: 48px;
+    $fsFtContactDc: 16px;
+    $fsFtCopyDc: 12px;
+
+    //Tablet
+    $fsLogoTb: 16px;
+    $fsMnTitleTb: 33px;
+    $fsTitleTb: 28px;
+    $fsTextTb: 19px; 
+    $fsFtTitleTb: 48px;  
+    $fsFtContactTb: 16px;
+    $fsFtCopyTb: 12px;
+
+    //Mobile
+    $fsLogoMb: 16px;
+    $fsMnTitleMb: 30px;
+    $fsTitleMb: 26px;
+    $fsTextMb: 16px;
+    $fsFtTitleMb: 32px;
+    $fsFtContactMb: 18px;
+    $fsFtCopyMb: 16px;
+
+//LineHeigh 
+    //Desctop
+    $lhLogoDc: 150%;
+    $lhMnTitleDc: 133%;
+    $lhTitleDc: 166%;
+    $lhTextDc: 168%;
+    $lhFtTitleDc: 133%;
+    $lhFtContactDc: 166%;
+    $lhFtCopyDc: 166%;
+
+    //Tablet
+    $lhLogoTb : 150%;
+    $lhMnTitleTb: 152%;
+    $lhTitleTb: 166%;
+    $lhTextTb: 168%;
+    $lhFtTitleTb: 133%;
+    $lhFtContactTb: 166%;
+    $lhFtCopyTb: 166%;
+    
+    //Mobile
+    $lhLogoMb : 150%;
+    $lhMnTitleMb: 167%;
+    $lhTitleMb: 166%;
+    $lhTextMb: 200%;
+    $lhFtTitleMb: 42px;
+    $lhFtContactMb: 166%;
+    $lhFtCopyMb: 166%;
+
+//Letter Spacing
+    $lsLogo: 0.5em;
+    $lsMnTitle: 0.05em;
+    $lsTitle: 0.1em;
+    $lsText: 0.05em;
+    $lsFtTitle: 0.05em;
+    $lsFtContact: 0.1em;
+    $lsFtCopy: 0.1em;
+
+//Colors
+    $clTitle: #000000;
+    $clText: #565656;
+    $clFooterBg: #F4F4F4;
+
+//Borders
+    $SocialsDefault: #ffffff;
+    $SocialsHover:#565656;
+    $brgrey: 1px solid #565656; 

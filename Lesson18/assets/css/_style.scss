@@ -1,0 +1,348 @@
+@import 'app.scss';
+
+.header{
+    .container{
+        @include container-left(0 auto, $Dc, left);
+        width: 1170px / 1440px * 100%;
+    }
+    &__container{
+        padding: 38px 0;
+        &-logo{
+            
+            @include font($fontText, $fsLogoDc, $fwLogo, $lhLogoDc, $lsLogo);
+            color:$clTitle;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.main{
+    .container{
+        @include container-left(0 auto, $Dc, left);
+        width: 1170px / 1440px * 100%;
+
+        &__section{
+            
+            & + .container__section{
+                margin-top: 90px;
+            }
+
+            .section__heading{
+                @include font($fontTitle, $fsTitleDc, $fwTitle, $lhTitleDc, $lsTitle);
+                color:$clTitle;
+                margin-bottom: 50px
+            }
+
+            .section__img{
+                margin-bottom: 20px;
+                width: 100%;
+
+                picture{
+                    width: 100%;
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+
+            .section__text{
+                width: 100%;
+                
+                &-chapter{
+                    @include font($fontText, $fsTextDc, $fwText, $lhTextDc, $lsText);
+                    color: $clText;
+                    
+                    + .section__text-chapter{
+                        margin-top: 47px;
+                    }
+                
+                }
+                
+            }
+
+            .section__text--short{
+                width: 50%;
+            }
+        }
+    }
+    &__container{
+
+        &-title{
+            
+            .title__text{
+                @include font($fontTitle, $fsMnTitleDc, $fwTitle, $lhMnTitleDc, $lsMnTitle);
+                color:$clTitle;
+
+            }
+            margin-bottom: 70px;
+        }
+        &-img{
+            width: 100%;
+            
+            picture{
+                width: 100%;
+
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        &-content{
+            padding: 90px 0;
+        }
+    }
+
+}
+
+.footer{
+    background-color: $clFooterBg;
+
+    &__container{
+        @include container-left (0 auto, $Dc, left);
+        padding: 70px 0 30px;
+        text-align: center;
+        width: 1170px / 1440px * 100%;
+        
+        
+        .content{
+            @include flex-between;
+            margin-bottom: 20px;
+            
+
+            &__title{
+                width: 80%;
+                @include flex-left-column;
+                h2{
+                    @include font($fontTitle, $fsFtTitleDc, $fwText, $lhFtTitleDc, $lsFtTitle);
+                    color:$clTitle;
+                    text-align: left;
+                }
+            }
+
+            &__phone,
+            &__email{
+                color:$clTitle;
+                @include link;
+                @include font($fontText, $fsFtContactDc, $fwText, $lhFtContactDc, $lsFtContact);
+                text-align: left;
+            }
+            &__phone{
+                margin: 30px 0 15px;
+            }
+            &__socials{
+                width: 269px;
+                @include flex-between;
+
+                .socials__item{
+                    @include transition(0.3s);
+                    @include flex-center;
+                    border:$brgrey;
+                    height: 50px;
+                    width: 50px;
+                    padding: 13px;
+                    background-color: $SocialsDefault;
+
+                    &:hover{
+                        background-color:$SocialsHover;
+                    }
+
+                    &:hover .social__default{
+                        fill: $clFooterBg;
+                    }
+                    
+                    &-logo{
+                        height: 24px;
+
+                        .social__default{
+                            fill: $SocialsHover;
+                            @include transition(0.3s);
+                        }
+                    }
+                }
+            }
+        }
+        .site__copyright{
+            display: block;
+            color: $clTitle;
+            @include font($fontText, $fsFtCopyDc, $fwText, $lhFtCopyDc, $lsFtCopy);
+            
+        }
+    }
+}
+
+@media screen and (max-width: 1024px){
+    
+    .main{
+        .container{
+            &__section{
+                .section__text--short{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:768px){
+    .header{
+        .container{
+            @include container-left(0 auto, $Tb, left);
+            width: 700px / 768px * 100%;
+            
+        }
+        &__container{
+            padding: 18px 0;
+        }
+    }
+    .main{
+        .container{
+            padding-top: 50px;
+            @include container-left(0 auto, $Tb, left);
+            width: 700px / 768px * 100%;
+
+            &__section{
+                & + .container__section{
+                    margin-top: 70px;
+                }
+            }
+        }
+        &__container{
+
+            &-title{
+                
+                .title__text{
+                    @include font($fontTitle, $fsMnTitleTb, $fwTitle, $lhMnTitleTb, $lsMnTitle);
+                    
+    
+                }
+                margin-bottom: 50px;
+            }
+        }    
+    }
+    .footer{
+        background-color: $clFooterBg;
+    
+        &__container{
+            @include flex-center-column;
+            padding: 50px 0 50px;
+            text-align: center;
+            width: 700px / 768px * 100%;
+            margin: 0 auto;
+            
+            
+            .content{
+                @include flex-center-column;
+                margin-bottom: 40px;
+                
+                &__title{
+                    width: 100%;
+                    @include flex-center-column;
+                    margin-bottom: 40px;
+                    
+                    h2{
+                        text-align: center;
+                    }
+                }
+                &__phone{
+                    margin: 20px 0 15px;
+                }
+            }
+        }
+    }    
+}
+
+@media screen and (max-width:500px){
+    .header{
+        .container{
+            @include container-left(0 auto, $Tb, left);
+            width: 500px / 550px * 100%;
+        }
+        &__container{
+            padding: 18px 0;
+        }
+    }
+    .main{
+        .container{
+            padding-top: 0;
+            @include container-left(0 auto, $Tb, left);
+            width: 500px / 550px * 100%;
+
+            &__section{
+                & + .container__section{
+                    margin-top: 70px;
+                }
+
+
+                .section__heading{
+                    @include font($fontTitle, $fsTitleMb, $fwTitle, $lhTitleMb, $lsTitle);
+                    margin-bottom: 40px
+                }
+    
+                .section__img{
+                    margin-bottom: 20px;
+                    width: 100%;
+    
+                    picture{
+                        width: 100%;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                }
+    
+                .section__text{
+                    
+                    &-chapter{
+                        @include font($fontText, $fsTextMb, $fwText, $lhTextMb, $lsText);
+                        
+                        + .section__text-chapter{
+                            margin-top: 40px;
+                        }
+                    
+                    }
+                    
+                }
+            }
+            
+        }
+        &__container{
+
+            &-title{
+                
+                .title__text{
+                    @include font($fontTitle, $fsMnTitleMb, $fwTitle, $lhMnTitleMb, $lsMnTitle);
+                    
+    
+                }
+                margin-bottom: 40px;
+            }
+            &-content{
+                padding: 70px 0;
+            }
+        } 
+    }
+    .footer{
+    
+        &__container{
+            width: 500px / 550px * 100%;            
+            
+            .content{
+                
+                &__title{
+                    width: 100%;
+                    @include flex-center-column;
+                    margin-bottom: 40px;
+                    
+                    h2{
+                        text-align: center;
+                    }
+                }
+                &__phone,
+                &__email{
+                    @include font($fontText, $fsFtContactMb, $fwText, $lhFtContactMb, $lsFtContact);
+                }
+                
+            }
+        }
+    }    
+}

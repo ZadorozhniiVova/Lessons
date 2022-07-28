@@ -1,0 +1,127 @@
+*,
+::before,
+::after
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main_container{
+  margin: 0 auto;
+  max-width: 1200px;
+  color:#000000;
+  padding-bottom: 90px;
+
+}
+/* Header Block */
+header{
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.header_container{
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+header .eng_version_button{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 50px;
+  font-family:'Tourney', cursive;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 18px;
+  letter-spacing: 0.04em;
+}
+header a{
+  text-decoration: none;
+  color: black;
+  vertical-align: middle;
+  
+ 
+}
+
+header nav{
+  font-family: 'Staatliches', cursive;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 28px;
+  display: inline-block;  
+  margin-right: 600px;
+  vertical-align: middle;
+}
+
+header nav span{
+  display: inline-block;
+  vertical-align:middle;
+  letter-spacing: 0.04em;
+}
+
+header .logo_img{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+header .logo_img img{
+  vertical-align:middle;
+}
+
+/* Content Block */
+.main_text{
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.main_text_box{
+  padding-top: 70px;
+  width: 100%;
+  display: inline-block;
+}
+
+.text_box_title{
+  display: inline-block;  
+  height: 48px;
+  letter-spacing: 0.04em;
+}
+
+.text_box_title h2, span{
+  display:inline-block;
+  
+}
+
+.text_box_title h2{
+  margin-right: 10px;
+  font-family: 'Francois One', sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 48px;
+  
+  
+}
+
+.text_box_title span{
+  font-family: 'Farro', sans-serif;
+  vertical-align: top;
+  font-weight: 300;
+  font-size: 15px;
+}
+.text_box_text{
+  display: inline-block;
+}
+.text_box_text> span{
+  font-family: 'PT Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 48px;
+}
+.main_text_box>.text_box_text>span:nth-child(n+1){
+  margin-top: 40px;
+}
+.grey_background{
+  background-color: rgb(216, 213, 213);
+}
+

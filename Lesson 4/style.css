@@ -1,0 +1,285 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+
+.container_content h1{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 47px;
+    height: 64px;
+    width: 328px;
+    text-align: left; 
+    line-height: 64px;
+    margin-top: 0;
+    margin-bottom: 36px;     
+}
+
+h2{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 46px;
+    margin-bottom:28px;
+}
+
+a {
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    color: #070707;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px; 
+}
+
+header, main, footer{
+    margin: auto;
+}
+nav{
+    max-width: 941px;
+    margin: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-bottom: 1px solid #828282;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+
+}
+
+nav ul{
+    list-style: none;
+    margin-bottom: 29px;
+    text-align: center;
+}
+nav ul>li{
+    display: inline-block;
+}
+
+nav a{
+    color: #828282;
+    line-height: 25px;
+    text-align: center;
+}
+
+
+nav ul a:hover{
+    color: #070707;
+}
+
+nav li{
+    margin-right: 41px;
+    text-align: center;
+}
+
+ul li:last-child{
+    margin-right: 0;
+}
+
+.container_menu{
+    max-width: 943px;
+    margin: auto;
+    margin-top: 23px;   
+}
+
+.container_content{
+    padding: 100px 0;
+    margin: 0 auto;
+    max-width: 943px;
+    text-align: center;
+}
+
+.section_grey{
+    background-color:#F6F6F6;
+}
+/* Home Block */
+#DenisNovik{
+    padding-top: 34px;
+}
+
+.DenisNovikFace{
+    border-top: solid 2px #090909;
+}
+
+
+
+/* AboutMe Block */
+.aboutMe_text_content_middle {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+/* Skills Block */
+
+.skills_comment{
+    margin-bottom: 79px;
+}
+
+.skills_program{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: row;
+
+}
+
+.skills_program_type:last-child{
+    margin-right: 0;
+}
+
+.skills_program_type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 90px;
+
+}
+
+.program_type_logo{
+    width: 89px;
+    height: 87px;
+    margin-bottom: 23px;
+}
+
+.program_type_logo_phooshop{
+    background: radial-gradient(75.99% 75.64% at 32.94% 22.44%, rgba(52, 54, 78, 0.98) 0%, #0C0824 100%);
+}
+
+.program_type_logo_illustrator{
+    background: radial-gradient(76% 75.63% at 32.97% 22.44%, rgba(66, 51, 37, 0.98) 0%, #1C0A00 100%);
+}
+
+.program_type_logo_afterEffects{
+    background: radial-gradient(76% 75.63% at 32.97% 22.42%, rgba(68, 47, 85, 0.98) 0%, #12002C 100%);
+}
+
+.program_type_name{
+    width: 79px;
+    height: 30px;
+    margin-bottom: 60px;
+    font-family: 'Gilroy-Bold', sans-serif;
+    font-size: 14px;
+    line-height: 17px;
+    color:  #828282;
+}
+
+.rating{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+.star{
+    width: 26px;
+    height: 26px;
+    margin-right: 9px;
+}
+
+.star:last-child{
+    margin-right: 0;
+}
+
+/* Portfolio Block */
+
+#Portfolio .container_content{
+    padding-top:118px;
+}
+.portfolio_img{
+    margin-bottom: 15px;
+}
+
+.portfolio_link a>span{
+    font-family: 'Open Sans', sans-serif;
+    text-decoration-line: underline;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+    color: #070707;
+}
+
+.portfolio_content_box{
+    margin-bottom: 135px;
+}
+.portfolio_content_box:last-child{
+    margin-bottom:0;
+}
+
+/* Footer Block */
+
+#Contacts .container_content{
+    padding-bottom: 160px;
+    margin-bottom: 0;
+}
+
+.container_footer{
+    padding: 100px 552px;
+    width: 342px;
+    height: 411px;
+    text-align: center;
+}
+
+.footer_contacts, .contact_text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact_text_content{
+    display: inline-block;
+    margin-bottom: 78px;
+}
+
+.send_message_button{
+    margin-bottom: 37px;
+}
+
+.send_message_button a{
+    background-color:#070707;
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 19px;
+    
+}
+
+.social_group{
+    width: 100%;
+    margin-bottom: 41px;
+}
+
+.social_group li{
+    display: inline-block;
+}
+
+.social_group ul li{
+    margin-right: 61px;
+}
+.social_group ul li:last-child{
+    margin-right: 0;
+    margin-left: 0;
+
+}
+
+.social_logo{
+    width: 40px;
+    height: 40px;
+}
+
+.socials_info p{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    color:#828282;
+}

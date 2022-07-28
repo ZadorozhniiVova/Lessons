@@ -1,0 +1,167 @@
+*,
+::after,
+::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+@keyframes rotateCard {
+    from{
+        transform: rotateY(0deg);
+    }
+    50%{
+        transform: rotateY(180deg)
+    }
+    to{
+        transform: rotateY(360deg);
+    }
+}
+@keyframes rotateCardBack {
+    from{
+        transform: rotateY(180deg);
+    }
+    50%{
+        transform: rotateY(360deg)
+    }
+    to{
+        transform: rotateY(540deg);
+    }
+}
+
+.card__wrapper{
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.wrapper{
+    height: 220px;
+    width: 150px;
+    display: inline-flex;
+    margin: 10px 3px;
+}
+
+.card{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    perspective: 1000px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.card__face,
+.card__back{
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-radius:20px;
+    position: absolute;
+    transition: 2.5s;
+    backface-visibility:hidden;
+}
+
+.card__face{
+    border: 2px solid black;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 10px;
+    transform: rotateY(180deg);
+    background-color:white;
+}
+
+.card__face--hover:hover{
+    animation:none;
+    transform: rotateY(180deg);
+}
+
+
+.card__back--hover:hover{
+    animation:none;
+    transform: rotateY(360deg);
+
+}
+.card__face--animation{
+    animation: rotateCard 2.5s ease infinite;
+    
+}
+
+.card__back--animation{
+    animation: rotateCardBack 2.5s ease infinite;
+}
+
+.card__face--animation--delay1s{
+    animation-delay: 1s
+}
+
+.card__back--animation--delay1s{
+    animation-delay: 1s
+}
+
+.card__face--animation--delay3s{
+    animation-delay: 3s
+}
+
+.card__back--animation--delay3s{
+    animation-delay: 3s
+}
+
+
+.card__face--animation--delay4s{
+    animation-delay: 4s
+}
+
+.card__back--animation--delay4s{
+    animation-delay: 4s
+}
+
+.card__face--animation--delay5s{
+    animation-delay: 5s
+}
+
+.card__back--animation--delay5s{
+    animation-delay: 5s
+}
+
+.card__face-title{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 30px;
+
+}
+
+.title__name{
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.title__img{
+    width: 20px;
+}
+
+.card__face-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.body__img{
+    width: 60px;
+}
+.card__face-title--rotate180{
+    transform: rotate(180deg);
+    display: flex;
+    align-content: flex-end;
+
+
+}
+.card__back-img{
+    width: 100%;
+    height: 100%;
+}

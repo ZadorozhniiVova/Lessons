@@ -1,0 +1,174 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #FFFFFF;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* Header Block */
+
+
+header{
+    margin: 0 auto;
+    font-size: 0;   
+    max-width: 1200px;
+}
+.header_conteiner{
+    padding-top: 17px;
+    padding-bottom: 17px;  
+    font-family: 'Montserrat', sans-serif;  
+}
+
+.logo{
+    vertical-align: top;
+    display: inline-block;
+    height: 46px;
+}
+
+.logo img{
+    padding: 7px 0;
+}
+
+
+nav{
+    display: inline-block;
+    height: 28px;
+    margin: 0 202px;
+}
+
+nav ul>li{
+    display: inline-block;
+}
+
+nav ul a{
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    text-align: center;
+    color: #2F281E;
+    
+}
+
+nav ul li{
+    margin-right: 20px;
+}
+nav ul li:last-child{
+    margin-right: 0;
+}
+
+
+nav ul a:hover{
+    color:#FF9900;
+}
+
+
+
+.sign{
+    display: inline-block;
+    margin-right: 0;
+}
+.SignIn{
+    padding: 12px 25px;
+    color: #2F281E;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius:4px;
+    border: 1px solid #BCD0E5;
+    background-color: #FFFFFF;
+    margin-right: 32px;
+
+}
+
+.SignUp{
+    padding: 13px 23px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius:4px;
+    color: #FFFFFF;
+    border:none;
+    background-color: #FF9900;
+    margin: 0;
+}
+
+/* Main Block */
+
+main{
+    margin: 0 auto;
+    font-size: 0;
+    max-width: 1200px;
+    
+}
+.container{
+    display: inline-block;
+    padding-top: 87px; 
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;   
+}
+
+.first-screen{
+    max-height: 495px;
+}
+
+.container_content_text{
+    width: 500px;
+    display: inline-block;
+    margin-right: 56px;
+    vertical-align: middle;
+
+
+}
+
+h1{
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 54px;
+    text-align: left;
+    color: #2F281E;
+
+}
+
+.container_content_text p{
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #544837;
+    text-align: left;
+
+}
+
+.GetStarted{
+    margin-top: 20px;
+    padding: 13px 44px;
+    background-color: #FF9900;
+    border-radius: 4px; 
+    border:none;
+    color:#FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+
+}
+.container_content_img{
+    width: 644px;
+    display:inline-block;
+    vertical-align:middle
+}
+
+
+

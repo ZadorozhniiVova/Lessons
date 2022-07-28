@@ -1,0 +1,431 @@
+.main{
+    background-color: $clMBg;
+    @include transition (0.5s);
+    height: 913px;
+
+    @include media ($Tb){
+        height: 100%
+    }
+    
+    &__container{
+        padding: 120px 0;
+        @include transition (0.5s);
+        @include container($Dc);
+        
+        
+        @include media ($Tb){
+            width: 93%;
+            padding: 80px 0;
+        }
+
+        @include media ($Mb){
+            width: 95%;
+            padding: 50px 0;
+            
+        }
+        
+        
+
+
+        .container__card{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            @include transition (1s);
+            height: 673px;
+
+            @include media ($Tb){
+                height: 575px;
+            }
+            @include media ($Mb){
+                height: 100%;
+                flex-wrap: wrap;
+                justify-content: center;
+                
+            }
+            
+
+            .card__el{
+                background-color: $clBg;
+                text-align: center;
+                position: relative;
+                width: 370px / 1200px * 100%;
+                height: 611px / 670px * 100%;
+                @include transition (0.5s);
+                @include media ($Tb){
+                    height: 84%;
+                }
+                @include media ($Mb){
+                    margin: 0 auto;
+                    width:80%;
+                    height: 611px / 670px * 100%;
+                    
+                }
+                
+
+                & + .card__el{
+                    margin-left: 30px;
+
+                    
+                    @include media ($Mb){
+                        
+                        margin: 0 auto;
+                        margin-top: 50px;
+                        
+                    }
+                }
+
+                &:hover{
+                    height: 100%;
+                    width: 400px / 1200px * 100%;
+
+                    @include media ($Mb){
+                        width:90%;
+                    }
+                        
+                    
+
+                    & .el__header-badge{
+                        opacity: 1;
+                    }
+
+                    & .card__el-main{
+                        padding-bottom: 67px;
+                    }
+                    & .card__el-footer{
+                        padding-top: 47px;
+                        padding-bottom: 30px;
+
+                        @include media ($Tb){
+                            padding-top: 37px;
+                            padding-bottom: 20px;
+                        }
+                        
+                        @include media ($Mb){
+                            padding-top: 37px;
+                            padding-bottom: 20px;
+                        }
+                        
+                    }
+                    & .el__footer-text{
+                        opacity: 1;
+                    }
+
+                    & .el__footer-button{
+                        background-color: #FD8D7B;
+                        bottom: 66px;
+
+                        @include media ($Tb){
+                            bottom: 50px;
+                        }
+                        
+                        @include media ($Mb){
+                            bottom: 50px;
+                            
+                        }
+                    }
+
+                    & .el__header-price{
+                        padding-top: 50px;
+                        padding-bottom: 40px;
+
+                        @include media ($Tb){
+                            padding-top: 40px;
+                            padding-bottom: 30px;
+                        }
+                        
+                        @include media ($Mb){
+                            padding-top: 30px;
+                            padding-bottom: 20px;
+                        }
+                    }
+                }
+                
+                
+
+                &-header{
+                    position: relative;
+                    background-color: $clBg;
+                    overflow: visible;
+
+                    .el__header-badge{
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        z-index: 3;
+                        opacity: 0;
+                        @include transition( 0.5s);
+
+                        
+
+                        .badge__buble{
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            width: 20px;
+                            height: 17px;
+                            &-small{
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                content: "";
+                                width: 4px;
+                                height: 4px;
+                                border-radius: 50%;
+                                -webkit-border-radius: 50%;
+                                -moz-border-radius: 50% ;
+                                -ms-border-radius: 50% ;
+                                -o-border-radius: 50% ;
+                                background-color:$clBtnHov;
+                            }
+
+                            &-big{
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                content: "";
+                                width: 14px;
+                                height: 14px;
+                                border-radius: 50%;
+                                -webkit-border-radius: 50%;
+                                -moz-border-radius: 50% ;
+                                -ms-border-radius: 50% ;
+                                -o-border-radius: 50% ;
+                                background-color:$clBtnHov;
+                            }
+                        }
+
+                        .badge__text{
+                            @include flexCenter;
+                            padding-right: 20px;
+                            
+                            &-buble{
+                                width: 48px;
+                                height: 48px;
+                                @include border-radius(50%);
+                                background-color: $clBtnHov;
+                                @include flexCenter;
+                                
+
+                                .buble__text{
+                                    font-family: 'Bebas Neue Book';
+                                    font-size: 24px;
+                                    line-height: 24px;
+                                    color: $white;
+                                    text-transform: uppercase;
+                                }
+                            }
+                            &-tooltip{
+                                display: inline-flex;
+                                position: absolute;
+                                right: -87px;
+                                top: 25px;
+                                width: 100px;
+                                align-items: center;
+                                justify-content: center;
+
+                                @include media ($Tb){
+                                    visibility: hidden;
+                                }
+                                
+                                svg{
+                                    position: absolute;
+                                }
+                                span{
+                                    position: absolute;
+                                    font-family: 'Bebas Neue Book';
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    font-size: 16px;
+                                    line-height: 16px;
+                                    text-align: center;
+                                    letter-spacing: 0.04em;
+                                    text-transform: uppercase;
+                                    color: #FFFFFF;
+                                }
+                            }
+                        }
+                    }
+
+                    .el__header-price{
+                        padding-top: 40px;
+                        padding-bottom: 30px;
+                        @include transition (0.5s);
+                        
+                        @include media ($Tb){
+                            padding-top: 30px;
+                            padding-bottom: 20px;
+                        }
+                        
+                        @include media ($Mb){
+                            padding-top: 20px;
+                            padding-bottom: 10px;
+                        }
+
+                        .header__price{
+                            @include flexCenter;
+                            position: relative;
+                            display: inline-flex;
+                            .price__header{
+                                font-family: 'Bebas Neue Thin';
+                                font-size: 24px;
+                                line-height: 28px;
+                                color: $cltext;
+                                position: absolute;
+                                top: 0;
+                                left: -9px;
+                            }
+    
+                            .price__value{
+                                font-family: 'Bebas Neue Thin';
+                                font-size: 60px;
+                                line-height: 52px;
+                                letter-spacing: 0.08em;
+                                color: $clTitle;
+                                width: 52px;
+                                height: 46px;
+                            }
+    
+                            .price__time{
+                                font-family: 'Bebas Neue Thin';
+                                font-style: normal;
+                                font-weight: 300;
+                                font-size: 16px;
+                                line-height: 16px;
+                                letter-spacing: 0.08em;
+                                color: $clTitle;
+                                position: absolute;
+                                bottom: -4px;
+                                right: -20px;
+                            }
+    
+                            
+                        }
+                        .price__type{
+                            margin-top: 20px;
+                            font-family: 'Bebas Neue Book';
+                            font-size: 24px;
+                            line-height: 28px;
+                            text-align: center;
+                            letter-spacing: 0.04em;
+                            color: $clTitle;
+                            text-transform: uppercase;
+                        }
+                    }
+
+
+                }
+
+                &-main{
+                    position: relative;
+                    padding-top: 40px;
+                    padding-bottom: 60px;
+                    display: flex;
+                    flex-direction: column;
+                    background-image: url(../img/bgimage.png);
+                    background-position: top;
+                    background-repeat: no-repeat;
+                    background-color: $clBg;
+                    background-size:cover;
+                    overflow: visible;
+
+                    @include media ($Tb){
+                        padding-top: 20px;
+                        padding-bottom: 20px;
+                    }
+                    
+                    @include media ($Mb){
+                        padding-top: 20px;
+                        padding-bottom: 30px;
+                    }
+                    
+                    .el__main{
+                        
+                        &-logo{
+                            margin-bottom: 30px;
+                            z-index: 2;
+                            
+                        }
+                        &-text{
+                            margin: 0 auto;
+                            z-index: 2;
+                            p{
+                                font-family: 'Roboto';
+                                font-style: normal;
+                                font-weight: 300;
+                                font-size: 16px;
+                                line-height: 20px;
+                                letter-spacing: 0.04em;
+                                text-align: left;
+                                color: $clTitle;
+                                & + p{
+                                    margin-top: 30px;
+                                    @include media ($Tb){
+                                        margin-top: 20px;
+                                    
+                                    }
+                                    
+                                    @include media ($Mb){
+                                        margin-top: 30px;
+                                    }
+                                }
+                            }    
+                            
+                        }
+                    }
+                }
+
+                &-footer{
+                    
+                    @include flexCenter;
+                    padding-top: 19px;
+                    padding-bottom: 19px;
+                    @include transition (0.5s);
+                    background-color: $clBg;
+
+
+                    .el__footer-button{
+                        background: $clBtn;
+                        border-radius: 30px;
+                        position: absolute;
+                        bottom: -27px;
+                        font-family: 'Bebas Neue Regular';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 18px;
+                        line-height: 18px;
+                        text-align: center;
+                        letter-spacing: 0.04em;
+                        padding: 20px 50px;
+                        color: $white;
+                        text-decoration: none;
+                        text-transform: uppercase;
+                        @include transition (0.5s);
+
+                        @include media ($Tb){
+
+                            padding: 15px 40px;
+                        }
+                        
+                        @include media ($Mb){
+                            padding: 15px 80px;
+                        }
+                    }
+
+                    .el__footer-text{
+                        font-family: 'Roboto';
+                        font-style: normal;
+                        font-weight: 300;
+                        font-size: 11px;
+                        line-height: 18px;
+                        letter-spacing: 0.04em;
+                        color: #A9A9A9 ;
+                        opacity: 0;
+                        @include transition( 0.5s);
+                        
+                    }
+                }
+            }
+        }
+    }
+}
