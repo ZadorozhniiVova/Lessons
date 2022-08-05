@@ -1,4 +1,11 @@
-// DOM
+// HTML:
+
+
+// <style>*{box-sizing: border-box;margin:0;padding:0;}</style>
+// <script src="./assets/js/main.js"></script>
+
+
+// JS:
 
 // Створити сторінку, що показує нумерований список пісень:
 var playList = [
