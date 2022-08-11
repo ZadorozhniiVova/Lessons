@@ -75,79 +75,113 @@ price.addEventListener('click', function(){
 // Створити HTML-сторінку з блоком тексту в рамці. Реалізувати можливість змінювати розмір блоку, якщо затиснути мишку в правому нижньому кутку і тягнути її далі.
 
 const body = document.getElementById('body')
-console.log(body)
 
 const block = document.createElement('div')
     block.setAttribute('id','block')
     block.classList.toggle('block')
-    block.setAttribute('style','width: 250px; height: 100px; border: 1px solid grey; margin: 10px; border-radius: 5px;position: relative;display: flex;box-sizing: border-box;transition: 0.8s')
+    block.setAttribute('style','position: absolute; width: 400px;min-width: 150px; max-width: 80%; height: 100px; min-height: 50px; max-height: 200px; border: 1px solid blue; margin: 10px; border-radius: 5px;display: flex;box-sizing: border-box;padding: 5px;')
     document.body.appendChild(block);
 
-let block__text = document.createElement('span')
+const blockResizer = document.createElement('div')
+    blockResizer.setAttribute('id','blockResizer')
+    blockResizer.classList.toggle('resizer')
+    blockResizer.setAttribute('style','width: 10px; height: 10px; border: 1px solid blue; border-radius: 50%; position: absolute; cursor: nwse-resize; bottom: -4px; right: -4px;background-color: white')
+    block.appendChild(blockResizer);
+
+
+let block__text = document.createElement('p')
     divText__text.classList.toggle('block__text')
-    block__text.setAttribute('style', 'z-index:1; text-wrap:wrap; width: 100%; font-family: Arial, sans-serif; font-size: 20px; padding: 3px; ')
-    block__text.innerText = 'Some Text' 
+    block__text.setAttribute('style', 'text-wrap:wrap; width: 100%; height: 100%;font-family: Arial, sans-serif; font-size: 15px;')
+    block__text.innerText = 'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. начала XVI века. ' 
     block.appendChild(block__text)
 
 
-var lastX; // Отслеживает последнюю позицию X мыши
-  var rect = document.getElementById("block");
-  rect.addEventListener("mousedown", function(ev) {
-    lastX = ev.pageX;
-      addEventListener("mousemove", moved);
-      ev.preventDefault(); // Предотвращает выделение
-  });
+// var lastX; // Отслеживает последнюю позицию X мыши
+//   var rect = document.getElementById("block");
+//   rect.addEventListener("mousedown", function(ev) {
+//     lastX = ev.pageX;
+//       addEventListener("mousemove", moved);
+//       ev.preventDefault(); // Предотвращает выделение
+//   });
 
-  function buttonPressed(press) {
-    if (press.buttons == null)
-      return press.which != 0;
-    else
-      return press.buttons != 0;
-  }
-  function moved(moved) {
-    if (!buttonPressed(moved)) {
-      removeEventListener("mousemove", moved);
-    } else {
-      var dist = moved.pageX - lastX;
-      var newWidth = Math.max(10, rect.offsetWidth + dist);
-      rect.style.width = newWidth + "px";
-      lastX = moved.pageX;
-    }
-  }
-// block.addEventListener('mousedown', function(eg){
+//   function buttonPressed(press) {
+    
+//     if (press.buttons == null)
+//       return press.which != 0;
+//     else
+//       return press.buttons != 0;
+//   }
+//   function moved(moved) {
+//     if (!buttonPressed(moved)) {
+//       removeEventListener("mousemove", moved);
+//     } else {
+//       var dist = moved.pageX - lastX;
+//       var newWidth = Math.max(10, rect.offsetWidth + dist);
+//       rect.style.width = newWidth + "px";
+//       lastX = moved.pageX;
+//     }
+//   }
+
+
+// blockResizer.addEventListener('mousedown', function(eg){
 //     console.log('mousedown')
 
     
-    // let blockWidth = eg.pageX-block.offsetLeft;
-    // let blockHeight = eg.pageY-block.offsetTop;
-    // console.log(eg.pageX)
-    // if(eg.pageX)
-    // if((parseInt(block.style.width) - eg.pageX-block.offsetLeft) < 15 && (parseInt(block.style.width) - eg.pageX-block.offsetLeft) >= -5 && (parseInt(block.style.height) - eg.pageY-block.offsetTop) < 15 && (parseInt(block.style.height) - eg.pageY- block.offsetTop) >= -5 ){
-    //     console.log('Ты в углу, двигай мышку')
+//     let blockWidth = eg.pageX-block.offsetLeft;
+//     let blockHeight = eg.pageY-block.offsetTop;
+//     console.log(`eg.pageX: ${eg.pageX}`)
+
+//     if((parseInt(block.style.width) - eg.pageX-block.offsetLeft) < 15 && (parseInt(block.style.width) - eg.pageX-block.offsetLeft) >= -5 && (parseInt(block.style.height) - eg.pageY-block.offsetTop) < 15 && (parseInt(block.style.height) - eg.pageY- block.offsetTop) >= -5 ){
+//         console.log('Ты в углу, двигай мышку')
         
-    // }
-    // while(eg.type === 'mousedown'){
-    //     block.style.width = `${eg.pageX - block.offsetLeft}` + 'px'; 
-    //     block.style.height = `${eg.pageY - block.offsetTop}` + 'px';
-    //     console.log(block.style.width)
-    //     console.log(block.style.height)
-    //     return
-    // }
+//     }
+//     while(eg.type === 'mousedown'){
+//         block.style.width = `${eg.pageX - block.offsetLeft}` + 'px'; 
+//         block.style.height = `${eg.pageY - block.offsetTop}` + 'px';
+//         console.log(block.style.width)
+//         console.log(block.style.height)
+//         return
+//     }
 
 
         
             
 
-        // body.addEventListener('mouseup', function(e){
+//         body.addEventListener('mouseup', function(e){
 
-        //     let width = `${e.pageX - block.offsetLeft}` + 'px'; 
-        //     let height = `${e.pageY - block.offsetTop}` + 'px';
-        //     block.style.width = width;
-        //     console.log(`width: ${width}`)
-        //     block.style.height = height;
-        //     console.log(`height: ${height}`)
-        //     return
-        // })
+//             let width = `${e.pageX - block.offsetLeft}` + 'px'; 
+//             let height = `${e.pageY - block.offsetTop}` + 'px';
+//             block.style.width = width;
+//             console.log(`width: ${width}`)
+//             block.style.height = height;
+//             console.log(`height: ${height}`)
+//             return
+//         })
     
 //     eg.stopPropagation()
 // })
+
+
+function resizeDiv(div){
+    const element = document.querySelector(div);
+    console.log(element)
+    const resizer = document.querySelector(div + ' .resizer');
+    console.log(resizer)
+  
+    resizer.addEventListener('mousedown', function(e) {
+      e.preventDefault()
+      body.addEventListener('mousemove', resize)
+      body.addEventListener('mouseup', stopResize)
+    })
+
+    function resize(e){
+        element.style.width = e.pageX - element.offsetLeft + 'px';
+        element.style.height = e.pageY- element.offsetTop + 'px';
+    }
+
+    function stopResize(){
+        body.removeEventListener('mousemove', resize)
+    }
+}
+
+resizeDiv('.block')
