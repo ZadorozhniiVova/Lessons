@@ -98,9 +98,7 @@ let block__text = document.createElement('p')
 
 function resizeDiv(div){
     const element = document.querySelector(div);
-    console.log(element)
     const resizer = document.querySelector(div + ' .resizer');
-    console.log(resizer)
   
     resizer.addEventListener('mousedown', function(e) {
       e.preventDefault()
@@ -119,3 +117,5 @@ function resizeDiv(div){
 }
 
 resizeDiv('.block')
+
+
