@@ -1,0 +1,295 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.container{
+    width: $Dc;
+    background: $darkBlue;
+    padding: 82px 220px; 
+    position: relative; 
+    margin: auto;
+
+    .container__content{
+        width: 1000px,;
+        margin: 0 auto; 
+        padding: 154px 200px; 
+        position: relative;
+
+        .container__content-bg{
+            width: 100%;
+            height:100%; 
+            position: absolute; 
+            top: 0;
+            left: 0;
+            background-image: url(../img/photo.png);
+            background-position: center;
+            background-size: 100%;
+        }
+
+        .container__content-bgCover{
+            width: 100%; 
+            height: 100%; 
+            position: absolute; 
+            top: 0;
+            left: 0; 
+            background: $bgCoverColor;
+        }
+
+        .gameInfo{
+            width: 600px; 
+            height: 552px;
+            position: relative;
+            z-index:  1;
+
+            .tabs {
+                width:100%; 
+                height: 120px;
+                padding: 28px 50px; 
+                background: $darkBlue;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .tabsItem{
+                    width: 120px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: column;   
+                    cursor: pointer;
+                    
+                    .tabsItem__logo{
+                        width: 24px;
+                        height: 22px;
+                        margin-bottom: 15px
+                        
+                    }
+
+                    .logoImg__el,
+                    .logoImg__el--fill{
+                        @include transition(0.15s);
+                    }
+
+                    
+                    .tabsItem__text{
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 28px;
+                        text-transform: uppercase;
+                        color: #8D91A3;
+                        @include transition(0.15s);
+
+                    }
+
+                    &:hover .logoImg__el{
+                        stroke: white;
+                    }
+
+                    &:hover .logoImg__el--fill{
+                        fill: white;
+                    }
+                    &:hover .tabsItem__text{
+                        color: white;
+                    }
+
+                    &:focus .logoImg__el{
+                        stroke: white;
+                    }
+
+                    &:focus .logoImg__el--fill{
+                        fill: white;
+                    }
+                    &:focus .tabsItem__text{
+                        color: white;
+                    }
+                }
+
+                
+            }
+            .card{
+                width: 100%;
+                background-color: $deepBlue;
+                padding: 60px 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                display: none;
+                
+                &.active {
+                    display: flex; /* по умолчанию показываем нужный блок */
+                }
+
+                .pic__info{
+                    width: 160px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+
+                    .pic__info-img{
+                        margin-bottom: 25px;
+                    }
+
+
+                    .pic__info-rating{
+                        width: 100%;
+                        display: flex;
+                        align-items:center;
+                        justify-content: center;
+
+                        .rating__star{
+                            cursor: pointer;
+                            
+                            .rating__star--fill{
+                                @include transition(0.2s);
+                            }
+                        }
+                        .rating__star + .rating__star{
+                            margin-left: 10px;
+                            
+                        }
+                    }
+
+                }
+
+                .text__info{
+                    width: 319px;
+                    @include flex-center-column;
+
+                    .text__info-description{
+                        @include flex-left-column;
+                        position: relative; 
+                        width: 100%;
+                        margin-bottom: 50px;
+
+
+                        .score{
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            width: 75px;
+                            height: 75px;
+                            @include flex-center-column;
+                            
+                            .score__ratingDown{
+                                position: absolute;
+                            }
+                            .score__ratingUp{
+                                position: absolute;
+                                @include transition(0.3s);
+                            }
+
+                            .score__rate{
+                                font-family: 'Lato';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 20px;
+                                line-height: 22px;
+                                text-align: center;
+                                color: $text;
+                                @include transition(0.3s);
+                            }
+                        }
+
+                        .description__title,
+                        .description__subtitle,
+                        .description__text{
+                            font-family: 'Lato';
+                            font-style: normal;
+                            font-weight: 400;
+                        }
+
+                        .description__title{
+                            font-size: 32px;
+                            line-height: 32px;
+                            color: $white;
+                            margin: 15px 0;
+                        }
+
+                        .description__subtitle{
+                            font-size: 14px;
+                            line-height: 20px;
+                            color: $white;
+                            margin-bottom: 40px
+                        }
+
+                        .description__text{
+                            font-size: 14px;
+                            line-height: 22px;
+                            color: $text;
+                        }
+                    }
+
+                    .text__info-toBuy{
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items:center;
+                        width: 100%;
+
+                        .toBuy__price{
+                            margin-right: 50px;
+
+                            &-discount{
+                                font-family: 'Lato';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 12px;
+                                line-height: 20px;
+                                color: $yellow;
+                            }
+
+                            &-value{
+                                font-family: 'Lato';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 32px;
+                                line-height: 32px;
+                                color: #FFFFFF;
+                            }
+                        }
+                        .toBuy__button{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 20px 30px;
+                            background: #13E28D;
+                            border-radius: 2px;
+                            border: 0;
+
+                            font-family: 'Lato';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 16px;
+                            line-height: 20px;
+                            text-transform: uppercase;
+                            color: #FFFFFF;
+                            @include transition(0.5s);
+
+                            &:hover{
+                                @include resize(1.05)
+                            }
+
+                            &:active{
+                                @include resize(1.25)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.display{
+    opacity:1
+}
+
+.notDisplay{
+    opacity:0
+}

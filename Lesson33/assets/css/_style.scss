@@ -1,0 +1,33 @@
+*,
+::after,
+::before{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.content {
+    margin: auto;
+    width: 100%;
+    max-width: 1400px;
+    box-sizing: border-box;
+  }
+  
+  .top_element {
+    background: aquamarine;
+    color: #3498db;
+    font-size: 36px;
+    line-height: 100px;
+    margin: 10px;
+    padding: 2%;
+    position: relative;
+    text-align: center;
+  
+  }
+  .slick-dots {
+    bottom: 30px;
+  }
+  .top-dots li button:before{
+    font-size: 15px;
+  }

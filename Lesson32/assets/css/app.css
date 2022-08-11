@@ -1,0 +1,299 @@
+@charset "UTF-8";
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 1440px;
+  background: #2B3040;
+  padding: 82px 220px;
+  position: relative;
+  margin: auto;
+}
+.container .container__content {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 154px 200px;
+  position: relative;
+}
+.container .container__content .container__content-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(../img/photo.png);
+  background-position: center;
+  background-size: 100%;
+}
+.container .container__content .container__content-bgCover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(41, 45, 62, 0.8);
+}
+.container .container__content .gameInfo {
+  width: 600px;
+  height: 552px;
+  position: relative;
+  z-index: 1;
+}
+.container .container__content .gameInfo .tabs {
+  width: 100%;
+  height: 120px;
+  padding: 28px 50px;
+  background: #2B3040;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container .container__content .gameInfo .tabs .tabsItem {
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  cursor: pointer;
+}
+.container .container__content .gameInfo .tabs .tabsItem .tabsItem__logo {
+  width: 24px;
+  height: 22px;
+  margin-bottom: 15px;
+}
+.container .container__content .gameInfo .tabs .tabsItem .logoImg__el,
+.container .container__content .gameInfo .tabs .tabsItem .logoImg__el--fill {
+  transition: all 0.15s ease;
+  -webkit-transition: all 0.15s ease;
+  -moz-transition: all 0.15s ease;
+  -ms-transition: all 0.15s ease;
+  -o-transition: all 0.15s ease;
+}
+.container .container__content .gameInfo .tabs .tabsItem .tabsItem__text {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: #8D91A3;
+  transition: all 0.15s ease;
+  -webkit-transition: all 0.15s ease;
+  -moz-transition: all 0.15s ease;
+  -ms-transition: all 0.15s ease;
+  -o-transition: all 0.15s ease;
+}
+.container .container__content .gameInfo .tabs .tabsItem:hover .logoImg__el {
+  stroke: white;
+}
+.container .container__content .gameInfo .tabs .tabsItem:hover .logoImg__el--fill {
+  fill: white;
+}
+.container .container__content .gameInfo .tabs .tabsItem:hover .tabsItem__text {
+  color: white;
+}
+.container .container__content .gameInfo .tabs .tabsItem:focus .logoImg__el {
+  stroke: white;
+}
+.container .container__content .gameInfo .tabs .tabsItem:focus .logoImg__el--fill {
+  fill: white;
+}
+.container .container__content .gameInfo .tabs .tabsItem:focus .tabsItem__text {
+  color: white;
+}
+.container .container__content .gameInfo .card {
+  width: 100%;
+  background-color: #212534;
+  padding: 60px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  display: none;
+}
+.container .container__content .gameInfo .card.active {
+  display: flex; /* по умолчанию показываем нужный блок */
+}
+.container .container__content .gameInfo .card .pic__info {
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.container .container__content .gameInfo .card .pic__info .pic__info-img {
+  margin-bottom: 25px;
+}
+.container .container__content .gameInfo .card .pic__info .pic__info-rating {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container .container__content .gameInfo .card .pic__info .pic__info-rating .rating__star {
+  cursor: pointer;
+}
+.container .container__content .gameInfo .card .pic__info .pic__info-rating .rating__star .rating__star--fill {
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+.container .container__content .gameInfo .card .pic__info .pic__info-rating .rating__star + .rating__star {
+  margin-left: 10px;
+}
+.container .container__content .gameInfo .card .text__info {
+  width: 319px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .score {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .score .score__ratingDown {
+  position: absolute;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .score .score__ratingUp {
+  position: absolute;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .score .score__rate {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 22px;
+  text-align: center;
+  color: #B7BACD;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .description__title,
+.container .container__content .gameInfo .card .text__info .text__info-description .description__subtitle,
+.container .container__content .gameInfo .card .text__info .text__info-description .description__text {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .description__title {
+  font-size: 32px;
+  line-height: 32px;
+  color: white;
+  margin: 15px 0;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .description__subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: white;
+  margin-bottom: 40px;
+}
+.container .container__content .gameInfo .card .text__info .text__info-description .description__text {
+  font-size: 14px;
+  line-height: 22px;
+  color: #B7BACD;
+}
+.container .container__content .gameInfo .card .text__info .text__info-toBuy {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+.container .container__content .gameInfo .card .text__info .text__info-toBuy .toBuy__price {
+  margin-right: 50px;
+}
+.container .container__content .gameInfo .card .text__info .text__info-toBuy .toBuy__price-discount {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  color: #FFDD3F;
+}
+.container .container__content .gameInfo .card .text__info .text__info-toBuy .toBuy__price-value {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 32px;
+  color: #FFFFFF;
+}
+.container .container__content .gameInfo .card .text__info .text__info-toBuy .toBuy__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  background: #13E28D;
+  border-radius: 2px;
+  border: 0;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.container .container__content .gameInfo .card .text__info .text__info-toBuy .toBuy__button:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+.container .container__content .gameInfo .card .text__info .text__info-toBuy .toBuy__button:active {
+  transform: scale(1.25);
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -o-transform: scale(1.25);
+}
+
+.display {
+  opacity: 1;
+}
+
+.notDisplay {
+  opacity: 0;
+}/*# sourceMappingURL=app.css.map */
