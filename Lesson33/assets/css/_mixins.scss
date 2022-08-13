@@ -37,6 +37,13 @@
     flex-direction: column;
     
 }
+@mixin flex-right-column {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    
+}
 
 @mixin flex-between(){
     display: flex;
@@ -109,4 +116,12 @@
     @media (max-width: $screen){
         @content;
     }
+}
+
+@mixin translateX($X){
+    transform: translateX($X);
+    -webkit-transform: translateX($X);
+    -moz-transform: translateX($X);
+    -ms-transform: translateX($X);
+    -o-transform: translateX($X);
 }

@@ -1,20 +1,23 @@
 //Screen
-$Dc: 1440px;
+$lg: 1280px;
+$md: 768px;
+$s: 320px;
 
 
 
 //Colors
-$deepBlue: #212534;
-$darkBlue: #2B3040;
-$inactive: #8D91A3;
-$text: #B7BACD;
-$yellow: #FFDD3F;
-$lightGreen: #13E28D;
-$bgCoverColor: rgba(41, 45, 62, 0.8);
-$white: white;
+$black : #000000;
+$white: #FFFFFF;
+$brown-dark: #35312D;
+$arrow-inactive: #202020;
+$tomato: #C62100;
+$tomato-light: #F16A50;
+$brown-light: #F8F1EA;
+$dot-inactive: rgba(248, 241, 234, 0.7);
+$dark-dot-inactive: #CAC2BA;
 
 //Fonts:
-
+$text: 'Montserrat', sans-serif;
 
 //Font Size:
 
