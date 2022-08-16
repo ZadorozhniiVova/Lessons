@@ -2,7 +2,7 @@ $(function(){
 
     
 
-    const filmDB='http://omdbapi.com';
+    const filmDB='https://omdbapi.com';
     const i = '?i=tt3896198';
     const apiKey='apikey=7c130cb8';
     $('#searchButton').on('click', function(){
@@ -22,7 +22,7 @@ $(function(){
                 filmTop.html('')
                 filmTop.css('border', 'none')
                 
-                const responce = await fetch(`${filmDB}/?s=${movieName}&type=${movieType}&${apiKey}&page=${pageNum}`)
+                const responce = await fetch(`${filmDB}/?s=${movieName}&type=${movieType}&${i}&${apiKey}&page=${pageNum}`)
                 const respJson = await responce.json()
 
                 if(parseInt(respJson.totalResults)>0){
@@ -87,7 +87,7 @@ $(function(){
                 
             $('#filmRight').on('click', async function(event){
                 
-                const InfoURL = "http://www.omdbapi.com/"
+                const InfoURL = "https://www.omdbapi.com/"
                 let targetId = event.target.parentNode.getAttribute("id")
                 if(targetId !== 'null' && targetId !== 'filmRight' && targetId.Response !== 'False'){
                     $('.modal').css("opacity", "0");
