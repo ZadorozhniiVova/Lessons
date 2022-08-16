@@ -22,7 +22,7 @@ $(function(){
                 filmTop.html('')
                 filmTop.css('border', 'none')
                 
-                const responce = await fetch(`${filmDB}/?s=${movieName}&type=${movieType}&${i}&${apiKey}&page=${pageNum}`)
+                const responce = await fetch(`${filmDB}/?s=${movieName}&type=${movieType}&${apiKey}&page=${pageNum}`)
                 const respJson = await responce.json()
 
                 if(parseInt(respJson.totalResults)>0){
