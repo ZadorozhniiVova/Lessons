@@ -1,98 +1,66 @@
+$(function () {
+    let cityName = ["Lisbon", "Paris", "Belgrade", "Venice", "Piraeus", "Caire", "Odesa", "Kyiv", "Rome", "Tokyo", "Sydney", "Rio"];
 
-// window.localStorage.setItem('hello','tut');
-
-// const { ready } = require("jquery")
-
-// window.localStorage.getItem('hello')
-
-// window.localStorage.removeItem('hello')
-
-// console.log(window.localStorage.key())
-
-// localStorage.clear();
-
-// const someData = {
-//     name:'Oleksandr'
-// }
-
-// window.localStorage.setItem('teacher', JSON.stringify(someData))
-
-class LocalStorageCRUD{
-    constructor(){
-
-    }
-
-    create(key, value){
-        if(typeof(value) === 'Object'){
-            window.localStorage.setItem(key, JSON.stringify(value));
-        }else{
-            window.localStorage.setItem(key, value);
-        }
+    if (document.cookie === "") {
+        console.log('Empty Cookies')
+        getWeather()
+        createCookie()
+    } else {
+        console.log('Full cookies')
+        getWeatherLOCAL()
         
     }
+    // window.cookie.onChanged.addListener(getWeather(),createCookie())
+    
+    async function getWeather() {
+        
+        for (let i = 0; i <= cityName.length - 1; i++) {
 
-    read(key){
-       return  window.localStorage.getItem(key)
+            $('.weather').append(`<div class="weather-type weather-type-${cityName[i]}"></div>`)
+            $(`.weather-type-${cityName[i]}`).append(`<div class="weather_inside weather_inside-${cityName[i]}"></div>`)
+            $(`.weather-type-${cityName[i]}`).css('overflow', `hidden`)
+            $(`.weather_inside-${cityName[i]}`).append(`<p class="cityName">${cityName[i]}</p>`)
+            $(`.weather_inside-${cityName[i]}`).append(`<div class="weather_info weather_info-${cityName[i]}"></div>`)
+            $(`.weather_info-${cityName[i]}`).append(`<p class="cels cels-${cityName[i]}"></p>`)
+            $(`.weather_info-${cityName[i]}`).append(`<div class="icon_box icon_box-${cityName[i]}"></div>`)
+
+            await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName[i]}&units=metric&lang=ua&appid=3b1e8a5b6b2113eaca0f80e605f25ce9`)
+                .then(function retJson(resp) {
+                    return resp.json()
+                })
+                .then(function (data) {
+                    window.localStorage.setItem(`data${cityName[i]}`, JSON.stringify(data));
+                    $(`.cels-${data.name}`).html(`${Math.floor(data.main.temp)}°C`)
+                    $(`.icon_box-${data.name}`).append(`<img class="animate__animated animate__zoomInDown weather_icon weather_icon-${data.name}" src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png"/>`)
+                })
+        }
     }
 
-    update(key, value){
-        for(let index = 0; index<window.localStorage.length; index++){
-            if(window.localStorage.key(index) === key){
-                if(typeof(value) === 'Object'){
-                    window.localStorage.setItem(key, JSON.stringify(value));
-                }
+    async function getWeatherLOCAL() {
+        for (let i = 0; i <= cityName.length - 1; i++) {
+
+            $('.weather').append(`<div class="weather-type weather-type-${cityName[i]}"></div>`)
+            $(`.weather-type-${cityName[i]}`).append(`<div class="weather_inside weather_inside-${cityName[i]}"></div>`)
+            $(`.weather-type-${cityName[i]}`).css('overflow', `hidden`)
+            $(`.weather_inside-${cityName[i]}`).append(`<p class="animate__animated animate__zoomIn cityName">${cityName[i]}</p>`)
+            $(`.weather_inside-${cityName[i]}`).append(`<div class="weather_info weather_info-${cityName[i]}"></div>`)
+            $(`.weather_info-${cityName[i]}`).append(`<p class="animate__animated animate__zoomInDown cels cels-${cityName[i]}"></p>`)
+            $(`.weather_info-${cityName[i]}`).append(`<div class="icon_box icon_box-${cityName[i]}"></div>`)
+
+            async function getData() {
+                let valu = localStorage.getItem(`data${cityName[i]}`);
+                let valuJson = await JSON.parse(valu)
+                $(`.cels-${cityName[i]}`).html(`${Math.floor(valuJson.main.temp)}°C`)
+                $(`.icon_box-${cityName[i]}`).append(`<img class="animate__animated animate__zoomInDown weather_icon weather_icon-${cityName[i]}" src="http://openweathermap.org/img/wn/${valuJson.weather[0].icon}.png"/>`)
             }
+            getData()
         }
-        // window.localStorage.key[index]
-        
     }
-    delete(key){
-        window.localStorage.removeItem(key)
+    function createCookie() {
+        let fisrtTime = new Date().getTime();
+        // let expTime = new Date(fisrtTime + (2000)).toUTCString()
+        let expTime = new Date(fisrtTime + (2 * 60 * 60 * 1000)).toUTCString()
+        document.cookie = `user=anonym;expires=${expTime}`;
     }
+})
 
-}
-
-
-const crud = new LocalStorageCRUD()
-const str = 'testing'
-const num = 123
-const arr = ['one', 'two', ' three']
-const bool = false
-const obj = { name: "Name", lastName:"Lastneymenko", child: {name: "maybe"}}
-const arrObj = [{name:'name1'}, {name1:'name2'}]
-
-crud.create('str', str)
-crud.create('num', num)
-crud.create('arr', arr)
-crud.create('bool', bool)
-crud.create('obj', obj)
-crud.create('arrObj', arrObj)
-
-crud.read('str') === str? console.log('str true'): console.log("str false")
-parseInt(crud.read('num')) === num? console.log('num true'): console.log("num false")
-crud.read('arr') == arr? console.log('arr true'): console.log("arr false")
-crud.read('bool') === bool? console.log('bool true'): console.log("bool false")
-crud.read('obj') == obj? console.log('obj true'): console.log("obj false")
-crud.read('arrObj') == arrObj? console.log('arrObj true'): console.log("arrObj false")
-
-
-const newObj = crud.read('obj')
-const newarrObj = crud.read('arrObj')
-console.log(newObj)
-console.log(newarrObj)
-
-
-
-crud.update('bool', bool)
-crud.update('obj', 755)
-crud.update('arrObj', 99)
-
-
-crud.delete('bool')
-// window.localStorage.setItem('arr', {key:"qwe", key1:"tut"})
-// const obj = window.localStorage.getItem('obj');
-// console.log(obj)
-// create(key, value)
-// ready(key)
-// update(key, value)
-// delete(key)

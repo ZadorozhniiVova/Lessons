@@ -6,43 +6,169 @@
     box-sizing: border-box;
 }
 
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
-#map {
-  height: 100%;
-  width: 100%;
- 
+:root {
+  --animate-duration: 2s;
+}
+main{
+  border: 25px solid #2b81AC;
+  background-color:#3399CC;
+  margin: 0 auto;
+  color: white;
+  font-family: 'Lucida Sans', sans-serif;
 }
 
-/* 
-  * Optional: Makes the sample page fill the window. 
-  */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+.container{
+  width: 100vw;
+  margin: 0 auto;
+  height: 93vh;
+  padding: 40px;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
 
-/* Optional: Makes the sample page fill the window. */
-
-.menu{
-  width: 300px;
-  height: 400px;
-  position: absolute;
-  background-color: white;
-  top: 150px;
-  right: 0;
-  opacity: 50%;
-
+h1{
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 25px;
 }
 
-.info__window{
-  width: 400px;
+.weather{
+  /*border: 1px solid #ffff;
+  */font-size: 0;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+
+.weather-type{
+  width: 25%;
+  display: inline-block;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s;
+}
+
+.weather_inside{
+  border: 2px solid #ffff;
+
+  text-align: center;
+  transition: 0.s1;
+  -webkit-transition: 0.s1;
+  -moz-transition: 0.s1;
+  -ms-transition: 0.s1;
+  -o-transition: 0.s1;
+  
+}
+
+.weather_inside p{
+  display: inline-block;
+  font-weight: 400;
+  font-size: 35px;    
+  vertical-align: middle;
+}
+
+.weather_inside:hover{
+  opacity: 0.7;
+}
+.weather_icon{
+  display: inline-block;
+  vertical-align: middle;
+}
+.weather_info{
+  color: rgb(255, 255, 255);
+  margin-top: 4px;
+  vertical-align: middle;
+  line-height: 61px;
+}
+
+.cels{
+  margin-right: 13px;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+
+.icon_box{
+
+  vertical-align: middle;
+  display:inline-block;
+}
+
+.icon_box img{
+  height: 100px;
+  width: 100px;
+}
+
+.middle{
+  width: 50%;
+}
+
+.big{
+  width: 100%;
+}
+
+.lissabon{
+  background-color: #3399CC;
+}
+
+
+.paris{
+  background-color: #33CCCC;
+}
+
+.belgrade{
+  background-color: #996699;
+}
+
+.venice{
+  background-color: #C24747;
+}
+
+.Tel-avive{
+  background-color: #E2674A;
+}
+
+.Cair{
+  background-color: #FFCC66;
+}
+
+.NY{
+  background-color: #99CC99;
+}
+
+.ND{
+  background-color: #669999;
+}
+
+.SF{
+  background-color: #CC6699;
+}
+
+.Tokyo{
+  background-color: #339966;
+}
+
+.Sydney{
+  background-color: #666699;
+}
+
+.bottom_text{
+  font-size: 16px;
+  line-height: 19px;
+  font-family: 'Lucida Sans Unicode';
+}
+
+.animate__swing{
+  animate-repeat: 2;
 }
