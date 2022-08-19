@@ -61,8 +61,8 @@ $(function () {
     }
     function createCookie() {
         let fisrtTime = new Date().getTime();
-        let expTime = new Date(fisrtTime + (15000)).toUTCString()
-        // let expTime = new Date(fisrtTime + (2 * 60 * 60 * 1000)).toUTCString()
+
+        let expTime = new Date(fisrtTime + (2 * 60 * 60 * 1000)).toUTCString()
         document.cookie = `user=anonym;expires=${expTime}`;
     }
 })
