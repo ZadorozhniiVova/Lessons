@@ -1,0 +1,46 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.main .main__container {
+  width: 100%;
+  background-color: lightblue;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.main .main__container-br {
+  content: "";
+  width: 100px;
+  border-bottom: 2px solid white;
+  display: block;
+}
+.main .main__container-title {
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 40px;
+  font-weight: 700;
+  color: white;
+  margin: 40px 0;
+}
+.main .main__container-slider {
+  width: 80%;
+}
+.main .main__container-slider .slider__item {
+  width: 300px;
+}/*# sourceMappingURL=app.css.map */

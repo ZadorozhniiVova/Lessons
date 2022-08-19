@@ -3,14 +3,17 @@ $(function () {
 
     if (document.cookie === "") {
         console.log('Empty Cookies')
-        getWeather()
-        createCookie()
+        // getWeather()
+        // createCookie() 
+        CookieStore.onchange = createCookie();
+        CookieStore.onchange = getWeather();
     } else {
         console.log('Full cookies')
         getWeatherLOCAL()
         
     }
-    // window.cookie.onChanged.addListener(getWeather(),createCookie())
+         
+    
     
     async function getWeather() {
         
@@ -58,8 +61,8 @@ $(function () {
     }
     function createCookie() {
         let fisrtTime = new Date().getTime();
-        // let expTime = new Date(fisrtTime + (2000)).toUTCString()
-        let expTime = new Date(fisrtTime + (2 * 60 * 60 * 1000)).toUTCString()
+        let expTime = new Date(fisrtTime + (15000)).toUTCString()
+        // let expTime = new Date(fisrtTime + (2 * 60 * 60 * 1000)).toUTCString()
         document.cookie = `user=anonym;expires=${expTime}`;
     }
 })
