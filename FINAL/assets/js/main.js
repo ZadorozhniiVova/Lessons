@@ -87,7 +87,7 @@ $(function () {
 
   
   async function sliderGames() {
-    let sliderItemsID = [326243,27976,647552,494384, 463723,29238, 437059,  490752]
+    let sliderItemsID = [326243,27976,647552,494384, 463723,29238,437059,490752]
     const respSAdd = await fetch(`${url}${games}?${apiKey}&search=god of war&search_exact=true`)
       const respAddJson = await respSAdd.json()
 
