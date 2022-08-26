@@ -42,8 +42,8 @@ body {
 
 .header {
   width: 100%;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(38deg, rgb(2, 0, 36) 0%, rgba(10, 23, 185, 0.7598389698) 32%, rgba(0, 108, 255, 0.8410714628) 100%);
+  background: #000046; /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .header__container {
   max-width: 1440px;
@@ -120,6 +120,11 @@ body {
 .header__container .markets__list-el__link .link__img {
   width: 100%;
   height: 100%;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
 .header__container .markets__list-el__microsoft :hover .link__img-microsoft {
   fill: #4285f4;
@@ -141,6 +146,7 @@ body {
   justify-content: center;
   margin-bottom: 0px;
   position: relative;
+  padding-bottom: 400px;
 }
 .search .game__list {
   position: absolute;
@@ -288,6 +294,8 @@ body {
   width: 100%;
   height: 40vw;
   overflow: hidden;
+  text-align: center;
+  min-width: 0;
 }
 .main .main__slider .slider__el {
   width: 100%;
@@ -303,15 +311,38 @@ body {
 }
 .main .main__slider .slider__el-name {
   font-size: 60px;
+  text-shadow: 0 2px 10px #000;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.main .main__slider .main__slider-top {
+  min-width: 0;
 }
 .main .main__slider .main__slider-bottom {
+  display: inline-block;
+  min-width: 0;
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 10vh;
+  overflow: hidden;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .main .main__slider .main__slider-bottom .bottom__slider-name {
+  text-align: center;
+  width: 273px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.main .main__slider .main__slider-bottom .bottom__slider-name__text {
   font-size: 25px;
-  color: white;
-  width: 200px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: opacity 0.5s;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }/*# sourceMappingURL=app.css.map */
