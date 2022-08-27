@@ -12,71 +12,71 @@ let marketType = $('#type').val();
 $(function () {
 
   //=====================поиск игры в сторонних магазине (start)
-  $('#search').change(() => {
+  // $('#search').change(() => {
 
-    async function allGames() {
-      const respGames = await fetch(`${url}${games}?${apiKey}&search=${$('#search').val()}&search_exact=true`)
-      const respGamesJson = await respGames.json()
-      let findGames = respGamesJson.results;
-      let gameList = `<div class="game__list"></div>`
-      $('.search').append(gameList)
+  //   async function allGames() {
+  //     const respGames = await fetch(`${url}${games}?${apiKey}&search=${$('#search').val()}&search_exact=true`)
+  //     const respGamesJson = await respGames.json()
+  //     let findGames = respGamesJson.results;
+  //     let gameList = `<div class="game__list"></div>`
+  //     $('.search').append(gameList)
 
-      for (let i = 0; i <= findGames.length - 1; i++) {
-        $('.game__list').append(`<div class="game__list-el">
-        <div class="game__list-el_bg"><img class="el__bg-img"  src="${findGames[i].background_image}"></div><span class="game__list-el_name"">${findGames[i].name}</span> </div>`)
-        $('.game__list').css('dislay","flex')
+  //     for (let i = 0; i <= findGames.length - 1; i++) {
+  //       $('.game__list').append(`<div class="game__list-el">
+  //       <div class="game__list-el_bg"><img class="el__bg-img"  src="${findGames[i].background_image}"></div><span class="game__list-el_name"">${findGames[i].name}</span> </div>`)
+  //       $('.game__list').css('dislay","flex')
 
 
-        $('.game__list-el').on('click', function (event) {
+  //       $('.game__list-el').on('click', function (event) {
 
-          $('.searchStoreType').html("")
-          $('#search').val($(event.target).text())
-          $('.game__list').css("display", "none")
+  //         $('.searchStoreType').html("")
+  //         $('#search').val($(event.target).text())
+  //         $('.game__list').css("display", "none")
 
-          if ($(event.target).text() == findGames[i].name) {
+  //         if ($(event.target).text() == findGames[i].name) {
 
-            async function findMarket() {
-              const respStores = await fetch(`${url}${games}/${findGames[i].id}/stores?${apiKey}`)
-              const respStoresJson = await respStores.json()
+  //           async function findMarket() {
+  //             const respStores = await fetch(`${url}${games}/${findGames[i].id}/stores?${apiKey}`)
+  //             const respStoresJson = await respStores.json()
 
-              if (respStoresJson.results.length > 0) {
-                for (let g = 0; g < respStoresJson.results.length; g++) {
+  //             if (respStoresJson.results.length > 0) {
+  //               for (let g = 0; g < respStoresJson.results.length; g++) {
 
-                  async function findMarketId() {
-                    const respMarket = await fetch(`${url}${stores}?${apiKey}`)
-                    const respMarketJson = await respMarket.json()
-                    let results = respMarketJson.results
+  //                 async function findMarketId() {
+  //                   const respMarket = await fetch(`${url}${stores}?${apiKey}`)
+  //                   const respMarketJson = await respMarket.json()
+  //                   let results = respMarketJson.results
 
-                    for (let n = 0; n < results.length - 1; n++) {
+  //                   for (let n = 0; n < results.length - 1; n++) {
 
-                      if (parseInt(respStoresJson.results[g].store_id) === parseInt(results[n].id)) {
-                        $('.searchStoreType').append(`<option class="searchStoreType__option" value="${results[n].name}">${results[n].name}</option>`)
-                        $('#type').change(() => {
-                          console.log($('#type').val())
-                          console.log(results[n])
-                          if (results[n].name == $('#type').val()) {
-                            console.log(results[n].name)
-                            console.log(`${respStoresJson.results[g].url}`)
+  //                     if (parseInt(respStoresJson.results[g].store_id) === parseInt(results[n].id)) {
+  //                       $('.searchStoreType').append(`<option class="searchStoreType__option" value="${results[n].name}">${results[n].name}</option>`)
+  //                       $('#type').change(() => {
+  //                         console.log($('#type').val())
+  //                         console.log(results[n])
+  //                         if (results[n].name == $('#type').val()) {
+  //                           console.log(results[n].name)
+  //                           console.log(`${respStoresJson.results[g].url}`)
 
-                            $('#searchButton').attr('href', `${respStoresJson.results[g].url}`) //Добавляем поисковую ссылку
-                          }
-                        })
-                      }
-                    }
-                  }
-                  findMarketId()
-                }
-              } else {
-                alert('no game links')
-              }
-            }
-            findMarket()
-          }
-        })
-      }
-    }
-    allGames();
-  })
+  //                           $('#searchButton').attr('href', `${respStoresJson.results[g].url}`) //Добавляем поисковую ссылку
+  //                         }
+  //                       })
+  //                     }
+  //                   }
+  //                 }
+  //                 findMarketId()
+  //               }
+  //             } else {
+  //               alert('no game links')
+  //             }
+  //           }
+  //           findMarket()
+  //         }
+  //       })
+  //     }
+  //   }
+  //   allGames();
+  // })
   //=====================поиск игры в сторонних магазине (end)
 
   //=====================рандомные номер от 1 до 100 (start)
@@ -84,14 +84,13 @@ $(function () {
   //=====================рандомные номер от 1 до 100 (end)
 
   //=====================рандомный слайдер (start)
-
+ 
   
+  
+
   async function sliderGames() {
     let sliderItemsID = [326243,27976,647552,494384, 463723,29238,437059,490752]
-    const respSAdd = await fetch(`${url}${games}?${apiKey}&search=god of war&search_exact=true`)
-      const respAddJson = await respSAdd.json()
 
-      console.log(respAddJson)
     for (let id = 0; id < sliderItemsID.length; id++) {
       const respSlider = await fetch(`${url}${games}/${sliderItemsID[id]}?${apiKey}`)
       const respSlderJson = await respSlider.json()
@@ -143,6 +142,62 @@ $(function () {
   }
 
   sliderGames()
+  
+  // $(async function(){
+  //   let sliderItemsID = [326243,27976,647552,494384, 463723,29238,437059,490752]
+      
+  //   for (let id = 0; id < sliderItemsID.length; id++) {
+  //     async function slidersCont() {
+  //       await fetch(`${url}${games}/${sliderItemsID[id]}?${apiKey}`)
+  //         .then(function retJson(resp) {
+  //           return resp.json()
+  //         })
+  //         .then(function(data){
+  //           $('.main__slider-top .slick-track').append(`
+  //           <div><div class="main__slider-el slider__el" style="background-image: url(${data.background_image})">
+  //             <h2 class="slider__el-name">${data.name}</h2> 
+  //           </div></div>`);
+  //           $('.main__slider-bottom').append(`
+  //           <div class="bottom__slider-name">
+  //               <h2 class="bottom__slider-name__text">${data.name}</h2>
+  //             </div> `);
+  //         })
+  //     }
+      
+  //     slidersCont()
+      
+  //   }
+  // })
+  
+  // $(function(){
+  //   $('.main__slider-top').slick({
+  //     slidesToShow: 1,
+  //     slidesToScroll: 1,
+  //     autoplay: true,
+  //     autoplaySpeed: 2000,
+  //     dots: false,
+  //     infinite: true,
+  //     speed:1000,
+  //     fade: true,
+  //     asNavFor:'.main__slider-bottom',
+  //   });
+    
+  //   $('.main__slider-bottom').slick({
+  //     slidesToShow: 5,
+  //     slidesToScroll: 1,
+  //     autoplay: true,
+  //     autoplaySpeed: 2000,
+  //     dots: false,
+  //     infinite: true,
+  //     speed:1000,
+  //     asNavFor:'.main__slider-top',
+  //     centerMode: true,
+  //     focusOnSelect: true,
+  //     arrows: false,
+  //   });
+  // });
+  
+  
  
   //=====================рандомный слайдер (end)
 
@@ -257,6 +312,8 @@ $(function () {
 
 
 })
+
+
 // //HEADER
 
 

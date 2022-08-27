@@ -308,6 +308,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-width: 0;
 }
 .main .main__slider .slider__el-name {
   font-size: 60px;
@@ -320,7 +321,6 @@ body {
   min-width: 0;
 }
 .main .main__slider .main__slider-bottom {
-  display: inline-block;
   min-width: 0;
   position: absolute;
   bottom: 0;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue instance</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="container pt-5">
+        <h1 class="text-center">Introduction to Vue.js</h1>
+        <p>{{someNumber}}</p>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+      new Vue({
+        el: '#app',
+        data: {
+          someNumber: 10,
+        },
+      });
+    </script>
+  </body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1 v-show="view" v-text="message"></h1>
+      
+
+      <input type="text" v-model="message1" name="" id="">
+      <h1>{{ message1 }}</h1>
+
+      <input type="checkbox" v-model="checked" name="" id="">
+      <label for="checkbox"> {{ checked }}</label>
+
+      <h1 v-pre> {{ False Lorem ipsum dolor sit amet.  }}</h1>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="script.js"></script>
+    
+  </body>
+</html> -->
+

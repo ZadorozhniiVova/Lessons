@@ -290,6 +290,7 @@ body {
       background-repeat: no-repeat;
       background-size: cover;
       @include flex-center-column;
+      min-width:0;
       // overflow: hidden;
 
       &-name{
@@ -305,7 +306,7 @@ body {
       min-width:0;
     }
     .main__slider-bottom{
-      display: inline-block;
+
       min-width:0;
       position: absolute;
       bottom:0;
@@ -313,6 +314,7 @@ body {
       overflow: hidden;
       min-height: 3rem;
       @include flexCenter;
+
       .bottom__slider-name{
         text-align: center;
         width: 273px;
