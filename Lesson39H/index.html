@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        body {
+            background: #ddeefc;
+            font-family: "Source Sans Pro", sans-serif;
+            font-size: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .mb-3 {
+            margin-bottom: 0 !important;
+        }
+
+        .form {
+            max-width: 570px;
+            margin: auto;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+            border-radius: 10px;
+            padding: 35px;
+            padding-top: 180px;
+        }
+
+        .form-select {
+            max-width: 150px;
+            width: 150px;
+        }
+
+        .form__select-date {
+            height: auto;
+            max-height: 100px;
+        }
+
+        .form__select-date+.form__select-date {
+            margin-left: 15px;
+        }
+
+        .form__secure {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .form__secure-date {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .date__choice {
+            display: flex;
+        }
+
+        .form__secure-cvv {
+            max-width: 150px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            height: 55px;
+            background: #2364d2;
+            border: none;
+            border-radius: 5px;
+            font-size: 22px;
+            font-weight: 500;
+            font-family: "Source Sans Pro", sans-serif;
+            box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
+            color: #fff;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .card {
+            max-width: 430px;
+            height: 270px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin-bottom: -130px;
+            border-radius: 15px;
+            border: none;
+        }
+
+        .card__front {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px 0 rgb(14 42 90 / 55%);
+            transform: perspective(2000px) rotateY(0deg) rotateX(0deg) rotate(0deg);
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.71, 0.03, 0.56, 0.85);
+            backface-visibility: hidden;
+            height: 100%;
+        }
+
+        .card__item {
+            font-family: "Source Code Pro", monospace;
+            padding: 25px 15px;
+            position: relative;
+            z-index: 4;
+            height: 100%;
+            text-shadow: 7px 6px 10px rgb(14 42 90 / 80%);
+            user-select: none;
+            border-radius: 15px;
+        }
+
+        .card__focus {
+            position: absolute;
+            z-index: 3;
+            border-radius: 15px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.35s cubic-bezier(0.71, 0.03, 0.56, 0.85);
+            opacity: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border: 2px solid rgb(255 255 255 / 65%);
+        }
+
+        .card__bg {
+            height: 100%;
+            background-color: rgb(28 29 39);
+            position: absolute;
+            height: 100%;
+            background-color: rgb(28 29 39);
+            left: 0;
+            top: 0;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card__bg-img {
+            max-width: 100%;
+            display: block;
+            max-height: 100%;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .label {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding: 0 10px;
+
+        }
+
+        .label__chip {
+            width: 60px;
+        }
+
+        .label__type {
+            height: 45px;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            max-width: 100px;
+            margin-left: auto;
+            width: 100%;
+        }
+
+        .card__item-number {
+            font-weight: 500;
+            line-height: 1;
+            color: rgb(255 255 255);
+            font-size: 27px;
+            margin-bottom: 35px;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .card__item-holder {
+            color: rgb(255 255 255);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        /* .holder__name,
+        .holder__expire-title {
+            margin-bottom: 6px;
+        } */
+
+        .holder__name {
+            color: rgb(255 255 255);
+            width: 100%;
+            max-width: calc(100% - 85px);
+            padding: 10px 15px;
+            font-weight: 500;
+            display: block;
+            cursor: pointer;
+                }
+
+        .holder__name span {
+            opacity: 0.7;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .holder__name h3 {
+            font-size: 18px;
+            line-height: 1;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-transform: uppercase;
+        }
+
+        .holder__expire {
+            flex-wrap: wrap;
+            font-size: 18px;
+            margin-left: auto;
+            padding: 10px;
+            display: inline-flex;
+            width: 80px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .holder__expire-date {
+            font-weight: 500;
+            line-height: 1;
+            color: #fff;
+            font-size: 27px;
+
+            display: inline-block;
+
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .holder__expite-title {
+            opacity: 0.7;
+            font-size: 13px;
+            padding-bottom: 6px;
+            width: 100%;
+        }
+
+        .holder__expire-date h3 {
+            margin-bottom: 0;
+            width: 22px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper" id="wrapper">
+        <div class="card">
+            <div class="card__front">
+                <div class="card__focus"></div>
+                <div class="card__bg">
+                    <img src="./13.jpeg" alt="" class="card__bg-img">
+                </div>
+                <div class="card__item">
+
+                    <div class="card__item-label label">
+                        <img src="./chip.png" alt="chip" class="label__chip">
+                        <img src="./visa.png" alt="visa" class="label__type">
+                    </div>
+                    <div class="card__item-number Number"> {{cardNumber}}</div>
+                    <div class="card__item-holder holder">
+                        <div class="holder__name">
+                            <span>Card Holder</span>
+                            <h3>{{cardName}}</h3>
+                        </div>
+                        <div class="holder__expire">
+                            <span class="holder__expire-title">Expires</span>
+                            <div class="holder__expire-date date">
+                                <h3>{{cardExpireYear}}</h3>
+                                <h3>/</h3>
+                                <h3>{{cardExpireMonth}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <form class="form" id="form">
+            <div class="mb-3 ">
+                <label for="exampleInputNumber" class="form-label">Card Number</label>
+                <input type="text" class="form-control" id="exampleInputNumber" minlength="16" maxlength="16" required
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                    v-model="cardNumber">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Card Holders</label>
+                <input type="text" class="form-control" id="exampleInputName" required v-model="cardName">
+            </div>
+            <div class="form__secure">
+
+                <div class="form__secure-date date" required>
+                    <label for="dateSelect" class="form-label">Expiration Date</label>
+                    <div class="date__choice">
+                        <select class="form-select form__select-date" aria-label="Default select example"
+                            id="dateSelect" required v-model="cardExpireYear">
+                            <option selected value="">Month</option>
+                            <option v-for="n in 12" :value="n">{{ n }}</option>
+                        </select>
+                        <select class="form-select form__select-date" aria-label="Default select example" required
+                            v-model="cardExpireMonth">
+                            <option selected value="">Year</option>
+                            <option v-for="n in 12" :value="date+n-2000">{{ date+n }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form__secure-cvv">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="cvv" minlength="3" maxlength="3" required
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" />
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <script src="./main.js"></script>
+    <script>
+        new Vue({
+            el: "#wrapper",
+            data: {
+                // isActive: false,
+                // color: "blue",
+                date: 2021,
+                cardNumber: "",
+                cardName: "",
+                cardExpireYear: "",
+                cardExpireMonth: "",
+            },
+            computed: {
+
+                // getCssClasses: function () {
+                //     return {
+                //         'red': this.isActive,
+                //         'green': !this.isActive
+                //     }
+                // }
+            },
+            methods: {
+
+
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
