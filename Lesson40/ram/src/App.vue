@@ -1,32 +1,21 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
+    <ram-nav-menu></ram-nav-menu>
+    <RamBody></RamBody>
+    <router-view class="mb-3"></router-view>
+    <RamFooter></RamFooter>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+<script>
+import RamNavMenu from "@/components/general/RamNavMenu.vue";
+import RamBody from "@/components/general/RamBody.vue";
+import RamFooter from "@/components/general/RamFooter.vue";
+export default {
+  components: {
+    RamNavMenu,
+    RamBody,
+    RamFooter,
+  },
+};
+</script>
