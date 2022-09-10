@@ -4,7 +4,7 @@ const stores = "/stores";
 const games = "/games";
 const platforms = "/platforms"; // две страницы(&page=1)
 const url = "https://api.rawg.io/api";
-const apiKey = 'key=3d770078d0d8493a8de967ae4f287969';
+const apiKey = 'key=aa0261996cd54584b28260614f7a2d1b';
 
 let marketType = $('#type').val();
 

@@ -45,22 +45,22 @@
             </div>
           </div>
           <div class="card__item-holder holder">
-            <div class="holder__name" style="position: relative">
+            <div class="holder__name">
               <span class="holder__name-title">Card Holder</span>
               <transition name="slide-fade-up">
                 <span class="holder__subtitle-name" v-if="!cardName.length"
                   >FULL NAME</span
                 >
                 <span v-if="cardName.length" key="1">
-                  
-                    <span
-                      class="holder__subtitle-name"
-                      v-for="(n, $index) in cardName.replace(/\s\s+/g, ' ')"
-                      :key="$index + 1"
-                      >
-                      <transition name="slide-fade-up"><span>{{ n }}</span></transition>
-                    </span>
-
+                  <span
+                    class="holder__subtitle-name"
+                    v-for="(n, $index) in cardName.replace(/\s\s+/g, ' ')"
+                    :key="$index + 1"
+                  >
+                    <transition name="slide-fade-up"
+                      ><span>{{ n }}</span></transition
+                    >
+                  </span>
                 </span>
               </transition>
             </div>
@@ -521,8 +521,14 @@ export default {
   max-width: calc(100% - 85px);
   padding: 10px 15px;
   font-weight: 500;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   cursor: pointer;
+}
+
+.holder__name span {
+  overflow: hidden;
 }
 
 .holder__name-title {
@@ -546,6 +552,7 @@ export default {
   text-overflow: ellipsis;
   text-transform: uppercase;
   margin-bottom: 0;
+  overflow: hidden;
 }
 
 .holder__subtitle-name__letter {
