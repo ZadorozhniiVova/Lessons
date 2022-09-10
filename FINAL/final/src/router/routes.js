@@ -11,17 +11,17 @@ const routes = [
     name: "home",
     component: HomeView,
   },
-  // {
-  //   path: "/game",
-  //   name: "game",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "game" */ "../views/GameView.vue"),
-  // },
   {
-    name:'game',
+    path: "/game",
+    name: "game",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "game" */ "../views/GameView.vue"),
+  },
+  {
+    name: "gameId",
     path: "/game/:id",
     component: GameView,
   },

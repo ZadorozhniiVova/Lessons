@@ -12,7 +12,7 @@
         :key="popular"
       >
         <router-link
-          :to="{ name: 'game', params: { id:`${popular.id}`} }"
+          :to="{ name: 'gameId', params: { id: `${popular.id}` } }"
           class="popularCard"
         >
           <v-card :loading="loading" class="mx-auto my-12" max-width="374">

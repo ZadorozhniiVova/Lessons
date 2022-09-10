@@ -117,158 +117,40 @@
             <div class="gameCard__container-pageTitle pageTitle">
               <h4 class="pageTitle__text">Shops</h4>
             </div>
-            <div class="gameCard__container-game game">
-              <div class="game__title">
-                <h1 class="game__title-text">{{ gameInfo.name }}</h1>
-              </div>
-              <div class="game__subtitle">
-                <div class="game__subtitle-author author">
-                  <h3
-                    class="author__name"
-                    v-for="publisher of gameInfo.publishers"
-                    :key="publisher"
-                  >
-                    {{ publisher.name }}
-                  </h3>
-                </div>
-                <div class="game__subtitle-genre genre">
-                  <ul class="genre__list">
-                    <li
-                      class="genre__list-item"
-                      v-for="genre in gameInfo.genres"
-                      :key="genre"
-                    >
-                      {{ genre.name }}
-                    </li>
-                  </ul>
-                </div>
-                <div class="game__subtitle-rating rating">
-                  <v-rating
-                    :value="gameInfo.rating"
-                    color="grey"
-                    dense
-                    half-increments
-                    readonly
-                    size="24"
-                  ></v-rating>
-                  <span class="rating__answers">{{
-                    gameInfo.ratings_count
-                  }}</span>
-                </div>
-              </div>
-              <div class="game__info">
-                <h4 class="game__info-text">{{ gameInfo.description_raw }}</h4>
-              </div>
-            </div>
-            <div
-              class="gameCard__container-buy buy"
-              v-if="storesInfo.length != 0"
-            >
-              <v-btn
-                class="buy__btn"
-                depressed
-                elevation="6"
-                plain
-                x-large
-                color="#2C2E30"
-                v-for="(platform, $index) in storesData"
-                :key="$index"
-                :value="platform"
-                :href="storesData[$index].url"
-                ><span class="buy__btn-text">{{
-                  storesData[$index].name
-                }}</span>
-              </v-btn>
-            </div>
-            <div v-else><h2 style="color: white">Out of Selling</h2></div>
-            <div class="gameCard__container-age age">
-              <div class="age__value">
-                <span class="age__value-text"> {{ ageLimit }} +</span>
-              </div>
-              <div class="age__info">
-                <span class="age__info-text">Age limit</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </slide>
-      <slide id="gameMainSlide">
-        <div
-          class="gameCard"
-          :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
-        >
-          <div class="gameCard__cover"></div>
-          <div class="gameCard__container">
-            <div class="gameCard__container-pageTitle pageTitle">
-              <h4 class="pageTitle__text">Shops</h4>
-            </div>
-            <div class="gameCard__container-game game">
-              <div class="game__title">
-                <h1 class="game__title-text">{{ gameInfo.name }}</h1>
-              </div>
-              <div class="game__subtitle">
-                <div class="game__subtitle-author author">
-                  <h3 class="author__name">
-                    {{ gameInfo.publishers[0].name }}
-                  </h3>
-                </div>
-                <div class="game__subtitle-genre genre">
-                  <ul class="genre__list">
-                    <li
-                      class="genre__list-item"
-                      v-for="genre in gameInfo.genres"
-                      :key="genre"
-                    >
-                      {{ genre.name }}
-                    </li>
-                  </ul>
-                </div>
-                <div class="game__subtitle-rating rating">
-                  <v-rating
-                    :value="gameInfo.rating"
-                    color="grey"
-                    dense
-                    half-increments
-                    readonly
-                    size="24"
-                  ></v-rating>
-                  <span class="rating__answers">{{
-                    gameInfo.ratings_count
-                  }}</span>
-                </div>
-              </div>
-              <div class="game__info">
-                <h4 class="game__info-text">{{ gameInfo.description_raw }}</h4>
-              </div>
-            </div>
-            <div
-              class="gameCard__container-buy buy"
-              v-if="storesInfo.length != 0"
-            >
-              <v-btn
-                class="buy__btn"
-                depressed
-                elevation="6"
-                plain
-                x-large
-                color="#2C2E30"
-                v-for="(platform, $index) in storesData"
-                :key="$index"
-                :value="platform"
-                :href="storesData[$index].url"
-                ><span class="buy__btn-text">{{
-                  storesData[$index].name
-                }}</span>
-              </v-btn>
-            </div>
-            <div v-else><h2 style="color: white">Out of Selling</h2></div>
-            <div class="gameCard__container-age age">
-              <div class="age__value">
-                <span class="age__value-text"> {{ ageLimit }} +</span>
-              </div>
-              <div class="age__info">
-                <span class="age__info-text">Age limit</span>
-              </div>
+
+            <div class="gameCard__container-require require">
+              <template>
+                <v-card>
+                  <v-tabs vertical>
+                    <v-tab v-for="platform in platforms" :key="platform">
+                      <v-icon left> mdi-account </v-icon>
+                      {{ platform.name }}
+                    </v-tab>
+                    <v-tab-item>
+                      <v-card
+                        flat
+                        v-for="platform in platforms"
+                        :key="platform"
+                      >
+                        <v-card-text
+                          style="display: flex; justify-content: space-between"
+                        >
+                          <div>
+                            <p v-for="minReq in platform.minReq" :key="minReq">
+                              {{ minReq }}
+                            </p>
+                          </div>
+                          <div>
+                            <p v-for="recReq in platform.recReq" :key="recReq">
+                              {{ recReq }}
+                            </p>
+                          </div>
+                        </v-card-text>
+                      </v-card>
+                    </v-tab-item>
+                  </v-tabs>
+                </v-card>
+              </template>
             </div>
           </div>
         </div>
@@ -312,6 +194,7 @@ export default {
       storesNames: [],
       storesData: [],
       ageLimit: "12",
+      platforms: [],
 
       //stiles
       isOpacity: false,
@@ -332,15 +215,26 @@ export default {
       `games/${gameId}/stores?&key=aa0261996cd54584b28260614f7a2d1b`
     );
 
-    console.log("respGameId", respGameId.data.stores);
+    console.log("respGameId", respGameId.data.platforms);
     console.log("respGameIdMarket.data.results", respGameIdMarket.data.results); //url
     this.gameInfo = respGameId.data;
     this.storesInfo = respGameIdMarket.data.results;
 
+    for (let i = 0; i < respGameId.data.platforms.length; i++) {
+      this.platforms.push({
+        name: respGameId.data.platforms[i].platform.name,
+        released: respGameId.data.platforms[i].released_at,
+        minReq: respGameId.data.platforms[i].requirements.minimum.split("\n"),
+        recReq:
+          respGameId.data.platforms[i].requirements.recommended.split("\n"),
+      });
+    }
+    console.log("this.platforms", this.platforms);
+
     for (let i = 0; i < respGameId.data.stores.length; i++) {
       this.storesNames.push(respGameId.data.stores[i].store.name);
     }
-    console.log(this.storesNames);
+    // console.log(this.storesNames);
 
     for (let i = 0; i < this.storesInfo.length; i++) {
       this.storesData.push({
@@ -348,7 +242,7 @@ export default {
         url: this.storesInfo[i].url,
       });
     }
-    console.log("this.storesData", this.storesData);
+    // console.log("this.storesData", this.storesData);
   },
 };
 </script>
@@ -408,6 +302,7 @@ export default {
         .hooper-indicator {
           &:after {
             content: "Game Info";
+            text-shadow: #999 0 0 10px;
             color: white;
             width: 200px;
             display: inline-block;
@@ -598,12 +493,25 @@ export default {
 
         &__info {
           &-text {
+            width: 100%;
+            max-width: 100%;
+            height: 230px;
+            max-height: 230px;
             font-family: "Josefin Sans", sans-serif;
             font-weight: 300;
             letter-spacing: 1.5px;
-            font-size: 20px;
+            font-size: 15px;
             line-height: 33px;
             color: #fefcfe;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -moz-box;
+            -moz-box-orient: vertical;
+            display: -webkit-box;
+            -webkit-line-clamp: 7;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+            box-orient: vertical;
           }
         }
       }
@@ -612,13 +520,15 @@ export default {
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
 
         &__btn {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
 
-          padding: 12px 24px !important;
+          padding: 6px 12px !important;
           text-align: left !important;
           background-color: #2c2e30 !important;
           height: 57px !important;
@@ -688,5 +598,6 @@ export default {
 
 .isOpacity {
   opacity: 1;
+  text-shadow: none;
 }
 </style>

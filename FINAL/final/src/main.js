@@ -21,7 +21,7 @@ import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import VueSocialSharing from "vue-social-sharing";
 import Multiselect from "vue-multiselect";
-import routes from '@/router/routes.js';
+import routes from "@/router/routes.js";
 
 Vue.component("VueSlickCarousel", VueSlickCarousel);
 Vue.use(Buefy);
