@@ -69,7 +69,7 @@ export default {
 
     watch(
       () => searchedGame,
-      (game) =>
+      () =>
         axios
           .get(
             `https://api.rawg.io/api/games?key=aa0261996cd54584b28260614f7a2d1b&search=${searchedGame}&search_exact=true`
@@ -77,11 +77,6 @@ export default {
           .then((res) => (data.value = res.data.results)),
       console.log("RESULT", data.value)
     );
-
-    return {
-      data,
-      searchedGame,
-    };
   },
 };
 //     $("#search").change(() => {

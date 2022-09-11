@@ -107,7 +107,7 @@
           </div>
         </div>
       </slide>
-      <slide id="gameMainSlide">
+      <!-- <slide id="gameMainSlide">  //Характеристики
         <div
           class="gameCard"
           :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
@@ -129,20 +129,20 @@
                     <v-tab-item>
                       <v-card
                         flat
-                        v-for="platform in platforms"
-                        :key="platform"
+                        v-for="(platform,$index ) in platforms"
+                        :key="$index"
                       >
                         <v-card-text
                           style="display: flex; justify-content: space-between"
                         >
                           <div>
-                            <p v-for="minReq in platform.minReq" :key="minReq">
-                              {{ minReq }}
+                            <p>
+                              {{ platform[$index].minReq }}
                             </p>
                           </div>
                           <div>
-                            <p v-for="recReq in platform.recReq" :key="recReq">
-                              {{ recReq }}
+                            <p>
+                              {{ platform[$index].recReq }}
                             </p>
                           </div>
                         </v-card-text>
@@ -154,8 +154,88 @@
             </div>
           </div>
         </div>
-      </slide>
+      </slide> -->
 
+      <slide id="gameMainSlide" v-if="achivements.length > 0">
+        <div
+          class="gameCard"
+          :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
+        >
+          <div class="gameCard__cover"></div>
+          <div class="gameCard__container">
+            <div class="gameCard__container-pageTitle pageTitle">
+              <h4 class="pageTitle__text">Achivements</h4>
+            </div>
+            <div class="gameCard__container-achivement achivement">
+              <div
+                class="achivement__card"
+                v-for="achivement in achivements"
+                :key="achivement"
+              >
+                <div class="achivement__fwd">
+                  <img
+                    :src="achivement.image"
+                    alt=""
+                    class="achivement__fwd-img"
+                  />
+                </div>
+                <div class="achivement__back">
+                  <div class="achivement__back-info">
+                    <p clas="achivment__name">
+                      {{ achivement.name }}
+                    </p>
+                    <p class="achicement__goal">
+                      {{ achivement.description }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </slide>
+      <slide id="gameMainSlide" v-if="screenshots.length > 0">
+        <div
+          class="gameCard"
+          :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
+        >
+          <div class="gameCard__cover"></div>
+          <div class="gameCard__container">
+            <div class="gameCard__container-pageTitle pageTitle">
+              <h4 class="pageTitle__text">Screenshots</h4>
+            </div>
+            <div class="gameCard__container-screenschots screenschots">
+              <hooper group="screenshots" class="screenschots__slider-Top" >
+                <slide
+                  class="screenschots__slideTop"
+                  v-for="screenshot in screenshots"
+                  :key="screenshot"
+                >
+                  <img class="screenschots__slideTop-img" :src="screenshot" />
+                </slide>
+              </hooper>
+
+              <hooper
+                group="screenshots"
+                :itemsToShow="3"
+                :centerMode="true"
+                class="screenschots__slider-Btm"
+              >
+                <slide
+                  class="screenschots__slideBtm"
+                  v-for="screenshot in screenshots"
+                  :key="screenshot"
+                >
+                  <img class="screenschots__slideBtm-img" :src="screenshot" />
+                </slide>
+
+                <hooper-navigation slot="hooper-addons-screenshot"></hooper-navigation>
+                <hooper-pagination slot="hooper-addons-screenshot"></hooper-pagination>
+              </hooper>
+            </div>
+          </div>
+        </div>
+      </slide>
       <hooper-pagination slot="hooper-addons"></hooper-pagination>
       <hooper-pagination class="nav__btn" slot="hooper-addons">
         <ol class="hooper-indicators">
@@ -195,6 +275,8 @@ export default {
       storesData: [],
       ageLimit: "12",
       platforms: [],
+      achivements: [],
+      screenshots: [],
 
       //stiles
       isOpacity: false,
@@ -214,23 +296,34 @@ export default {
     let respGameIdMarket = await Api().get(
       `games/${gameId}/stores?&key=aa0261996cd54584b28260614f7a2d1b`
     );
+    let respGameIdAchiv = await Api().get(
+      `games/${gameId}/achievements?&key=aa0261996cd54584b28260614f7a2d1b`
+    );
+    let respGameIdScreenshots = await Api().get(
+      `games/${gameId}/screenshots?&key=aa0261996cd54584b28260614f7a2d1b`
+    );
 
-    console.log("respGameId", respGameId.data.platforms);
-    console.log("respGameIdMarket.data.results", respGameIdMarket.data.results); //url
+    console.log("respGameId", respGameId.data);
+    console.log("respGameIdAchiv", respGameIdAchiv.data.results);
+
+    // console.log("respGameIdMarket.data.results", respGameIdMarket.data.results); //url
     this.gameInfo = respGameId.data;
     this.storesInfo = respGameIdMarket.data.results;
+    this.achivements = respGameIdAchiv.data.results;
+
+    for (let i = 0; i < respGameIdScreenshots.data.results.length; i++) {
+      this.screenshots.push(respGameIdScreenshots.data.results[i].image);
+    }
+    console.log(" this.screenshots", this.screenshots);
 
     for (let i = 0; i < respGameId.data.platforms.length; i++) {
       this.platforms.push({
         name: respGameId.data.platforms[i].platform.name,
         released: respGameId.data.platforms[i].released_at,
-        minReq: respGameId.data.platforms[i].requirements.minimum.split("\n"),
-        recReq:
-          respGameId.data.platforms[i].requirements.recommended.split("\n"),
       });
     }
-    console.log("this.platforms", this.platforms);
 
+    console.log("this.platforms", this.platforms);
     for (let i = 0; i < respGameId.data.stores.length; i++) {
       this.storesNames.push(respGameId.data.stores[i].store.name);
     }
@@ -366,6 +459,7 @@ export default {
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
+      position: relative;
 
       .pageTitle {
         top: 80px;
@@ -515,7 +609,65 @@ export default {
           }
         }
       }
+      .achivement {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        flex-direction: row;
 
+        .achivement__card {
+          width: 200px;
+          height: 200px;
+          margin: 5px;
+          position: relative;
+          overflow: hidden;
+          border-radius: 2px;
+          text-align: center;
+
+          &:hover .achivement__back {
+            transform: translateX(0);
+          }
+          .achivement__fwd {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            &-img {
+              margin: 0;
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .achivement__back {
+            width: 100%;
+            height: 100%;
+            padding: 5px;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+            transition: 0.4s ease-in-out;
+
+            .achivement__back-info {
+              font-family: "Josefin Sans", sans-serif;
+              .achivment__name {
+                text-shadow: rgb(252, 252, 252) 0 0 10px;
+                font-weight: 300;
+                font-size: 15px;
+              }
+              .achicement__goal {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
       .buy {
         display: flex;
         justify-content: flex-start;
@@ -590,6 +742,25 @@ export default {
             font-weight: 400;
             font-size: 35px;
           }
+        }
+      }
+
+      .screenschots{
+        width: 100%;
+        height: 100%;
+
+        .screenschots__slideTop {
+          height: 400px;
+        }
+        
+        .screenschots__slideTop-img{
+          margin: 5px;
+        }
+
+        .screenschots__slideBtm-img{
+          margin: 5px;
+          height: 100%;
+          width: 100%;
         }
       }
     }

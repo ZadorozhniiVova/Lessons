@@ -22,6 +22,10 @@ import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import VueSocialSharing from "vue-social-sharing";
 import Multiselect from "vue-multiselect";
 import routes from "@/router/routes.js";
+import VueAnimXYZ from "@animxyz/vue";
+import "@animxyz/core";
+import "@morioh/v-lightbox/dist/lightbox.css";
+// import Lightbox from '@morioh/v-lightbox'
 
 Vue.component("VueSlickCarousel", VueSlickCarousel);
 Vue.use(Buefy);
@@ -35,6 +39,8 @@ Vue.use(IconsPlugin);
 Vue.use(loader);
 Vue.use(VModal);
 Vue.use(VueSocialSharing);
+Vue.use(VueAnimXYZ);
+// Vue.use(Lightbox);
 
 new Vue({
   router,
@@ -48,6 +54,7 @@ new Vue({
   VueSocialSharing,
   Multiselect,
   routes,
+  // Lightbox,
 
   render: (h) => h(App),
   mounted() {},
