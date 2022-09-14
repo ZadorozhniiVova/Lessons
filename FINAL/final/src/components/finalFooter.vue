@@ -26,18 +26,18 @@
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-card-text>
     </v-card>
-    <finalSharingVue />
+    <!-- <finalSharingVue /> -->
   </v-footer>
 </template>
 
 <script>
-import finalSharingVue from "./finalSharing.vue";
+// import finalSharingVue from "./finalSharing.vue";
 export default {
   data: () => ({
     icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
   }),
   components: {
-    finalSharingVue,
+    // finalSharingVue,
   },
 };
 </script>

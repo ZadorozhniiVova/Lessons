@@ -2,6 +2,7 @@
 const path = require("path");
 module.exports = {
   transpileDependencies: ["vuetify"],
+  lintOnSave: false,
   pluginOptions: {
     "style-resources-loader": {
       preProcessor: "scss",

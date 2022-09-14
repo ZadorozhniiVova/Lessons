@@ -1,9 +1,11 @@
 <template>
   <div class="body">
+    <!-- <finalVideoVue/> -->
+    <!-- <finalSlider></finalSlider> -->
     <finalHeader></finalHeader>
-    <finalSlider></finalSlider>
+    <finalMainWrapper />
     <!-- <finalSearchMarket></finalSearchMarket> -->
-    <finalMostPopular></finalMostPopular>
+
     <!-- <div v-for="game in games" :key="game"></div> -->
     <finalFooterVue />
   </div>
@@ -11,22 +13,26 @@
 
 <script>
 import finalHeader from "../components/finalHeader";
-import finalSlider from "@/components/finalSlider.vue";
+// import finalSlider from "@/components/finalSlider.vue"; //almost
+// import finalVideoVue from "@/components/finalVideo.vue";
 // import finalSearchMarket from "@/components/finalSearchMarket.vue";
-import finalMostPopular from "@/components/finalMostPopular.vue";
 import finalFooterVue from "@/components/finalFooter.vue";
 // import finalSharingVue from "@/components/finalSharing.vue";
+import finalMainWrapper from "@/components/finalMainWrapper.vue";
 
 export default {
   name: "HomeView",
 
   components: {
     finalHeader,
-    finalSlider,
+    // finalSlider, //almost
     // finalSearchMarket,
-    finalMostPopular,
+    // finalMostPopular, //almost
     finalFooterVue,
+    // finalVideoVue,
     // finalSharingVue,
+
+    finalMainWrapper,
   },
   mounted() {
     // this.$store.dispatch("loadAllGames");
@@ -42,4 +48,8 @@ export default {
   },
 };
 </script>
-<style lang="sass"></style>
+<style lang="scss">
+.body {
+  background-color: black;
+}
+</style>

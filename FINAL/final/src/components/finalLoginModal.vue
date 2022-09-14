@@ -1,105 +1,214 @@
 <template>
-  <modal class="main" :style="mainStyle" name="demo-login">
-    <h1>Welcome!</h1>
-    <input
-      type="text"
-      name="username"
-      id="username"
-      placeholder="User Name"
-      :style="input"
-    />
-    <br />
-    <input
-      type="password"
-      name="password"
-      id="password"
-      placeholder="P@$$W0RD"
-      :style="input"
-    />
-    <br />
-    <input
-      type="button"
-      value="Done!"
-      class="button"
-      id="done"
-      :style="inputStyle"
-    />
-    <br />
-    <!-- <img src="../assets/google.svg" alt="Login using Google" />
-    <img src="../assets/facebook.svg" alt="Login using Facebook" /> -->
-  </modal>
+  <div v-if="show" class="login-page" name="login">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
+          <div
+            v-if="!registerActive"
+            class="card login"
+            v-bind:class="{ error: emptyFields }"
+          >
+            <h1>Sign In</h1>
+            <form class="form-group">
+              <input
+                v-model="userLogin"
+                type="text"
+                class="form-control"
+                placeholder="User Name"
+                required
+              />
+              <input
+                v-model="emailLogin"
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                required
+              />
+              <input
+                v-model="passwordLogin"
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                required
+              />
+              <input type="submit" class="btn btn-primary" @click="doLogin" />
+              <p>
+                Don't have an account?
+                <a
+                  href="#"
+                  @click="
+                    (registerActive = !registerActive), (emptyFields = false)
+                  "
+                  >Sign up here</a
+                >
+              </p>
+            </form>
+          </div>
+
+          <div
+            v-else
+            class="card register"
+            v-bind:class="{ error: emptyFields }"
+          >
+            <h1>Sign Up</h1>
+
+            <form class="form-group">
+              <input
+                v-model="userReg"
+                type="text"
+                class="form-control"
+                placeholder="User Name"
+                required
+              />
+              <input
+                v-model="emailReg"
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                required
+              />
+              <input
+                v-model="passwordReg"
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                required
+              />
+              <input
+                v-model="confirmReg"
+                type="password"
+                class="form-control"
+                placeholder="Confirm Password"
+                required
+              />
+              <input
+                type="submit"
+                class="btn btn-primary"
+                @click="doRegister"
+              />
+              <p>
+                Already have an account?
+                <a
+                  href="#"
+                  @click="
+                    (registerActive = !registerActive), (emptyFields = false)
+                  "
+                  >Sign in here</a
+                >
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  //Custom style for main and input for make the page responsive:
   props: {
-    mainStyle: String,
-    inputStyle: String,
+    show: {
+      type: Boolean,
+      default: false,
+    },
   },
+  data: function () {
+    return {
+      registerActive: false,
+      emailLogin: "",
+      passwordLogin: "",
+      emailReg: "",
+      passwordReg: "",
+      confirmReg: "",
+      emptyFields: false,
+    };
+  },
+
   methods: {
-    show() {
-      this.$modal.show("demo-login");
+    showModal() {
+      this.show = !this.show;
     },
-    hide() {
-      this.$modal.hide("demo-login");
+    hideModal() {
+      if (this.show == true) {
+        this.show = !this.show;
+      }
     },
-  },
-  mount() {
-    this.show();
+    login() {
+      console.log("work");
+      localStorage.setItem("name", this.$modal.username);
+    },
+    doLogin() {
+      if (this.emailLogin === "" || this.passwordLogin === "") {
+        this.emptyFields = true;
+      } else {
+        localStorage.setItem("userName", this.userLogin);
+        localStorage.setItem("email", this.emailLogin);
+        localStorage.setItem("password", this.passwordLogin);
+        this.show = false;
+        this.$emit("login");
+      }
+    },
+    doRegister() {
+      if (
+        this.emailReg === "" ||
+        this.passwordReg === "" ||
+        this.confirmReg === ""
+      ) {
+        this.emptyFields = true;
+      } else {
+        localStorage.setItem("userName", this.userReg);
+        localStorage.setItem("email", this.emailReg);
+        localStorage.setItem("password", this.passwordReg);
+        this.show = false;
+      }
+    },
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 /* Import Poppins font: */
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-.main {
-  background: rgba(255, 255, 255, 0.4);
+
+.login-page {
   position: absolute;
-  top: 20%;
-  left: 30%;
-  width: 40%;
-  text-align: center;
-  padding: 5px;
-  border-radius: 3rem;
-  box-shadow: 0px 0px 8px -5px #000000;
-  padding-top: 3%;
-  padding-bottom: 5%;
-  font-family: "Poppins", sans-serif;
-}
-h1 {
-  cursor: default;
-  user-select: none;
-}
-input {
-  border-radius: 3rem;
-  border: none;
-  padding: 10px;
-  text-align: center;
-  outline: none;
-  margin: 10px;
-  width: 30%;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-}
-input:hover {
-  box-shadow: 0px 0px 8px -5px #000000;
-}
-input:active {
-  box-shadow: 0px 0px 8px -5px #000000;
-}
-#done {
-  background: lightgreen;
-}
-.button {
-  cursor: pointer;
-  user-select: none;
-}
-img {
-  height: 2.2rem;
-  margin: 10px;
-  user-select: none;
+  width: 100%;
+  z-index: 2;
+  margin: 0 auto;
+  p {
+    line-height: 1rem;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .form-group {
+    input {
+      margin-bottom: 20px;
+    }
+  }
+
+  .error {
+    animation-name: errorShake;
+    animation-duration: 0.3s;
+  }
+
+  @keyframes errorShake {
+    0% {
+      transform: translateX(-5px);
+    }
+    25% {
+      transform: translateX(5px);
+    }
+    50% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
 }
 </style>

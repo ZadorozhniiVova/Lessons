@@ -1,0 +1,363 @@
+<template>
+  <div class="finalCatalogItem" @mouseover="onSlider">
+    <div class="finalCatalogItem__top">
+      <div class="finalCatalogItem__slider">
+        <hooper
+          :pagination="true"
+          :autoPlay="allowAutoplay"
+          :playSpeed="1000"
+          :transition="300"
+          :infiniteScroll="true"
+        >
+          <slide
+            v-for="image in product_data.short_screenshots"
+            :key="image.id"
+          >
+            <img class="finalCatalogItem__img" :src="image.image" alt="" />
+          </slide>
+          <hooper-pagination slot="hooper-addons"></hooper-pagination>
+        </hooper>
+      </div>
+
+      <div class="finalCatalogItem__info">
+        <div
+          v-if="product_data.metacritic"
+          class="finalCatalogItem__info-metacritic"
+        >
+          {{ product_data.metacritic }}
+        </div>
+        <div class="finalCatalogItem__info-platforms platforms">
+          <div
+            class="platforms__name"
+            v-for="platform in product_data.platforms"
+            :key="platform.id"
+          >
+            {{ platform.platform.name }}
+          </div>
+        </div>
+        <router-link
+          :to="{ name: 'gameId', params: { id: `${product_data.id}` } }"
+          class="finalCatalogItem__info-name"
+          >{{ product_data.name }}</router-link
+        >
+
+        <!-- <div class="finalCatalogItem__info-rating">
+        <v-rating
+          :value="product_data.rating"
+          color="red"
+          dense
+          half-increments
+          readonly
+          size="14"
+        ></v-rating>
+
+        <div class="grey--text ms-2">
+          {{ product_data.rating }} ({{ product_data.reviews_count }})
+        </div>
+      </div> -->
+        <div class="finalCatalogItem__btn">
+          <v-btn icon :color="btnLike" @click="addToFavorite">
+            <v-icon dark> mdi-heart </v-icon>
+          </v-btn>
+        </div>
+      </div>
+    </div>
+    <div class="finalCatalogItem__btm">
+      <div class="finalCatalogItem__btm-info info">
+        <div class="info__wrapper">
+          <span class="info__wrapper-name">Release Date:</span>
+          <span class="info__wrapper-content">{{ product_data.released }}</span>
+        </div>
+        <hr class="info__br" />
+        <div class="info__wrapper">
+          <span class="info__wrapper-name">Last Update:</span>
+          <span class="info__wrapper-content">{{ product_data.updated }}</span>
+        </div>
+        <hr class="info__br" />
+        <div class="info__wrapper">
+          <span class="info__wrapper-name">Genre:</span>
+          <div class="info__wrapper-genre genre">
+            <span
+              class="genre__name"
+              v-for="genre in product_data.genres"
+              :key="genre.id"
+              >{{ genre.name }}</span
+            >
+          </div>
+        </div>
+        <v-btn class="info__wrapper-btn" block outlined color="grey">
+          <router-link
+            class="info__wrapper-btn__link"
+            :to="{ name: 'gameId', params: { id: `${product_data.id}` } }"
+            >Show more info ></router-link
+          >
+        </v-btn>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import "hooper/dist/hooper.css";
+import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
+import { mapActions } from "vuex";
+export default {
+  name: "finalCatalogItem",
+  data() {
+    return {
+      allowAutoplay: false,
+      btnLike: "grey",
+      favoriteList: [],
+    };
+  },
+  props: {
+    product_data: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+  },
+  components: {
+    Hooper,
+    Slide,
+    HooperPagination,
+  },
+  methods: {
+    onSlider: function () {
+      // console.log("over");
+      this.allowAutoplay = true;
+    },
+    addToFavorite() {
+      if (this.btnLike == "red") {
+        this.btnLike = "grey";
+        this.$emit("deleteFromFavorite")
+      } else {
+        this.btnLike = "red";
+        this.$emit("addToFavorite",this.product_data);
+      }
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+* {
+  font-family: "Josefin Sans", sans-serif;
+  font-style: normal;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.finalCatalogItem {
+  max-width: 20%;
+  flex-basis: 20%;
+  padding: 0px;
+  margin: 12px;
+  text-decoration: none;
+  position: relative;
+  transition: 0.1s;
+  // min-height: 380px;
+
+  box-sizing: border-box;
+  background-color: #202020;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 10px 20px 0 rgb(0 0 0 / 7%);
+  box-shadow: 0 10px 20px 0 rgb(0 0 0 / 7%);
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+    overflow: visible;
+    z-index: 2;
+    border-radius: 12px 12px 0 0;
+  }
+  &:hover .finalCatalogItem__btm {
+    opacity: 1;
+    top: auto;
+    left: 0;
+    z-index: 2;
+  }
+
+  &__btm {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    z-index: -1;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+    width: 100%;
+    background-color: #202020 !important;
+    padding: 16px;
+
+    .info {
+      background-color: #202020 !important;
+      color: white;
+
+      &__br {
+        margin: 10px 0;
+      }
+      &__wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-name {
+          margin-right: 10px;
+          opacity:0.8;
+          font-size:12px;
+        }
+        .genre {
+          display: inline-flex;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+          align-items: center;
+
+          &__name {
+            margin: 2px 5px;
+            padding: 2px 4px;
+            background-color: #6dc849;
+            border-color: rgba(109, 200, 73, 0.4);
+            border-radius: 10px;
+          }
+        }
+        &-btn {
+          width: 100%;
+          margin-top: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &__link {
+            text-decoration: none;
+            font-size: 16px;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  &__top {
+    border-radius: 12px 12px 0 0;
+    background-color: #202020;
+    overflow: hidden;
+  }
+
+  &__slider {
+    width: 100%;
+    max-width: 100%;
+    min-height: 56%;
+    height: 56%;
+  }
+  &__img {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__info {
+    padding: 16px;
+    position: relative;
+    &-metacritic {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #6dc849;
+      border-color: rgba(109, 200, 73, 0.4);
+      min-width: 32px;
+      display: inline-block;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 2px 0;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 4px;
+      border: 1px solid;
+    }
+    &-platforms {
+      width: 100%;
+      margin-bottom: 7px;
+
+      .platforms__name {
+        font-family: "Josefin Sans", sans-serif;
+        font-style: normal;
+        font-size: 10px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        flex: 0 1 auto;
+
+        align-items: center;
+        justify-content: flex-start;
+        color: white;
+        margin-right: 6px;
+      }
+    }
+    &-rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-name {
+      font-family: "Josefin Sans", sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      color: white !important;
+      text-decoration: none;
+      font-size: 24px;
+      line-height: 25px;
+      height: 50px;
+      display: block;
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  &__tbtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padd &-btn {
+      color: white !important;
+      padding: 3px;
+    }
+  }
+
+  &:hover .hooper-pagination {
+    opacity: 1;
+  }
+}
+
+.hooper-pagination {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.3s;
+
+  .hooper-indicators {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    li {
+      width: 30px;
+      margin: 0 3px;
+
+      .hooper-indicator {
+        width: 100%;
+        background-color: grey !important;
+        opacity: 0.8;
+      }
+
+      .hooper-indicator.is-active {
+        width: 100%;
+        background-color: white !important;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+</style>

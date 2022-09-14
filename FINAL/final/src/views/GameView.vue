@@ -7,6 +7,7 @@
       :transition="800"
       :itemsToShow="3"
       :centerMode="true"
+      style="position: absolute; left: 20px"
     >
       <slide> Game Info </slide>
       <slide> Images </slide>
@@ -41,7 +42,7 @@
                   <h3
                     class="author__name"
                     v-for="publisher of gameInfo.publishers"
-                    :key="publisher"
+                    :key="publisher.id"
                   >
                     {{ publisher.name }}
                   </h3>
@@ -51,7 +52,7 @@
                     <li
                       class="genre__list-item"
                       v-for="genre in gameInfo.genres"
-                      :key="genre"
+                      :key="genre.id"
                     >
                       {{ genre.name }}
                     </li>
@@ -196,7 +197,7 @@
       </slide>
       <slide id="gameMainSlide" v-if="screenshots.length > 0">
         <div
-          class="gameCard"
+          class="gameCard gameCard__screenshots"
           :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
         >
           <div class="gameCard__cover"></div>
@@ -205,7 +206,11 @@
               <h4 class="pageTitle__text">Screenshots</h4>
             </div>
             <div class="gameCard__container-screenschots screenschots">
-              <hooper group="screenshots" class="screenschots__slider-Top" >
+              <hooper
+                group="screenshots"
+                class="screenschots__slider-Top"
+                :vertical="false"
+              >
                 <slide
                   class="screenschots__slideTop"
                   v-for="screenshot in screenshots"
@@ -220,6 +225,9 @@
                 :itemsToShow="3"
                 :centerMode="true"
                 class="screenschots__slider-Btm"
+                :vertical="false"
+                :autoPlay="true"
+                :playSpeed="1500"
               >
                 <slide
                   class="screenschots__slideBtm"
@@ -229,8 +237,12 @@
                   <img class="screenschots__slideBtm-img" :src="screenshot" />
                 </slide>
 
-                <hooper-navigation slot="hooper-addons-screenshot"></hooper-navigation>
-                <hooper-pagination slot="hooper-addons-screenshot"></hooper-pagination>
+                <hooper-navigation
+                  slot="hooper-addons-screenshot"
+                ></hooper-navigation>
+                <hooper-pagination
+                  slot="hooper-addons-screenshot"
+                ></hooper-pagination>
               </hooper>
             </div>
           </div>
@@ -291,16 +303,16 @@ export default {
   async beforeMount() {
     let gameId = this.gameId;
     let respGameId = await Api().get(
-      `games/${gameId}?&key=aa0261996cd54584b28260614f7a2d1b`
+      `games/${gameId}?&key=3d770078d0d8493a8de967ae4f287969`
     );
     let respGameIdMarket = await Api().get(
-      `games/${gameId}/stores?&key=aa0261996cd54584b28260614f7a2d1b`
+      `games/${gameId}/stores?&key=3d770078d0d8493a8de967ae4f287969`
     );
     let respGameIdAchiv = await Api().get(
-      `games/${gameId}/achievements?&key=aa0261996cd54584b28260614f7a2d1b`
+      `games/${gameId}/achievements?&key=3d770078d0d8493a8de967ae4f287969`
     );
     let respGameIdScreenshots = await Api().get(
-      `games/${gameId}/screenshots?&key=aa0261996cd54584b28260614f7a2d1b`
+      `games/${gameId}/screenshots?&key=3d770078d0d8493a8de967ae4f287969`
     );
 
     console.log("respGameId", respGameId.data);
@@ -613,18 +625,23 @@ export default {
         width: 100%;
         padding: 20px;
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         flex-wrap: wrap;
         flex-direction: row;
 
         .achivement__card {
           width: 200px;
           height: 200px;
-          margin: 5px;
+          margin: 10px;
           position: relative;
           overflow: hidden;
           border-radius: 2px;
           text-align: center;
+          border-radius: 5px;
+          transition: 0.3s;
+          &:hover {
+            transform: scale(1.1);
+          }
 
           &:hover .achivement__back {
             transform: translateX(0);
@@ -745,26 +762,62 @@ export default {
         }
       }
 
-      .screenschots{
+      .screenschots {
         width: 100%;
         height: 100%;
 
-        .screenschots__slideTop {
-          height: 400px;
-        }
-        
-        .screenschots__slideTop-img{
-          margin: 5px;
+        .screenschots__slider-Top {
+          height: 500px;
+          margin-bottom: 10px;
+
+          .screenschots__slideTop {
+            height: 500px;
+            border-radius: 5px;
+            overflow: hidden;
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+
+            .screenschots__slideTop-img {
+              margin: 0px;
+              width: 100%;
+            }
+          }
         }
 
-        .screenschots__slideBtm-img{
-          margin: 5px;
-          height: 100%;
-          width: 100%;
+        .screenschots__slider-Btm {
+          .screenschots__slideBtm {
+            margin: 0 5px;
+            border-radius: 5px;
+            overflow: hidden;
+
+            .screenschots__slideBtm-img {
+              margin: 0px;
+              height: 100%;
+              width: 100%;
+            }
+          }
         }
       }
     }
   }
+  .gameCard__screenshots {
+    .pageTitle {
+      margin-bottom: 20px;
+    }
+
+    .hooper {
+      flex-direction: row;
+      .hooper-track {
+        flex-direction: row;
+        margin-left: 0 !important;
+      }
+    }
+  }
+}
+.v-application ol,
+.v-application ul {
+  padding-left: 0 !important;
 }
 
 .isOpacity {

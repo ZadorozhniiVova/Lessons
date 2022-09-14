@@ -1,22 +1,23 @@
 <template>
-  <div class="ma-12 pa-12">
-    <v-card>
+  <div class="finalSideMenu">
+    <v-card style="background-color: black">
       <v-navigation-drawer permanent expand-on-hover>
         <v-list>
-          <v-list-item class="px-2">
-            <v-list-item-avatar>
-              <v-img
-                src="https://randomuser.me/api/portraits/women/85.jpg"
-              ></v-img>
-            </v-list-item-avatar>
+          <v-list-item class="px-0">
+            <VueToyFace
+              size="40"
+              rounded="75"
+              :group="2"
+              :toy-number="10"
+              class="avatar"
+            />
           </v-list-item>
-
           <v-list-item link>
             <v-list-item-content>
               <v-list-item-title class="text-h6">
-                Sandra Adams
+                {{ name }}
               </v-list-item-title>
-              <v-list-item-subtitle>sandra_a88@gmail.com</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -47,3 +48,37 @@
     </v-card>
   </div>
 </template>
+<script>
+import VueToyFace from "vue-toy-face";
+
+export default {
+  name: "finalSideMenu",
+  data() {
+    return {
+      name: localStorage.getItem("userName"),
+      email: localStorage.getItem("email"),
+    };
+  },
+  components: { VueToyFace },
+};
+</script>
+
+<style lang="scss" scoped>
+* {
+  color: black !important;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.finalSideMenu {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 60px;
+}
+
+.v-navigation-drawer {
+  // цвет заднего фона боковой панели
+  background-color: #fad961 !important;
+  background-image: linear-gradient(90deg, #fad961 0%, #f76b1c 100%) !important;
+}
+</style>

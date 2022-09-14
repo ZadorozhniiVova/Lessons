@@ -5,28 +5,6 @@
         <a href="#" class="header__container-logo logo">
           <img class="logo__img" src="../assets/logo.png" alt="" />
         </a>
-        <nav class="header__container-menu menu">
-          <ul class="menu__list">
-            <li class="menu__list-el">
-              <a class="menu__list-el__link" href="#">Home</a>
-            </li>
-            <li class="menu__list-el">
-              <a class="menu__list-el__link" href="#">About Us</a>
-            </li>
-            <li class="menu__list-el">
-              <a class="menu__list-el__link" href="#">Buy</a>
-            </li>
-            <li class="menu__list-el">
-              <a class="menu__list-el__link" href="#">Contacts</a>
-            </li>
-
-            <li class="menu__list-el">
-              <router-link class="menu__list-el__link" to="/game"
-                >Game</router-link
-              >
-            </li>
-          </ul>
-        </nav>
         <nav class="header__container-markets markets">
           <ul class="markets__list">
             <li class="markets__list-el markets__list-el__microsoft">
@@ -96,52 +74,74 @@
             </li>
           </ul>
           <div class="buttonLogin">
-            <b-button @click="loadModal" variant="outline-primary"
+            <b-button
+              v-if="!userName"
+              @click="loadModal"
+              variant="outline-primary"
               >Login</b-button
+            >
+            <b-button v-else @click="clearUserData" variant="outline-primary"
+              >Logout</b-button
             >
           </div>
         </nav>
       </div>
     </header>
-    <finalLoginModal />
+    <finalLoginModal :show="showLogin" @login="userLogIn" />
   </div>
 </template>
 
 <script>
 import finalLoginModal from "@/components/finalLoginModal.vue";
 export default {
-  name: "HelloWorld",
+  name: "finalHeader",
   props: {},
-  methods: {
-    loadModal: function () {
-      this.$modal.show("demo-login");
-    },
-  },
-  mount() {},
   components: {
     finalLoginModal,
+  },
+  data() {
+    return {
+      showLogin: false,
+      password: "",
+      userName: false,
+    };
+  },
+  computed: {
+    userName() {
+      return localStorage.getItem("userName");
+    },
+  },
+  methods: {
+    loadModal: function () {
+      this.showLogin = !this.showLogin;
+    },
+    userLogIn() {
+      this.userName = true;
+    },
+    clearUserData() {
+      localStorage.clear();
+      this.userName = false;
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("userName")) {
+      this.userName = true;
+    } else {
+      this.userName = false;
+    }
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-* {
-  cursor: url("../assets/coursor.svg"), auto;
-}
+// * {
+//   cursor: url("../assets/coursor.svg"), auto;
+// }
 .header {
   width: 100%;
-  background: #000046; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #1cb5e0,
-    #000046
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #1cb5e0,
-    #000046
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #ffe53b;
+  background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
 
   &__container {
     max-width: 1440px;

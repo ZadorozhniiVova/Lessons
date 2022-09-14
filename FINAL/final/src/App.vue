@@ -1,20 +1,27 @@
 <template>
-  <v-app>
+  <v-app class="app">
+    <FinalSideMenu v-if="name !== undefined" />
     <preloader />
-
     <v-main>
       <router-view />
-      <!-- <p v-for="item in games" :key="item.id">{{ item.id }} {{ item.name }}</p> -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-// import Preloader from "@/components/finalPreloader.vue";
+import Preloader from "@/components/finalPreloader.vue";
+import FinalSideMenu from "@/components/finalSideMenu.vue";
 export default {
   name: "App",
+  data() {
+    return {
+      name: localStorage.userName,
+    };
+  },
   components: {
-    // Preloader,
+    Preloader,
+    FinalSideMenu,
+    // finalLoginModal,
   },
 };
 </script>
