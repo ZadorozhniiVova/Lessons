@@ -100,7 +100,6 @@
 <script>
 import "hooper/dist/hooper.css";
 import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
-import { mapActions } from "vuex";
 export default {
   name: "finalCatalogItem",
   data() {
@@ -131,10 +130,10 @@ export default {
     addToFavorite() {
       if (this.btnLike == "red") {
         this.btnLike = "grey";
-        this.$emit("deleteFromFavorite")
+        this.$emit("deleteFromFavorite");
       } else {
         this.btnLike = "red";
-        this.$emit("addToFavorite",this.product_data);
+        this.$emit("addToFavorite", this.product_data);
       }
     },
   },
@@ -158,7 +157,7 @@ export default {
   position: relative;
   transition: 0.1s;
   // min-height: 380px;
-
+  min-width: 320px;
   box-sizing: border-box;
   background-color: #202020;
   border-radius: 12px;
@@ -205,8 +204,8 @@ export default {
 
         &-name {
           margin-right: 10px;
-          opacity:0.8;
-          font-size:12px;
+          opacity: 0.8;
+          font-size: 12px;
         }
         .genre {
           display: inline-flex;
@@ -249,6 +248,41 @@ export default {
     max-width: 100%;
     min-height: 56%;
     height: 56%;
+
+    .hooper {
+      &-list {
+        .hooper-pagination {
+          width: 100% !important;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transition: 0.3s;
+
+          .hooper-indicators {
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+
+            li {
+              width: 30px !important;
+              margin: 0 3px !important;
+
+              .hooper-indicator {
+                width: 100% !important;
+                background-color: grey !important;
+                opacity: 0.7 !important;
+              }
+
+              .hooper-indicator.is-active {
+                width: 100% !important;
+                background-color: white !important;
+                opacity: 0.7 !important;
+              }
+            }
+          }
+        }
+      }
+    }
   }
   &__img {
     height: 100%;
@@ -275,20 +309,25 @@ export default {
       border: 1px solid;
     }
     &-platforms {
-      width: 100%;
-      margin-bottom: 7px;
+      width: 90%;
+      margin-bottom: 10px;
+      height: 40px;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      align-items: center;
 
       .platforms__name {
         font-family: "Josefin Sans", sans-serif;
         font-style: normal;
         font-size: 10px;
+        line-height: 10px;
         display: inline-flex;
         flex-wrap: wrap;
         flex: 0 1 auto;
-
+        color: #6dc849;
         align-items: center;
         justify-content: flex-start;
-        color: white;
         margin-right: 6px;
       }
     }
@@ -327,37 +366,6 @@ export default {
 
   &:hover .hooper-pagination {
     opacity: 1;
-  }
-}
-
-.hooper-pagination {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: 0.3s;
-
-  .hooper-indicators {
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
-    li {
-      width: 30px;
-      margin: 0 3px;
-
-      .hooper-indicator {
-        width: 100%;
-        background-color: grey !important;
-        opacity: 0.8;
-      }
-
-      .hooper-indicator.is-active {
-        width: 100%;
-        background-color: white !important;
-        opacity: 0.8;
-      }
-    }
   }
 }
 </style>

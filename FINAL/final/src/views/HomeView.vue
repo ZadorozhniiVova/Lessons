@@ -1,9 +1,8 @@
 <template>
   <div class="body">
-    <!-- <finalVideoVue/> -->
     <!-- <finalSlider></finalSlider> -->
     <finalHeader></finalHeader>
-    <finalMainWrapper />
+    <finalMainWrapper class="" />
     <!-- <finalSearchMarket></finalSearchMarket> -->
 
     <!-- <div v-for="game in games" :key="game"></div> -->
@@ -14,7 +13,6 @@
 <script>
 import finalHeader from "../components/finalHeader";
 // import finalSlider from "@/components/finalSlider.vue"; //almost
-// import finalVideoVue from "@/components/finalVideo.vue";
 // import finalSearchMarket from "@/components/finalSearchMarket.vue";
 import finalFooterVue from "@/components/finalFooter.vue";
 // import finalSharingVue from "@/components/finalSharing.vue";
@@ -29,7 +27,6 @@ export default {
     // finalSearchMarket,
     // finalMostPopular, //almost
     finalFooterVue,
-    // finalVideoVue,
     // finalSharingVue,
 
     finalMainWrapper,

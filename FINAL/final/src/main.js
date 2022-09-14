@@ -30,7 +30,7 @@ import "@morioh/v-lightbox/dist/lightbox.css";
 import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css";
 
-import store from'./vuex/store';
+import store from "./vuex/store";
 
 Vue.component("VueSlickCarousel", VueSlickCarousel);
 Vue.use(Buefy);

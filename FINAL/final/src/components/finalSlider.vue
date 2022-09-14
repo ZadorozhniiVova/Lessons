@@ -78,10 +78,10 @@ export default {
     this.sliderItemsID.forEach(async function (element) {
       // console.log(element)
       let respGames = await Api().get(
-        `games/${element}?&key=3d770078d0d8493a8de967ae4f287969`
+        `games/${element}?&key=a93f8e4bce884b11ae59a173f67e656c`
       );
       let respStore = await Api().get(
-        `games/${element}/stores?&key=3d770078d0d8493a8de967ae4f287969`
+        `games/${element}/stores?&key=a93f8e4bce884b11ae59a173f67e656c`
       );
 
       console.log("respGames", respGames.data);

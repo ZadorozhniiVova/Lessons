@@ -121,18 +121,11 @@ export default {
       passwordReg: "",
       confirmReg: "",
       emptyFields: false,
+      userLogin: "",
     };
   },
 
   methods: {
-    showModal() {
-      this.show = !this.show;
-    },
-    hideModal() {
-      if (this.show == true) {
-        this.show = !this.show;
-      }
-    },
     login() {
       console.log("work");
       localStorage.setItem("name", this.$modal.username);

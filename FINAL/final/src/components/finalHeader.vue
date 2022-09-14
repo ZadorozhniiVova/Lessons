@@ -103,14 +103,10 @@ export default {
     return {
       showLogin: false,
       password: "",
-      userName: false,
+      userName: localStorage.getItem("userName"),
     };
   },
-  computed: {
-    userName() {
-      return localStorage.getItem("userName");
-    },
-  },
+  computed: {},
   methods: {
     loadModal: function () {
       this.showLogin = !this.showLogin;
@@ -123,13 +119,13 @@ export default {
       this.userName = false;
     },
   },
-  mounted() {
-    if (localStorage.getItem("userName")) {
-      this.userName = true;
-    } else {
-      this.userName = false;
-    }
-  },
+  // mounted() {
+  //   if (localStorage.getItem("userName")) {
+  //     this.userName = true;
+  //   } else {
+  //     this.userName = false;
+  //   }
+  // },
 };
 </script>
 

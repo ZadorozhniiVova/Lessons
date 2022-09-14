@@ -1,36 +1,26 @@
 <template>
   <div class="finalMainWrapper">
-    <finalCatalog />
-    <finalFavorite v-if="FAVORITE.length" 
-    :favorite_data="FAVORITE"/>
+    <keep-alive>
+      <finalCatalog />
+    </keep-alive>
   </div>
 </template>
 
 <script>
 import finalCatalog from "./finalCatalog";
-import finalFavorite from "./finalFavorite";
-import { mapGetters } from 'vuex';
 
 export default {
   name: "finalMainWrapper",
   components: {
     finalCatalog,
-    finalFavorite,
   },
   props: {},
   data() {
     return {};
   },
-  computed: {
-    ...mapGetters([
-      'FAVORITE'
-    ])
-  },
   methods: {},
   watch: {},
-  mounted() {
-    console.log("Hello I am alive!");
-  },
+  mounted() {},
 };
 </script>
 

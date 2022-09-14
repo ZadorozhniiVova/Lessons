@@ -27,6 +27,7 @@
     "epic-spinners": "^1.1.0",
     "hooper": "^0.3.4",
     "jquery": "^3.6.1",
+    "mdb-vue-ui-kit": "^2.0.0",
     "scenejs": "^1.6.0",
     "tsparticles-engine": "^2.3.0",
     "vue": "^2.7.10",
