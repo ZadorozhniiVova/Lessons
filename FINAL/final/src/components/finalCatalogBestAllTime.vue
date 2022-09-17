@@ -42,14 +42,14 @@ export default {
   data() {
     return {
       perPage: 20,
-      currentPage: 1
+      currentPage: 1,
     };
   },
   watch: {
     currentPage(next) {
       this.$store.dispatch("getBestOfAllTimeByPage", next);
-      window.scrollTo(0,0);
-    }
+      window.scrollTo(0, 0);
+    },
   },
   computed: {
     ...mapGetters(["BESTOFALLTIME"]),

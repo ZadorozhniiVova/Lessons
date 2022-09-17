@@ -32,47 +32,46 @@ import finalHeader from "../components/finalHeader";
 import finalFooter from "../components/finalFooter.vue";
 import { mapActions, mapGetters } from "vuex";
 
-
 export default {
   name: "finalCatalogBestYear",
   components: {
     finalCatalogItem,
     finalHeader,
-    finalFooter
+    finalFooter,
   },
   data() {
     return {
       perPage: 20,
-      currentPage: 1
+      currentPage: 1,
     };
   },
   watch: {
     currentPage(next) {
       this.$store.dispatch("getBestOfYearByPage", next);
-      window.scrollTo(0,0);
-    }
+      window.scrollTo(0, 0);
+    },
   },
   methods: {
     ...mapActions([
       "GET_BEST_OF_YEAR_FROM_API",
       "ADD_TO_FAVORITE",
-      "DELETE_FROM_FAVORITE"
+      "DELETE_FROM_FAVORITE",
     ]),
     deleteFromFavorite(bestOfYearIndex) {
       this.DELETE_FROM_FAVORITE(bestOfYearIndex);
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
-    }
+    },
   },
   mounted() {
     this.GET_BEST_OF_YEAR_FROM_API().then((responce) => {
       console.log(responce);
     });
   },
-  
+
   computed: {
-    ...mapGetters(["BESTOFYEAR"])
-  }
+    ...mapGetters(["BESTOFYEAR"]),
+  },
 };
 </script>

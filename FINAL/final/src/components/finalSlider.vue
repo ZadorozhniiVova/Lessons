@@ -58,12 +58,12 @@ export default {
     return {
       sliderItemsID: [452642, 3328, 428839, 494384, 463723, 29238, 437059],
       sliderGames: [],
-      sliderGamesStores: []
+      sliderGamesStores: [],
     };
   },
   components: {
     Hooper,
-    Slide
+    Slide,
   },
   methods: {},
   async mounted() {
@@ -94,7 +94,7 @@ export default {
     // platforms() {
     //   return this.$store.state.platforms;
     // },
-  }
+  },
 };
 </script>
 

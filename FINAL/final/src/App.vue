@@ -1,6 +1,6 @@
 <template>
   <v-app class="app">
-    <FinalSideMenu  />
+    <FinalSideMenu />
     <!-- <preloader /> -->
     <v-main>
       <router-view />

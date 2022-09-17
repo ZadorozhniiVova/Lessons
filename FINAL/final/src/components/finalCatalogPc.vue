@@ -10,11 +10,9 @@
         @addToFavorite="addToFavorite"
         @deleteFromFavorite="deleteFromFavorite(bestOf2021Index)"
       />
-      
     </div>
     <div class="overflow-auto catalog__pagination d-flex justify-center">
       <b-pagination
-        
         v-model="currentPage"
         :total-rows="BESTOF2021.count / perPage"
         :per-page="perPage"
@@ -44,14 +42,14 @@ export default {
   data() {
     return {
       perPage: 20,
-      currentPage: 1
+      currentPage: 1,
     };
   },
   watch: {
     currentPage(next) {
       this.$store.dispatch("getBestOf2021ByPage", next);
-      window.scrollTo(0,0);
-    }
+      window.scrollTo(0, 0);
+    },
   },
   computed: {
     ...mapGetters(["BESTOF2021"]),

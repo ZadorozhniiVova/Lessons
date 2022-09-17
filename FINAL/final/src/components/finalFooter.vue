@@ -1,5 +1,5 @@
 <template>
-  <v-footer v-bind="localAttrs" :padless="true" :dark="true" absolute>
+  <v-footer :padless="true" :dark="true" absolute>
     <v-card flat tile width="100%" class="lighten-1 text-center">
       <v-card-text>
         <v-btn v-for="icon in icons" :key="icon" class="mx-4" icon>

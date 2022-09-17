@@ -64,9 +64,21 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPopularByPage({ commit }, page) {
-      Api
-        .getPopularByPageFromApi(this.state.key, page)
+    getPopularFilter({ commit },filterRequest) {
+      console.log("filterRequestFILTER", filterRequest)
+      Api.getPopularFilterFromApi(this.state.key,filterRequest)
+        .then((popular) => {
+          commit("SET_GAMES_TO_STATE", popular.data);
+          console.log("bestOfYear", popular);
+          return popular;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPopularByPage({ commit }, [page, filterRequest]) {
+      Api.getPopularByPageFromApi(this.state.key, page, filterRequest)
         .then((popular) => {
           commit("SET_GAMES_TO_STATE", popular.data);
           // console.log("bestOfYear", popular);
@@ -94,8 +106,7 @@ let store = new Vuex.Store({
         });
     },
     getBestOfYearByPage({ commit }, page) {
-      Api
-        .getBestOfYearByPageFromApi(this.state.key, page)
+      Api.getBestOfYearByPageFromApi(this.state.key, page)
         .then((bestOfYear) => {
           commit("SET_BEST_OF_YEAR_TO_STATE", bestOfYear.data);
           // console.log("bestOfYear", bestOfYear);
@@ -106,7 +117,7 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    
+
     GET_BEST_2021_FROM_API({ commit }) {
       return axios(
         `https://api.rawg.io/api/games?dates=2021-01-01,2021-12-31&rating&key=${this.state.key}`,
@@ -122,8 +133,7 @@ let store = new Vuex.Store({
         });
     },
     getBestOf2021ByPage({ commit }, page) {
-      Api
-        .getBestOf2021ByPageFromApi(this.state.key, page)
+      Api.getBestOf2021ByPageFromApi(this.state.key, page)
         .then((bestOf2021) => {
           commit("SET_BEST_OF_2021_TO_STATE", bestOf2021.data);
           // console.log("bestOf2021", bestOf2021);
@@ -149,8 +159,7 @@ let store = new Vuex.Store({
         });
     },
     getBestOfAllTimeByPage({ commit }, page) {
-      Api
-        .getBestOfAllTimeByPageFromApi(this.state.key, page)
+      Api.getBestOfAllTimeByPageFromApi(this.state.key, page)
         .then((bestOfAllTime) => {
           commit("SET_BEST_OF_ALL_TIME", bestOfAllTime.data);
           // console.log("bestOfAllTime", bestOfAllTime);
@@ -167,7 +176,6 @@ let store = new Vuex.Store({
     DELETE_FROM_FAVORITE({ commit }, favoriteGameIndex) {
       commit("DELETE_FROM_FAVORITE", favoriteGameIndex);
     }
-
 
     //https://api.rawg.io/api/games?&key=a93f8e4bce884b11ae59a173f67e656c&ordering=-name&platforms=1&dates=2020-01-01,2022-12-31 - запрос с сортировкой
   },

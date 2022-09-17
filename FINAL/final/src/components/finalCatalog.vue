@@ -7,21 +7,21 @@
         <b-form-select
           v-model="selectedFilter"
           :options="filterBy"
-          plain="true"
+          :plain="true"
         ></b-form-select>
       </div>
       <div>
         <b-form-select
           v-model="selectedPlatform"
           :options="platforms"
-          plain="true"
+          :plain="true"
         ></b-form-select>
       </div>
       <div>
         <b-form-select
           v-model="selectReleaseDate"
           :options="releaseDate"
-          plain="true"
+          :plain="true"
         ></b-form-select>
       </div>
     </div>
@@ -51,6 +51,7 @@
 <script>
 import finalCatalogItem from "./finalCatalogItem";
 import { mapActions, mapGetters } from "vuex";
+import Vue from "vue";
 
 export default {
   name: "finalCatalog",
@@ -61,48 +62,74 @@ export default {
     return {
       perPage: 20,
       currentPage: 1,
-      selectedFilter: null,
-      selectedPlatform: null,
-      selectReleaseDate: null,
+      selectedFilter: "",
+      selectedPlatform: "",
+      selectReleaseDate: "",
+
+
       filterBy: [
-        { value: null, text: "Order By:" },
-        { value: "ordering=-rating", text: "Rating" },
-        { value: "ordering=-metacritic ", text: "Metacritic" },
-        { value: "ordering=-name", text: "Name" },
-        { value: "ordering=-popularity", text: "Popularity" },
-        { value: "ordering=-released", text: "Date Added" }
+        { value: "", text: "Order By:" },
+        { value: "&ordering=-rating", text: "Rating" },
+        { value: "&ordering=-metacritic", text: "Metacritic" },
+        { value: "&ordering=-name", text: "Name" },
+        { value: "&ordering=-popularity", text: "Popularity" },
+        { value: "&ordering=-released", text: "Date Added" }
       ],
       platforms: [
-        { value: null, text: "Platform" },
-        { value: "1", text: "Xbox One" },
-        { value: "3", text: "iOS" },
-        { value: "4", text: "PC" },
-        { value: "5", text: "macOS" },
-        { value: "6", text: "Linux" },
-        { value: "7", text: "Nintendo Switch" },
-        { value: "8", text: "Nintendo 3DS" },
-        { value: "9", text: "Nintendo DS" },
-        { value: "10", text: "Wii U" },
-        { value: "11", text: "Wii" }
+        { value: "", text: "Platform" },
+        { value: "&platforms=1", text: "Xbox One" },
+        { value: "&platforms=3", text: "iOS" },
+        { value: "&platforms=4", text: "PC" },
+        { value: "&platforms=5", text: "macOS" },
+        { value: "&platforms=6", text: "Linux" },
+        { value: "&platforms=7", text: "Nintendo Switch" },
+        { value: "&platforms=8", text: "Nintendo 3DS" },
+        { value: "&platforms=9", text: "Nintendo DS" },
+        { value: "&platforms=10", text: "Wii U" },
+        { value: "&platforms=11", text: "Wii" }
       ],
       releaseDate: [
-        { value: null, text: "Release Date" },
-        { value: "dates=2020-01-01,2022-12-31", text: "2020-2022" },
-        { value: "dates=2010-09-01,2019-12-31", text: "2010-2019" },
-        { value: "dates=2000-09-01,2009-12-31", text: "2000-2009" },
-        { value: "dates=1990-09-01,1999-12-31", text: "1990-1999" },
-        { value: "dates=1980-09-01,1989-12-31", text: "1980-1989" },
-        { value: "dates=1970-09-01,1979-12-31", text: "1970-1979" },
-        { value: "dates=1960-09-01,1969-12-31", text: "1960-1969" },
-        { value: "dates=1950-09-01,1959-12-31", text: "1950-1959" }
+        { value: "", text: "Release Date" },
+        { value: "&dates=2020-01-01,2022-12-31", text: "2020-2022" },
+        { value: "&dates=2010-09-01,2019-12-31", text: "2010-2019" },
+        { value: "&dates=2000-09-01,2009-12-31", text: "2000-2009" },
+        { value: "&dates=1990-09-01,1999-12-31", text: "1990-1999" },
+        { value: "&dates=1980-09-01,1989-12-31", text: "1980-1989" },
+        { value: "&dates=1970-09-01,1979-12-31", text: "1970-1979" },
+        { value: "&dates=1960-09-01,1969-12-31", text: "1960-1969" },
+        { value: "&dates=1950-09-01,1959-12-31", text: "1950-1959" }
       ]
     };
   },
+  props: {
+    filterRequest: {
+        type: Array,
+        required: false,
+        default: () => ["","","&ordering=-popularity"],
+    }
+},
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getPopularByPage", next);
-      window.scrollTo(0, 30);
-    }
+      this.$store.dispatch("getPopularByPage",[next, this.filterRequest.join('')]);
+      window.scrollTo(0, 0);
+    },
+    
+    selectedFilter(){
+      Vue.set(this.filterRequest, 2, this.selectedFilter)
+    },
+    selectedPlatform(){
+      Vue.set(this.filterRequest, 1, this.selectedPlatform)
+    },
+    selectReleaseDate(){
+      Vue.set(this.filterRequest, 0, this.selectReleaseDate)
+    },
+    filterRequest:{
+      handler(newValue){
+        this.$store.dispatch('getPopularFilter',newValue.join(''))
+        this.currentPage = 1;
+      },
+      deep: true
+    },
   },
   computed: {
     ...mapGetters(["GAMES"])
@@ -122,10 +149,10 @@ export default {
   },
   mounted() {
     this.GET_POPULAR_GAMES_FROM_API().then((responce) => {
-      console.log(responce);
+      // console.log(responce);
     });
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -146,40 +173,40 @@ export default {
     margin: 0 auto;
 
     .form-control {
-  display: flex;
-  flex: 0 0 auto;
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  align-items: center;
+      display: flex;
+      flex: 0 0 auto;
+      -webkit-box-align: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      align-items: center;
 
-  margin: 0 4px  !important;
-  -webkit-box-flex: 0;
-  width: auto;
-  min-width: 150px;
-  padding: 5px 16px;
-  background-color: hsla(0, 0%, 100%, 0.07) !important;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #fff !important;
-  cursor: pointer;
+      margin: 0 4px !important;
+      -webkit-box-flex: 0;
+      width: auto;
+      min-width: 150px;
+      padding: 5px 16px;
+      background-color: hsla(0, 0%, 100%, 0.07) !important;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #fff !important;
+      cursor: pointer;
 
-  &:focus {
-    border-color: #6dc849 !important;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem #6dc849 !important;
-  }
-  option {
-    background-color: black !important;
-    padding: 5px 0 !important;
-    color: #fff !important;
-    font-size: 16px !important;
-    text-align: center;
-    display: inline-block;
-    height: 20px;
-    border: 1px solid white !important;
-  }
-}
+      &:focus {
+        border-color: #6dc849 !important;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem #6dc849 !important;
+      }
+      option {
+        background-color: black !important;
+        padding: 5px 0 !important;
+        color: #fff !important;
+        font-size: 16px !important;
+        text-align: center;
+        display: inline-block;
+        height: 20px;
+        border: 1px solid white !important;
+      }
+    }
   }
   &__container {
     display: flex;
@@ -229,6 +256,4 @@ export default {
     }
   }
 }
-
-
 </style>

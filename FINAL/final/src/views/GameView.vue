@@ -108,9 +108,9 @@
                   </div>
                   <div v-else><h2 style="color: white">Out of Selling</h2></div>
                 </div>
-                <div class=" info__container d-flex justify-start align-start">
+                <div class="info__container d-flex justify-start align-start">
                   <div
-                    class=" w-50 d-flex flex-column justify-center align-start"
+                    class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Genre</h5>
                     <div class="game__subtitle-genre genre">
@@ -126,22 +126,25 @@
                     </div>
                   </div>
                   <div
-                    class="  w-50 d-flex flex-column justify-center align-start"
+                    class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Release date</h5>
                     <p>{{ gameInfo.released }}</p>
                   </div>
                 </div>
-                <div class="info__container d-flex justify-space-between align-start">
+                <div
+                  class="info__container d-flex justify-space-between align-start"
+                >
                   <div
-                    class="  w-50 d-flex flex-column justify-center align-start"
+                    class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Platforms</h5>
                     <div class="game__subtitle-genre genre">
                       <div class="genre__list">
                         <span
                           class="genre__list-item"
-                          v-for="platform in platforms" :key="platform.id"
+                          v-for="platform in platforms"
+                          :key="platform.id"
                         >
                           {{ platform.name }}
                         </span>
@@ -149,15 +152,19 @@
                     </div>
                   </div>
                   <div
-                    class="  w-50 d-flex flex-column justify-center align-start"
+                    class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Metascore</h5>
-                    <a :href="gameInfo.metacritic_url " class="metacritic">{{ gameInfo.metacritic }}</a>
+                    <a :href="gameInfo.metacritic_url" class="metacritic">{{
+                      gameInfo.metacritic
+                    }}</a>
                   </div>
                 </div>
-                <div class="info__container d-flex justify-space-between align-start">
+                <div
+                  class="info__container d-flex justify-space-between align-start"
+                >
                   <div
-                    class="  w-50 d-flex flex-column justify-center align-start"
+                    class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Developer</h5>
                     <div class="game__subtitle-genre genre">
@@ -173,7 +180,7 @@
                     </div>
                   </div>
                   <div
-                    class="  w-50 d-flex flex-column justify-center align-start"
+                    class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Publisher</h5>
                     <div class="game__subtitle-genre genre">
@@ -189,16 +196,17 @@
                     </div>
                   </div>
                 </div>
-                <div class="info__container d-flex justify-space-between align-start">
+                <div
+                  class="info__container d-flex justify-space-between align-start"
+                >
                   <div
-                    class="  w-50 d-flex flex-column justify-center align-start"
+                    class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Web Site</h5>
                     <div class="game__subtitle-genre genre">
-                      <a :href="gameInfo.website">{{gameInfo.website}}</a>
+                      <a :href="gameInfo.website">{{ gameInfo.website }}</a>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -321,7 +329,7 @@
                 v-for="achivement in achivements"
                 :key="achivement.id"
                 :style="{
-                  backgroundImage: 'url(' + gameInfo.background_image + ')'
+                  backgroundImage: 'url(' + gameInfo.background_image + ')',
                 }"
               >
                 <div class="achivement__fwd">
@@ -451,14 +459,14 @@ export default {
       fadeInDown5001000: {
         classes: "fadeInDown",
         delay: 500,
-        duration: 1000
-      }
+        duration: 1000,
+      },
     };
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination
+    HooperPagination,
   },
   methods: {
     AchivShow: function (achivementId) {
@@ -466,7 +474,7 @@ export default {
       this.AchivInfo = achivementId;
       console.log(this.AchivInfo);
       return achivementId;
-    }
+    },
   },
   async beforeMount() {
     let gameId = this.gameId;
@@ -500,7 +508,7 @@ export default {
     for (let i = 0; i < respGameId.data.platforms.length; i++) {
       this.platforms.push({
         name: respGameId.data.platforms[i].platform.name,
-        released: respGameId.data.platforms[i].released_at
+        released: respGameId.data.platforms[i].released_at,
       });
     }
 
@@ -513,15 +521,15 @@ export default {
     for (let i = 0; i < this.storesInfo.length; i++) {
       this.storesData.push({
         name: this.storesNames[i],
-        url: this.storesInfo[i].url
+        url: this.storesInfo[i].url,
       });
     }
     // console.log("this.storesData", this.storesData);
-  }
+  },
 };
 </script>
 
-<style lang="scss"  >
+<style lang="scss">
 * {
   box-sizing: border-box;
   margin: 0;
@@ -1066,23 +1074,23 @@ export default {
   font-size: 20px;
 }
 
-.info__container{
+.info__container {
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
 }
 
 .metacritic {
-      color: #6dc849;
-      border-color: rgba(109, 200, 73, 0.4);
-      min-width: 32px;
-      display: inline-block;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      padding: 2px 0;
-      font-weight: 700;
-      text-align: center;
-      border-radius: 4px;
-      border: 1px solid;
-      background-color: black;
-    }
+  color: #6dc849;
+  border-color: rgba(109, 200, 73, 0.4);
+  min-width: 32px;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 2px 0;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid;
+  background-color: black;
+}
 </style>

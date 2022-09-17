@@ -64,7 +64,8 @@
           >
             <v-icon dark> mdi-heart </v-icon>
           </v-btn>
-          <v-rating
+          <div class="d-flex justify-end align-center">
+            <v-rating
             background-color="green lighten-2"
             color="green"
             half-increments
@@ -73,6 +74,8 @@
             size="20"
             :value="product_data.rating"
           ></v-rating>
+          <div>({{product_data.rating}})</div>
+          </div>
         </div>
       </div>
     </div>
@@ -120,7 +123,7 @@ export default {
     return {
       allowAutoplay: false,
       btnLike: "grey",
-      favoriteList: []
+      favoriteList: [],
     };
   },
   props: {
@@ -128,13 +131,13 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination
+    HooperPagination,
   },
   methods: {
     onSlider: function () {
@@ -149,8 +152,8 @@ export default {
         this.btnLike = "red";
         this.$emit("addToFavorite", this.product_data);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -373,7 +376,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       opacity: 0;
-
     }
   }
 
