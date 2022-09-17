@@ -1,20 +1,22 @@
 <template>
-  <div class="finalCatalogBestYear catalog">
+  <div class="finalCatalogBest2021 catalog">
     <finalHeader />
-    <h1 class="catalog__title">Best of the year</h1>
+    <h1 class="catalog__title">Popular in 2021</h1>
     <div class="catalog__container">
       <finalCatalogItem
-        v-for="(bestOfYear, bestOfYearIndex) in BESTOFYEAR.results"
-        :key="bestOfYear.id"
-        :product_data="bestOfYear"
+        v-for="(bestOf2021, bestOf2021Index) in BESTOF2021.results"
+        :key="bestOf2021.id"
+        :product_data="bestOf2021"
         @addToFavorite="addToFavorite"
-        @deleteFromFavorite="deleteFromFavorite(bestOfYearIndex)"
+        @deleteFromFavorite="deleteFromFavorite(bestOf2021Index)"
       />
+      
     </div>
     <div class="overflow-auto catalog__pagination d-flex justify-center">
       <b-pagination
+        
         v-model="currentPage"
-        :total-rows="BESTOFYEAR.count / perPage"
+        :total-rows="BESTOF2021.count / perPage"
         :per-page="perPage"
         first-text="First"
         prev-text="Prev"
@@ -27,18 +29,17 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
-import finalFooter from "../components/finalFooter.vue";
-import { mapActions, mapGetters } from "vuex";
-
+import finalFooter from "./finalFooter.vue";
 
 export default {
-  name: "finalCatalogBestYear",
+  name: "finalCatalogBest2021",
   components: {
     finalCatalogItem,
     finalHeader,
-    finalFooter
+    finalFooter,
   },
   data() {
     return {
@@ -48,31 +49,30 @@ export default {
   },
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getBestOfYearByPage", next);
+      this.$store.dispatch("getBestOf2021ByPage", next);
       window.scrollTo(0,0);
     }
   },
+  computed: {
+    ...mapGetters(["BESTOF2021"]),
+  },
   methods: {
     ...mapActions([
-      "GET_BEST_OF_YEAR_FROM_API",
+      "GET_BEST_2021_FROM_API",
       "ADD_TO_FAVORITE",
-      "DELETE_FROM_FAVORITE"
+      "DELETE_FROM_FAVORITE",
     ]),
-    deleteFromFavorite(bestOfYearIndex) {
-      this.DELETE_FROM_FAVORITE(bestOfYearIndex);
+    deleteFromFavorite(bestOf2021Index) {
+      this.DELETE_FROM_FAVORITE(bestOf2021Index);
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
-    }
+    },
   },
   mounted() {
-    this.GET_BEST_OF_YEAR_FROM_API().then((responce) => {
+    this.GET_BEST_2021_FROM_API().then((responce) => {
       console.log(responce);
     });
   },
-  
-  computed: {
-    ...mapGetters(["BESTOFYEAR"])
-  }
 };
 </script>

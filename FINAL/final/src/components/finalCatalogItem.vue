@@ -56,9 +56,23 @@
         </div>
       </div> -->
         <div class="finalCatalogItem__btn">
-          <v-btn icon :color="btnLike" @click="addToFavorite">
+          <v-btn
+            class="finalCatalogItem__btn-favorite"
+            icon
+            :color="btnLike"
+            @click="addToFavorite"
+          >
             <v-icon dark> mdi-heart </v-icon>
           </v-btn>
+          <v-rating
+            background-color="green lighten-2"
+            color="green"
+            half-increments
+            hover
+            length="5"
+            size="20"
+            :value="product_data.rating"
+          ></v-rating>
         </div>
       </div>
     </div>
@@ -106,7 +120,7 @@ export default {
     return {
       allowAutoplay: false,
       btnLike: "grey",
-      favoriteList: [],
+      favoriteList: []
     };
   },
   props: {
@@ -114,13 +128,13 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination,
+    HooperPagination
   },
   methods: {
     onSlider: function () {
@@ -135,8 +149,8 @@ export default {
         this.btnLike = "red";
         this.$emit("addToFavorite", this.product_data);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -176,6 +190,9 @@ export default {
     top: auto;
     left: 0;
     z-index: 2;
+  }
+  &:hover .finalCatalogItem__btn {
+    opacity: 1;
   }
 
   &__btm {
@@ -351,6 +368,13 @@ export default {
         opacity: 0.6;
       }
     }
+    .finalCatalogItem__btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+
+    }
   }
 
   &__tbtn {
@@ -367,5 +391,10 @@ export default {
   &:hover .hooper-pagination {
     opacity: 1;
   }
+}
+
+.v-icon,
+.v-icon--link {
+  padding: 4px !important;
 }
 </style>

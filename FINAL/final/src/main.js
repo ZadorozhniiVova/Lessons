@@ -29,8 +29,11 @@ import "@morioh/v-lightbox/dist/lightbox.css";
 // import Lightbox from '@morioh/v-lightbox'
 import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css";
-
+import VAnimateCss from 'v-animate-css';
+import 'animate.css';
 import store from "./vuex/store";
+import Autocomplete from '@trevoreyre/autocomplete-vue'
+import '@trevoreyre/autocomplete-vue/dist/style.css'
 
 Vue.component("VueSlickCarousel", VueSlickCarousel);
 Vue.use(Buefy);
@@ -45,7 +48,8 @@ Vue.use(loader);
 Vue.use(VModal);
 Vue.use(VueSocialSharing);
 Vue.use(VueAnimXYZ);
-// Vue.use(Lightbox);
+Vue.use(VAnimateCss);
+Vue.use(Autocomplete)
 
 new Vue({
   router,
@@ -60,7 +64,7 @@ new Vue({
   Multiselect,
   routes,
   Vuesax,
-  // Lightbox,
+  Autocomplete,
 
   render: (h) => h(App),
   mounted() {},

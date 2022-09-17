@@ -11,6 +11,17 @@
         @deleteFromFavorite="deleteFromFavorite(index)"
       />
     </div>
+    <div class="overflow-auto catalog__pagination d-flex justify-center">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="BESTOFALLTIME.count / perPage"
+        :per-page="perPage"
+        first-text="First"
+        prev-text="Prev"
+        next-text="Next"
+        last-text="Last"
+      ></b-pagination>
+    </div>
     <finalFooter />
   </div>
 </template>
@@ -29,7 +40,16 @@ export default {
     finalFooter,
   },
   data() {
-    return {};
+    return {
+      perPage: 20,
+      currentPage: 1
+    };
+  },
+  watch: {
+    currentPage(next) {
+      this.$store.dispatch("getBestOfAllTimeByPage", next);
+      window.scrollTo(0,0);
+    }
   },
   computed: {
     ...mapGetters(["BESTOFALLTIME"]),

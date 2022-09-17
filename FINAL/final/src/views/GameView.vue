@@ -33,70 +33,176 @@
             <div class="gameCard__container-pageTitle pageTitle">
               <h4 class="pageTitle__text">Shops</h4>
             </div>
-            <div class="gameCard__container-game game">
-              <div class="game__title">
-                <h1 class="game__title-text">{{ gameInfo.name }}</h1>
-              </div>
-              <div class="game__subtitle">
-                <div class="game__subtitle-author author">
-                  <h3
-                    class="author__name"
-                    v-for="publisher of gameInfo.publishers"
-                    :key="publisher.id"
-                  >
-                    {{ publisher.name }}
-                  </h3>
-                </div>
-                <div class="game__subtitle-genre genre">
-                  <ul class="genre__list">
-                    <li
-                      class="genre__list-item"
-                      v-for="genre in gameInfo.genres"
-                      :key="genre.id"
-                    >
-                      {{ genre.name }}
-                    </li>
-                  </ul>
-                </div>
-                <div class="game__subtitle-rating rating">
-                  <v-rating
-                    :value="gameInfo.rating"
-                    color="grey"
-                    dense
-                    half-increments
-                    readonly
-                    size="24"
-                  ></v-rating>
-                  <span class="rating__answers">{{
-                    gameInfo.ratings_count
-                  }}</span>
-                </div>
-              </div>
-              <div class="game__info">
-                <h4 class="game__info-text">{{ gameInfo.description_raw }}</h4>
-              </div>
-            </div>
             <div
-              class="gameCard__container-buy buy"
-              v-if="storesInfo.length != 0"
+              class="gameCard__container-game d-flex flex-wrap justify-space-between"
             >
-              <v-btn
-                class="buy__btn"
-                depressed
-                elevation="6"
-                plain
-                x-large
-                color="#2C2E30"
-                v-for="(platform, $index) in storesData"
-                :key="$index"
-                :value="platform"
-                :href="storesData[$index].url"
-                ><span class="buy__btn-text">{{
-                  storesData[$index].name
-                }}</span>
-              </v-btn>
+              <div class="gameCard__container-left game">
+                <div class="game__title d-flex flex-column align-start">
+                  <div class="mb-5">
+                    <span class="game__title-released mr-2">{{
+                      gameInfo.released
+                    }}</span>
+                    <span class="game__title-playTime mr-2"
+                      >AVERAGE PLAYTIME: {{ gameInfo.playtime }} HOURS</span
+                    >
+                  </div>
+                  <h1
+                    class="game__title-text"
+                    v-animate-css="fadeInDown5001000"
+                  >
+                    {{ gameInfo.name }}
+                  </h1>
+                </div>
+                <div class="game__subtitle">
+                  <div class="game__subtitle-author author">
+                    <h3
+                      class="author__name"
+                      v-for="publisher of gameInfo.publishers"
+                      :key="publisher.id"
+                    >
+                      {{ publisher.name }}
+                    </h3>
+                  </div>
+
+                  <div class="game__subtitle-rating rating">
+                    <v-rating
+                      :value="gameInfo.rating"
+                      color="grey"
+                      dense
+                      half-increments
+                      readonly
+                      size="24"
+                    ></v-rating>
+                    <span class="rating__answers">{{
+                      gameInfo.ratings_count
+                    }}</span>
+                  </div>
+                </div>
+                <div class="game__info">
+                  <h4 class="game__info-text">
+                    {{ gameInfo.description_raw }}
+                  </h4>
+                </div>
+              </div>
+              <div class="gameCard__container-right">
+                <div class="d-flex flex-column justify-start align-center">
+                  <h4 style="color: white">Where To Buy:</h4>
+                  <div
+                    class="gameCard__container-buy buy justify-lg-start"
+                    v-if="storesInfo.length != 0"
+                  >
+                    <v-btn
+                      class="buy__btn"
+                      depressed
+                      elevation="6"
+                      plain
+                      color="#2C2E30"
+                      v-for="(platform, $index) in storesData"
+                      :key="$index.id"
+                      :value="platform"
+                      :href="storesData[$index].url"
+                      ><p class="buy__btn-text">
+                        {{ storesData[$index].name }}
+                      </p>
+                    </v-btn>
+                  </div>
+                  <div v-else><h2 style="color: white">Out of Selling</h2></div>
+                </div>
+                <div class=" info__container d-flex justify-start align-start">
+                  <div
+                    class=" w-50 d-flex flex-column justify-center align-start"
+                  >
+                    <h5>Genre</h5>
+                    <div class="game__subtitle-genre genre">
+                      <div class="genre__list">
+                        <span
+                          class="genre__list-item"
+                          v-for="genre in gameInfo.genres"
+                          :key="genre.id"
+                        >
+                          {{ genre.name }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="  w-50 d-flex flex-column justify-center align-start"
+                  >
+                    <h5>Release date</h5>
+                    <p>{{ gameInfo.released }}</p>
+                  </div>
+                </div>
+                <div class="info__container d-flex justify-space-between align-start">
+                  <div
+                    class="  w-50 d-flex flex-column justify-center align-start"
+                  >
+                    <h5>Platforms</h5>
+                    <div class="game__subtitle-genre genre">
+                      <div class="genre__list">
+                        <span
+                          class="genre__list-item"
+                          v-for="platform in platforms" :key="platform.id"
+                        >
+                          {{ platform.name }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="  w-50 d-flex flex-column justify-center align-start"
+                  >
+                    <h5>Metascore</h5>
+                    <a :href="gameInfo.metacritic_url " class="metacritic">{{ gameInfo.metacritic }}</a>
+                  </div>
+                </div>
+                <div class="info__container d-flex justify-space-between align-start">
+                  <div
+                    class="  w-50 d-flex flex-column justify-center align-start"
+                  >
+                    <h5>Developer</h5>
+                    <div class="game__subtitle-genre genre">
+                      <div class="genre__list">
+                        <span
+                          class="genre__list-item"
+                          v-for="developer in gameInfo.developers"
+                          :key="developer.id"
+                        >
+                          {{ developer.name }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="  w-50 d-flex flex-column justify-center align-start"
+                  >
+                    <h5>Publisher</h5>
+                    <div class="game__subtitle-genre genre">
+                      <div class="genre__list">
+                        <span
+                          class="genre__list-item"
+                          v-for="publisher in gameInfo.publishers"
+                          :key="publisher.id"
+                        >
+                          {{ publisher.name }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="info__container d-flex justify-space-between align-start">
+                  <div
+                    class="  w-50 d-flex flex-column justify-center align-start"
+                  >
+                    <h5>Web Site</h5>
+                    <div class="game__subtitle-genre genre">
+                      <a :href="gameInfo.website">{{gameInfo.website}}</a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
-            <div v-else><h2 style="color: white">Out of Selling</h2></div>
+
             <div class="gameCard__container-age age">
               <div class="age__value">
                 <span class="age__value-text"> {{ ageLimit }} +</span>
@@ -159,6 +265,46 @@
 
       <slide id="gameMainSlide" v-if="achivements.length > 0">
         <div
+          v-if="isAchiv"
+          class="gameMainSlide__modal d-flex justify-center align-center"
+        >
+          <div
+            v-for="achivement in achivements"
+            :key="achivement.id"
+            class="d-flex justify-center align-center"
+          >
+            <div
+              v-if="achivement.id == AchivInfo"
+              class="d-flex justify-center align-center"
+            >
+              <div
+                class="achivement__modal-info d-flex justify-center align-center flex-column"
+              >
+                <img
+                  :src="achivement.image"
+                  alt="achivement.image"
+                  class="achivement__modal-img"
+                />
+                <h2
+                  clas="achivement__modal-name animate__animated animate__bounce"
+                >
+                  {{ achivement.name }}
+                </h2>
+                <h5 class="achicement__modal-goal">
+                  {{ achivement.description }}
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <b-button
+            @click="AchivShow"
+            variant="outline-success"
+            class="closeModal__btn"
+            >Close Achivement</b-button
+          >
+        </div>
+        <div
           class="gameCard"
           :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
         >
@@ -169,14 +315,19 @@
             </div>
             <div class="gameCard__container-achivement achivement">
               <div
+                @click="AchivShow(achivement.id)"
                 class="achivement__card"
+                v-animate-css.click="'animate__flipInX'"
                 v-for="achivement in achivements"
-                :key="achivement"
+                :key="achivement.id"
+                :style="{
+                  backgroundImage: 'url(' + gameInfo.background_image + ')'
+                }"
               >
                 <div class="achivement__fwd">
                   <img
                     :src="achivement.image"
-                    alt=""
+                    alt="achivement.image"
                     class="achivement__fwd-img"
                   />
                 </div>
@@ -214,7 +365,7 @@
                 <slide
                   class="screenschots__slideTop"
                   v-for="screenshot in screenshots"
-                  :key="screenshot"
+                  :key="screenshot.id"
                 >
                   <img class="screenschots__slideTop-img" :src="screenshot" />
                 </slide>
@@ -232,7 +383,7 @@
                 <slide
                   class="screenschots__slideBtm"
                   v-for="screenshot in screenshots"
-                  :key="screenshot"
+                  :key="screenshot.id"
                 >
                   <img class="screenschots__slideBtm-img" :src="screenshot" />
                 </slide>
@@ -276,6 +427,7 @@
 import Api from "../service/api";
 import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
 import "hooper/dist/hooper.css";
+import "animate.css";
 export default {
   data() {
     return {
@@ -289,34 +441,51 @@ export default {
       platforms: [],
       achivements: [],
       screenshots: [],
+      AchivInfo: "",
 
       //stiles
       isOpacity: false,
+      isAchiv: false,
+
+      //Animate
+      fadeInDown5001000: {
+        classes: "fadeInDown",
+        delay: 500,
+        duration: 1000
+      }
     };
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination,
+    HooperPagination
   },
-  methods: {},
+  methods: {
+    AchivShow: function (achivementId) {
+      this.isAchiv = !this.isAchiv;
+      this.AchivInfo = achivementId;
+      console.log(this.AchivInfo);
+      return achivementId;
+    }
+  },
   async beforeMount() {
     let gameId = this.gameId;
     let respGameId = await Api().get(
-      `games/${gameId}?&key=3d770078d0d8493a8de967ae4f287969`
+      `games/${gameId}?&key=a93f8e4bce884b11ae59a173f67e656c`
     );
     let respGameIdMarket = await Api().get(
-      `games/${gameId}/stores?&key=3d770078d0d8493a8de967ae4f287969`
+      `games/${gameId}/stores?&key=a93f8e4bce884b11ae59a173f67e656c`
     );
+
     let respGameIdAchiv = await Api().get(
-      `games/${gameId}/achievements?&key=3d770078d0d8493a8de967ae4f287969`
+      `games/${gameId}/achievements?&key=a93f8e4bce884b11ae59a173f67e656c`
     );
     let respGameIdScreenshots = await Api().get(
-      `games/${gameId}/screenshots?&key=3d770078d0d8493a8de967ae4f287969`
+      `games/${gameId}/screenshots?&key=a93f8e4bce884b11ae59a173f67e656c`
     );
 
     console.log("respGameId", respGameId.data);
-    console.log("respGameIdAchiv", respGameIdAchiv.data.results);
+    // console.log("respGameIdAchiv", respGameIdAchiv.data);
 
     // console.log("respGameIdMarket.data.results", respGameIdMarket.data.results); //url
     this.gameInfo = respGameId.data;
@@ -326,12 +495,12 @@ export default {
     for (let i = 0; i < respGameIdScreenshots.data.results.length; i++) {
       this.screenshots.push(respGameIdScreenshots.data.results[i].image);
     }
-    console.log(" this.screenshots", this.screenshots);
+    // console.log(" this.screenshots", this.screenshots);
 
     for (let i = 0; i < respGameId.data.platforms.length; i++) {
       this.platforms.push({
         name: respGameId.data.platforms[i].platform.name,
-        released: respGameId.data.platforms[i].released_at,
+        released: respGameId.data.platforms[i].released_at
       });
     }
 
@@ -344,19 +513,21 @@ export default {
     for (let i = 0; i < this.storesInfo.length; i++) {
       this.storesData.push({
         name: this.storesNames[i],
-        url: this.storesInfo[i].url,
+        url: this.storesInfo[i].url
       });
     }
     // console.log("this.storesData", this.storesData);
-  },
+  }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss"  >
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Josefin Sans", sans-serif;
+  font-style: normal;
 }
 
 .gamePage {
@@ -397,50 +568,50 @@ export default {
     }
   }
 
-  .nav__btn {
-    bottom: 100px !important;
-    left: 20px !important;
-    top: auto !important;
+  // .nav__btn {
+  //   bottom: 100px !important;
+  //   left: 20px !important;
+  //   top: auto !important;
 
-    .hooper-indicators {
-      &:first-child {
-        .hooper-indicator {
-          &:after {
-            content: "Game Info";
-            text-shadow: #999 0 0 10px;
-            color: white;
-            width: 200px;
-            display: inline-block;
-            font-family: "Josefin Sans", sans-serif;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 24px;
-            line-height: 30px;
-            opacity: 0.3;
-            transition: 0.3s ease-in-out;
-          }
-          .hooper-sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-          }
-        }
-        .is-active {
-          &::after {
-            opacity: 1;
-          }
-        }
-        li {
-          height: 20px !important;
-        }
-      }
-    }
-  }
+  //   .hooper-indicators {
+  //     &:first-child {
+  //       .hooper-indicator {
+  //         &:after {
+  //           content: "Game Info";
+  //           text-shadow: #999 0 0 10px;
+  //           color: white;
+  //           width: 200px;
+  //           display: inline-block;
+  //           font-family: "Josefin Sans", sans-serif;
+  //           font-style: normal;
+  //           font-weight: 700;
+  //           font-size: 24px;
+  //           line-height: 30px;
+  //           opacity: 0.3;
+  //           transition: 0.3s ease-in-out;
+  //         }
+  //         .hooper-sr-only {
+  //           position: absolute;
+  //           width: 1px;
+  //           height: 1px;
+  //           padding: 0;
+  //           margin: -1px;
+  //           overflow: hidden;
+  //           clip: rect(0, 0, 0, 0);
+  //           border: 0;
+  //         }
+  //       }
+  //       .is-active {
+  //         &::after {
+  //           opacity: 1;
+  //         }
+  //       }
+  //       li {
+  //         height: 20px !important;
+  //       }
+  //     }
+  //   }
+  // }
   .gameCard {
     background-position: center;
     background-size: cover;
@@ -463,9 +634,9 @@ export default {
     &__container {
       z-index: 2;
       width: 95%;
-      padding: 80px 40px 100px;
+      padding: 40px 0;
       margin: 0 auto;
-      max-width: 1400px;
+      max-width: 90%;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -475,7 +646,7 @@ export default {
 
       .pageTitle {
         top: 80px;
-        margin-bottom: 160px;
+        margin-bottom: 40px;
         color: white;
 
         &__text {
@@ -484,8 +655,7 @@ export default {
       }
 
       .game {
-        width: 100%;
-        margin-bottom: 75px;
+        width: 60%;
         &__title {
           display: flex;
           justify-content: flex-start;
@@ -495,15 +665,40 @@ export default {
             font-family: "Josefin Sans", sans-serif;
             font-style: normal;
             font-weight: 700;
-            font-size: 64px;
-            line-height: 79px;
+            font-size: 72px;
+            letter-spacing: 0;
+            line-height: 74px;
+            overflow-wrap: break-word;
             color: #fefcfe;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+          }
+
+          &-released {
+            font-size: 12px;
+            line-height: normal;
+            font-weight: 400;
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 2px 7.5px;
+          }
+          &-playTime {
+            font-size: 12px;
+            line-height: normal;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: #fff;
+            letter-spacing: 2px;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
           }
         }
 
         &__subtitle {
           display: inline-flex;
-          margin: 30px 0;
+          margin: 20px 0;
+          flex-wrap: wrap;
+          justify-content: flex-start;
 
           .author {
             display: flex;
@@ -513,8 +708,8 @@ export default {
               font-family: "Josefin Sans", sans-serif;
               font-style: normal;
               font-weight: 400;
-              font-size: 30px;
-              line-height: 41px;
+              font-size: 20px;
+              line-height: 31px;
               display: flex;
               align-items: center;
               color: #c6c6c6;
@@ -539,8 +734,8 @@ export default {
                 font-family: "Josefin Sans", sans-serif;
                 font-style: normal;
                 font-weight: 400;
-                font-size: 30px;
-                line-height: 41px;
+                font-size: 20px;
+                line-height: 31px;
                 display: flex;
                 align-items: center;
                 color: #c6c6c6;
@@ -572,8 +767,8 @@ export default {
               font-family: "Josefin Sans", sans-serif;
               font-weight: 400;
               font-style: normal;
-              font-size: 30px;
-              line-height: 41px;
+              font-size: 20px;
+              line-height: 31px;
               display: flex;
               align-items: center;
               color: #c6c6c6;
@@ -630,57 +825,44 @@ export default {
         flex-direction: row;
 
         .achivement__card {
-          width: 200px;
-          height: 200px;
-          margin: 10px;
+          width: 100px;
+          height: 160px;
+          margin: 20px;
           position: relative;
           overflow: hidden;
           border-radius: 2px;
           text-align: center;
           border-radius: 5px;
           transition: 0.3s;
+          transition: 0.3s;
+          animation: flipH 5s linear infinite;
+          perspective: 2000px;
+          transform-style: preserve-3d;
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          cursor: pointer;
+          border: 2px solid gold;
+          background-position: center;
+          background-size: cover;
+
           &:hover {
             transform: scale(1.1);
           }
 
-          &:hover .achivement__back {
-            transform: translateX(0);
-          }
           .achivement__fwd {
             position: absolute;
             width: 100%;
             height: 100%;
+            // -webkit-backface-visibility: hidden;
+            // backface-visibility: hidden;
+            background: #000000;
+            // animation: flipH 5s linear infinite;
 
             &-img {
               margin: 0;
               width: 100%;
               height: 100%;
-            }
-          }
-          .achivement__back {
-            width: 100%;
-            height: 100%;
-            padding: 5px;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.85);
-            color: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translateX(100%);
-            transition: 0.4s ease-in-out;
-
-            .achivement__back-info {
-              font-family: "Josefin Sans", sans-serif;
-              .achivment__name {
-                text-shadow: rgb(252, 252, 252) 0 0 10px;
-                font-weight: 300;
-                font-size: 15px;
-              }
-              .achicement__goal {
-                font-size: 12px;
-              }
             }
           }
         }
@@ -695,24 +877,27 @@ export default {
         &__btn {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-
+          align-items: center;
+          margin-right: 20px !important;
           padding: 6px 12px !important;
+          padding-bottom: 0px !important;
           text-align: left !important;
           background-color: #2c2e30 !important;
-          height: 57px !important;
+          height: 37px !important;
           transition: 0.1s ease-in-out;
           border-radius: 4px;
           color: #fefcfe !important;
 
           .v-btn__content {
             width: 100% !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
 
-          & + .buy__btn {
-            margin-left: 20px !important;
+          &:hover {
+            transform: scale(1.1);
           }
-
           &:active {
             box-shadow: 0px 0px 0px 4px #000000, 0px 0px 0px 8px #ffffff,
               0px 0px 15px 4px #ffffff !important;
@@ -725,10 +910,10 @@ export default {
 
           &-text {
             font-family: "Josefin Sans", sans-serif;
-            font-size: 24px;
+            font-size: 16px;
             color: #fefcfe !important;
-            height: 19px;
-            display: block;
+            line-height: 16px;
+            margin-bottom: 0 !important;
           }
         }
       }
@@ -824,4 +1009,80 @@ export default {
   opacity: 1;
   text-shadow: none;
 }
+
+@keyframes flipH {
+  0% {
+    transform: rotateY(0deg) rotateZ(33deg) skewY(-5deg);
+  }
+  50% {
+    transform: rotateY(180deg) rotateZ(33deg) skewY(-5deg);
+  }
+  100% {
+    transform: rotateY(360deg) rotateZ(33deg) skewY(-5deg);
+  }
+}
+// @keyframes rotateAchBack {
+//   0% {
+//     transform: rotateY(180deg) rotateZ(33deg) skewY(-5deg);
+//   }
+//   50% {
+//     transform: rotateY(360deg) rotateZ(33deg) skewY(-5deg);
+//   }
+//   100% {
+//     transform: rotateY(540deg) rotateZ(33deg) skewY(-5deg);
+// }
+// }
+
+.gameMainSlide__modal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 5;
+  color: white;
+  flex-direction: column;
+  transition: 1s ease-in-out;
+
+  .closeModal__btn {
+    position: absolute;
+    top: 20px;
+    right: 80px;
+  }
+}
+.achivement__modal-img {
+  width: 400px;
+  border-radius: 2px solid gold;
+}
+
+.achivement__modal-name {
+  font-family: "Josefin Sans", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 28px !important;
+}
+
+.achivement__modal-goal {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.info__container{
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.metacritic {
+      color: #6dc849;
+      border-color: rgba(109, 200, 73, 0.4);
+      min-width: 32px;
+      display: inline-block;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 2px 0;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 4px;
+      border: 1px solid;
+      background-color: black;
+    }
 </style>

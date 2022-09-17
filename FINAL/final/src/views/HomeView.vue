@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <!-- <finalSlider></finalSlider> -->
+    <finalSlider></finalSlider>
     <finalHeader></finalHeader>
     <finalMainWrapper class="" />
     <!-- <finalSearchMarket></finalSearchMarket> -->
@@ -12,18 +12,19 @@
 
 <script>
 import finalHeader from "../components/finalHeader";
-// import finalSlider from "@/components/finalSlider.vue"; //almost
+import finalSlider from "@/components/finalSlider.vue"; //almost
 // import finalSearchMarket from "@/components/finalSearchMarket.vue";
 import finalFooterVue from "@/components/finalFooter.vue";
 // import finalSharingVue from "@/components/finalSharing.vue";
 import finalMainWrapper from "@/components/finalMainWrapper.vue";
+import axios from "axios";
 
 export default {
   name: "HomeView",
 
   components: {
     finalHeader,
-    // finalSlider, //almost
+    finalSlider, //almost
     // finalSearchMarket,
     // finalMostPopular, //almost
     finalFooterVue,
@@ -31,7 +32,10 @@ export default {
 
     finalMainWrapper,
   },
-  mounted() {
+  async mounted() {
+    axios.get('https://api.rawg.io/docs/?format=openapi').then((data) =>{
+      console.log("data",data)
+    })
     // this.$store.dispatch("loadAllGames");
     // this.$store.dispatch("loadAllPlatforms");
   },

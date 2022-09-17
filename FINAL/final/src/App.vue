@@ -1,7 +1,7 @@
 <template>
   <v-app class="app">
-    <FinalSideMenu v-if="name !== undefined" />
-    <preloader />
+    <FinalSideMenu  />
+    <!-- <preloader /> -->
     <v-main>
       <router-view />
     </v-main>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Preloader from "@/components/finalPreloader.vue";
+// import Preloader from "@/components/finalPreloader.vue";
 import FinalSideMenu from "@/components/finalSideMenu.vue";
 export default {
   name: "App",
@@ -19,7 +19,7 @@ export default {
     };
   },
   components: {
-    Preloader,
+    // Preloader,
     FinalSideMenu,
     // finalLoginModal,
   },

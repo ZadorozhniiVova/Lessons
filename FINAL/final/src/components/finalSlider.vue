@@ -56,16 +56,14 @@ export default {
   name: "MyComponent",
   data() {
     return {
-      sliderItemsID: [
-        326246, 27976, 647552, 494384, 463723, 29238, 437059, 490752,
-      ],
+      sliderItemsID: [452642, 3328, 428839, 494384, 463723, 29238, 437059],
       sliderGames: [],
-      sliderGamesStores: [],
+      sliderGamesStores: []
     };
   },
   components: {
     Hooper,
-    Slide,
+    Slide
   },
   methods: {},
   async mounted() {
@@ -84,7 +82,7 @@ export default {
         `games/${element}/stores?&key=a93f8e4bce884b11ae59a173f67e656c`
       );
 
-      console.log("respGames", respGames.data);
+      // console.log("respGames", respGames.data);
       sliderGames.push(respGames.data);
       sliderGamesStores.push(respStore.data.results);
     });
@@ -96,7 +94,7 @@ export default {
     // platforms() {
     //   return this.$store.state.platforms;
     // },
-  },
+  }
 };
 </script>
 
@@ -106,7 +104,7 @@ export default {
   background-color: black;
 
   &__left {
-    height: 94vh;
+    height: 100vh;
     width: 50%;
 
     &-slide {
@@ -122,7 +120,7 @@ export default {
   }
 
   &__right {
-    height: 94vh;
+    height: 100vh;
     width: 50%;
     transform: rotate(180deg);
 
