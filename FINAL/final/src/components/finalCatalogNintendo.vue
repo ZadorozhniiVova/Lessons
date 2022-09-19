@@ -1,9 +1,9 @@
 <template>
-  <div class="finalCatalogPC catalog">
+  <div class="finalCatalogNintendo catalog">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
-      <h1 class="catalog__title-text">Games for PC</h1>
-      <span class="catalog__title-subtitle mb-3"> PC games, or personal computer games, started with the video game crash of 1983. PC games became popular after the development of the microprocessor and microcomputer. Some of the first PC games were Bertie the Brain, OXO and Spacewar! As the 3D graphics accelerators became faster and CPU power improved, PC games became more realistic and more accessible to produce. The PC market sales rocketed in the 80s when IBM computers and sound cards were generated. The platform involves different peripherals, gaming hardware, and software. These are mouse and keyboard; gamepads and motion controllers aren't obligatory, but still popularly accepted. Better hardware improves the game's accuracy; it usually lets the players use more NPCs than equivalents on other platforms. With the platform, the players can perform every sort of game. For example, shooters are easy to play due to the mouse controllers. However, the main reason for the PC games popularity is their lower prices and the backward compatibility with older titles, which leaves much to be desired on cosoles.</span>
+      <h1 class="catalog__title-text">Games for Nintendo </h1>
+      <span class="catalog__title-subtitle mb-3"> Nintendo Switch is a hybrid video game console made by Nintendo. The system represents a tablet-like device with a touchscreen with detachable controllers on the sides. The system can be inserted into a docking station connected to the TV and serve as a home console. This allows the games on the system to be played both on a big screen or in the handheld with no need to reset the system to change the modes. The central controller for the Switch is a pair of Joy-Cons – small controllers both of which feature four face buttons, an analog stick, two side buttons, and high-definition vibration. The controllers can be used separately by different players, together using a grip accessory or attached to the system in handheld mode. Unlike many previous Nintendo consoles, as for 2019, the system has strong support from third-party developers, especially from the indie scene. The Switch introduced Nintendo Switch Online, a subscription-based service that resembles Xbox Live Gold and PlayStation Plus. It allows players to play online multiplayer, offers a selection of classic Nintendo games and lets players use cloud saves.</span>
       <div class="d-flex">
         <div>
           <b-form-select
@@ -23,7 +23,7 @@
     </div>
     <div class="catalog__container">
       <finalCatalogItem
-        v-for="(game, gameIndex) in PLATFORMSPC.results"
+        v-for="(game, gameIndex) in PLATFORMSNINTENDO.results"
         :key="game.id"
         :product_data="game"
         @addToFavorite="addToFavorite"
@@ -33,7 +33,7 @@
     <div class="overflow-auto catalog__pagination d-flex justify-center">
       <b-pagination
         v-model="currentPage"
-        :total-rows="PLATFORMSPC.count / perPage"
+        :total-rows="PLATFORMSNINTENDO.count / perPage"
         :per-page="perPage"
         first-text="First"
         prev-text="Prev"
@@ -49,11 +49,11 @@
 import { mapActions, mapGetters } from "vuex";
 import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
-import finalFooter from "../components/finalFooter.vue";
+import finalFooter from "./finalFooter.vue";
 import Vue from "vue";
 
 export default {
-  name: "finalCatalogPc",
+  name: "finalCatalogNintendo",
   components: {
     finalCatalogItem,
     finalHeader,
@@ -91,12 +91,12 @@ export default {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["", "&platforms=4", ""]
+      default: () => ["", "&platforms=7,8,9,13,83", ""]
     }
   },
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getPlatformsPcByPage", [
+      this.$store.dispatch("getPlatformsNintendoByPage", [
         next,
         this.filterRequest.join("")
       ]);
@@ -111,18 +111,18 @@ export default {
 
     filterRequest: {
       handler(newValue) {
-        this.$store.dispatch("getPlatformsPcFilter", newValue.join(""));
+        this.$store.dispatch("getPlatformsNintendoFilter", newValue.join(""));
         this.currentPage = 1;
       },
       deep: true
     }
   },
   computed: {
-    ...mapGetters(["PLATFORMSPC"])
+    ...mapGetters(["PLATFORMSNINTENDO"])
   },
   methods: {
     ...mapActions([
-      "GET_PLATFORMS_PC_FROM_API",
+      "GET_PLATFORMS_NINTENDO_FROM_API",
       "ADD_TO_FAVORITE",
       "DELETE_FROM_FAVORITE"
     ]),
@@ -134,7 +134,7 @@ export default {
     }
   },
   mounted() {
-    this.GET_PLATFORMS_PC_FROM_API().then((responce) => {
+    this.GET_PLATFORMS_NINTENDO_FROM_API().then((responce) => {
       console.log(responce);
     });
   }

@@ -7,6 +7,12 @@ import finalFavorite from "../components/finalFavorite";
 import finalCatalogBestYear from "../components/finalCatalogBestYear";
 import finalCatalogBest2021 from "../components/finalCatalogBest2021";
 import finalCatalogBestAllTime from "../components/finalCatalogBestAllTime";
+import finalCatalogPC from "../components/finalCatalogPC"
+import finalCatalogXbox from "../components/finalCatalogXbox"
+import finalCatalogNintendo from  "../components/finalCatalogNintendo"
+import finalCatalogIos from "../components/finalCatalogIos"
+import finalCatalogAndroid from "../components/finalCatalogAndroid"
+import finalCatalogPS from "../components/finalCatalogPS"
 
 Vue.use(VueRouter);
 
@@ -51,6 +57,39 @@ const routes = [
     name: "bestOfAllTime",
     component: finalCatalogBestAllTime,
   },
+  {
+    path: "/Platform-PC",
+    name: "PlatformPC",
+    component: finalCatalogPC,
+  },
+  {
+    path: "/Platform-Playstation",
+    name: "PlatformPS",
+    component: finalCatalogPS,
+  },
+  {
+    path: "/Platform-XBox",
+    name: "PlatformXbox",
+    component: finalCatalogXbox,
+  },
+  {
+    path: "/Platform-Nintendo",
+    name: "PlatformNintendo",
+    component: finalCatalogNintendo,
+  },
+  {
+    path: "/Platform-iOs",
+    name: "PlatformIos",
+    component: finalCatalogIos,
+  },
+  {
+    path: "/Platform-Android",
+    name: "PlatformAndroid",
+    component: finalCatalogAndroid,
+  },
+  
+
+  
 ];
 
 const router = new VueRouter({

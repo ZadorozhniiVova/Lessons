@@ -12,7 +12,14 @@ let store = new Vuex.Store({
     favorite: [],
     bestOfYear: [],
     bestOf2021: [],
-    bestOfAllTime: []
+    bestOfAllTime: [],
+    platformsPC:[],
+    platformsPS:[],
+    platformsXbox:[],
+    platformsNintendo:[],
+    platformsIos:[],
+    platformsAndroid:[],
+    
   },
   mutations: {
     SET_GAMES_TO_STATE: (state, games) => {
@@ -44,7 +51,25 @@ let store = new Vuex.Store({
     },
     SET_BEST_OF_ALL_TIME: (state, bestOfAllTime) => {
       state.bestOfAllTime = bestOfAllTime;
-    }
+    },
+    SET_PLATFORMS_PC: (state, platform) => {
+      state.platformsPC = platform;
+    },
+    SET_PLATFORMS_PS: (state, platform) => {
+      state.platformsPS = platform;
+    },
+    SET_PLATFORMS_XBOX: (state, platform) => {
+      state.platformsXbox = platform;
+    },
+    SET_PLATFORMS_NINTENDO: (state, platform) => {
+      state.platformsNintendo = platform;
+    },
+    SET_PLATFORMS_IOS: (state, platform) => {
+      state.platformsIos = platform;
+    },
+    SET_PLATFORMS_ANDROID: (state, platform) => {
+      state.platformsAndroid = platform;
+    },
   },
   actions: {
     GET_POPULAR_GAMES_FROM_API({ commit }) {
@@ -65,12 +90,10 @@ let store = new Vuex.Store({
         });
     },
     getPopularFilter({ commit },filterRequest) {
-      console.log("filterRequestFILTER", filterRequest)
-      Api.getPopularFilterFromApi(this.state.key,filterRequest)
-        .then((popular) => {
-          commit("SET_GAMES_TO_STATE", popular.data);
-          console.log("bestOfYear", popular);
-          return popular;
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_GAMES_TO_STATE", responce.data);
+          return responce;
         })
         .catch((error) => {
           console.log(error);
@@ -78,11 +101,11 @@ let store = new Vuex.Store({
         });
     },
     getPopularByPage({ commit }, [page, filterRequest]) {
-      Api.getPopularByPageFromApi(this.state.key, page, filterRequest)
-        .then((popular) => {
-          commit("SET_GAMES_TO_STATE", popular.data);
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_GAMES_TO_STATE", responce.data);
           // console.log("bestOfYear", popular);
-          return popular;
+          return responce;
         })
         .catch((error) => {
           console.log(error);
@@ -92,25 +115,37 @@ let store = new Vuex.Store({
 
     GET_BEST_OF_YEAR_FROM_API({ commit }) {
       return axios(
-        `https://api.rawg.io/api/games?dates=2022-01-01,2022-12-31&rating&PC&key=${this.state.key}`,
+        `https://api.rawg.io/api/games?dates=2022-01-01,2022-12-31&rating&key=${this.state.key}`,
         { method: "GET" }
       )
-        .then((bestOfYear) => {
-          commit("SET_BEST_OF_YEAR_TO_STATE", bestOfYear.data);
-          console.log("bestOfYear", bestOfYear);
-          return bestOfYear;
+        .then((responce) => {
+          commit("SET_BEST_OF_YEAR_TO_STATE", responce.data);
+          console.log("bestOfYear", responce);
+          return responce;
         })
         .catch((error) => {
           console.log(error);
           return error;
         });
     },
-    getBestOfYearByPage({ commit }, page) {
-      Api.getBestOfYearByPageFromApi(this.state.key, page)
-        .then((bestOfYear) => {
-          commit("SET_BEST_OF_YEAR_TO_STATE", bestOfYear.data);
-          // console.log("bestOfYear", bestOfYear);
-          return bestOfYear;
+
+    getBestOfYearFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_BEST_OF_YEAR_TO_STATE", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getBestOfYearByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_BEST_OF_YEAR_TO_STATE", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
         })
         .catch((error) => {
           console.log(error);
@@ -132,18 +167,30 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getBestOf2021ByPage({ commit }, page) {
-      Api.getBestOf2021ByPageFromApi(this.state.key, page)
-        .then((bestOf2021) => {
-          commit("SET_BEST_OF_2021_TO_STATE", bestOf2021.data);
-          // console.log("bestOf2021", bestOf2021);
-          return bestOf2021;
+    getBestOf2021Filter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_BEST_OF_2021_TO_STATE", responce.data);
+          return responce;
         })
         .catch((error) => {
           console.log(error);
           return error;
         });
     },
+    getBestOf2021ByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_BEST_OF_2021_TO_STATE", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    
     GET_POPULAR_ALL_TIME({ commit }) {
       return axios(
         `https://api.rawg.io/api/games?dates=1950-01-01,2022-12-31&rating&key=${this.state.key}`,
@@ -158,18 +205,259 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getBestOfAllTimeByPage({ commit }, page) {
-      Api.getBestOfAllTimeByPageFromApi(this.state.key, page)
-        .then((bestOfAllTime) => {
-          commit("SET_BEST_OF_ALL_TIME", bestOfAllTime.data);
-          // console.log("bestOfAllTime", bestOfAllTime);
-          return bestOfAllTime;
+
+    getBestOfAllTimeFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_BEST_OF_ALL_TIME", responce.data);
+          return responce;
         })
         .catch((error) => {
           console.log(error);
           return error;
         });
     },
+    getBestOfAllTimeByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_BEST_OF_ALL_TIME", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+
+    
+    GET_PLATFORMS_PC_FROM_API({ commit }) {
+      return axios(
+        `https://api.rawg.io/api/games?platforms=4&key=${this.state.key}`,
+        { method: "GET" }
+      )
+        .then((responce) => {
+          commit("SET_PLATFORMS_PC", responce.data);
+          console.log("SET_PLATFORMS_PC", responce);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsPcFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_PC", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsPcByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_PC", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+
+    GET_PLATFORMS_PS_FROM_API({ commit }) {
+      return axios(
+        `https://api.rawg.io/api/games?platforms=187,18,16,15,27,19,17&key=${this.state.key}`,
+        { method: "GET" }
+      )
+        .then((responce) => {
+          commit("SET_PLATFORMS_PS", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsPsFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_PS", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsPsByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_PS", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+
+    GET_PLATFORMS_XBOX_FROM_API({ commit }) {
+      return axios(
+        `https://api.rawg.io/api/games?platforms=1,186,14,80&key=${this.state.key}`,
+        { method: "GET" }
+      )
+        .then((responce) => {
+          commit("SET_PLATFORMS_XBOX", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsXboxFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_XBOX", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsXboxByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_XBOX", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+
+    GET_PLATFORMS_NINTENDO_FROM_API({ commit }) {
+      return axios(
+        `https://api.rawg.io/api/games?platforms=7,8,9,13,83&key=${this.state.key}`,
+        { method: "GET" }
+      )
+        .then((responce) => {
+          commit("SET_PLATFORMS_NINTENDO", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsNintendoFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_NINTENDO", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsNintendoByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_NINTENDO", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    GET_PLATFORMS_IOS_FROM_API({ commit }) {
+      return axios(
+        `https://api.rawg.io/api/games?platforms=3&key=${this.state.key}`,
+        { method: "GET" }
+      )
+        .then((responce) => {
+          commit("SET_PLATFORMS_IOS", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsIosFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_IOS", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsIosByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_IOS", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    GET_PLATFORMS_ANDROID_FROM_API({ commit }) {
+      return axios(
+        `https://api.rawg.io/api/games?platforms=21&key=${this.state.key}`,
+        { method: "GET" }
+      )
+        .then((responce) => {
+          commit("SET_PLATFORMS_ANDROID", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsAndroidFilter({ commit },filterRequest) {
+      Api.getFilterFromApi  (this.state.key,filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_ANDROID", responce.data);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+    getPlatformsAndroidByPage({ commit }, [page, filterRequest]) {
+      Api.getPageFromApi(this.state.key, page, filterRequest)
+        .then((responce) => {
+          commit("SET_PLATFORMS_ANDROID", responce.data);
+          // console.log("bestOfYear", popular);
+          return responce;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
+    },
+
     ADD_TO_FAVORITE({ commit }, favoriteGame) {
       commit("SET_FAVORITE", favoriteGame);
     },
@@ -194,7 +482,25 @@ let store = new Vuex.Store({
     },
     BESTOFALLTIME(state) {
       return state.bestOfAllTime;
-    }
+    },
+    PLATFORMSPC(state){
+      return state.platformsPC
+    },
+    PLATFORMSPS(state){
+      return state.platformsPS
+    },
+    PLATFORMSXBOX(state){
+      return state.platformsXbox
+    },
+    PLATFORMSNINTENDO(state){
+      return state.platformsNintendo
+    },
+    PLATFORMSIOS(state){
+      return state.platformsIos
+    },
+    PLATFORMSANDROID(state){
+      return state.platformsAndroid
+    },
   }
 });
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="finalCatalogPC catalog">
+  <div class="finalCatalogPS catalog">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
-      <h1 class="catalog__title-text">Games for PC</h1>
-      <span class="catalog__title-subtitle mb-3"> PC games, or personal computer games, started with the video game crash of 1983. PC games became popular after the development of the microprocessor and microcomputer. Some of the first PC games were Bertie the Brain, OXO and Spacewar! As the 3D graphics accelerators became faster and CPU power improved, PC games became more realistic and more accessible to produce. The PC market sales rocketed in the 80s when IBM computers and sound cards were generated. The platform involves different peripherals, gaming hardware, and software. These are mouse and keyboard; gamepads and motion controllers aren't obligatory, but still popularly accepted. Better hardware improves the game's accuracy; it usually lets the players use more NPCs than equivalents on other platforms. With the platform, the players can perform every sort of game. For example, shooters are easy to play due to the mouse controllers. However, the main reason for the PC games popularity is their lower prices and the backward compatibility with older titles, which leaves much to be desired on cosoles.</span>
+      <h1 class="catalog__title-text">Games for PlayStation </h1>
+      <span class="catalog__title-subtitle mb-3"> PlayStation is a home video game console launched by Sony. There are currently three versions of the hardware variations: original console (also called "fat"); a slim version with optical audio output removed, weight and size reduced as well as USB interfaces differently placed; and Pro version with 4k and HDR support added and PS VR functions improved. PS4 supports VR with the special helmet called PS VR. The starting game lineup of the system is considered to be a one of the most successful in history. The console maintains the status of an exclusive-oriented platform with many remasters and Playstation-only games. Together with the start of the system, there was a multiplayer requirement introduced — now everyone seeking to play via PlayStation Network must have PS Plus active. It is a paid subscription granting the player 5 games per month for all three platforms.</span>
       <div class="d-flex">
         <div>
           <b-form-select
@@ -23,7 +23,7 @@
     </div>
     <div class="catalog__container">
       <finalCatalogItem
-        v-for="(game, gameIndex) in PLATFORMSPC.results"
+        v-for="(game, gameIndex) in PLATFORMSPS.results"
         :key="game.id"
         :product_data="game"
         @addToFavorite="addToFavorite"
@@ -33,7 +33,7 @@
     <div class="overflow-auto catalog__pagination d-flex justify-center">
       <b-pagination
         v-model="currentPage"
-        :total-rows="PLATFORMSPC.count / perPage"
+        :total-rows="PLATFORMSPS.count / perPage"
         :per-page="perPage"
         first-text="First"
         prev-text="Prev"
@@ -49,11 +49,11 @@
 import { mapActions, mapGetters } from "vuex";
 import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
-import finalFooter from "../components/finalFooter.vue";
+import finalFooter from "./finalFooter.vue";
 import Vue from "vue";
 
 export default {
-  name: "finalCatalogPc",
+  name: "finalCatalogAndroid",
   components: {
     finalCatalogItem,
     finalHeader,
@@ -91,12 +91,12 @@ export default {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["", "&platforms=4", ""]
+      default: () => ["", "&platforms=187,18,16,15,27,19,17", ""]
     }
   },
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getPlatformsPcByPage", [
+      this.$store.dispatch("getPlatformsPsByPage", [
         next,
         this.filterRequest.join("")
       ]);
@@ -111,18 +111,18 @@ export default {
 
     filterRequest: {
       handler(newValue) {
-        this.$store.dispatch("getPlatformsPcFilter", newValue.join(""));
+        this.$store.dispatch("getPlatformsPsFilter", newValue.join(""));
         this.currentPage = 1;
       },
       deep: true
     }
   },
   computed: {
-    ...mapGetters(["PLATFORMSPC"])
+    ...mapGetters(["PLATFORMSPS"])
   },
   methods: {
     ...mapActions([
-      "GET_PLATFORMS_PC_FROM_API",
+      "GET_PLATFORMS_PS_FROM_API",
       "ADD_TO_FAVORITE",
       "DELETE_FROM_FAVORITE"
     ]),
@@ -134,7 +134,7 @@ export default {
     }
   },
   mounted() {
-    this.GET_PLATFORMS_PC_FROM_API().then((responce) => {
+    this.GET_PLATFORMS_PS_FROM_API().then((responce) => {
       console.log(responce);
     });
   }

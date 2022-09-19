@@ -1,7 +1,8 @@
 <template>
   <div class="body">
-    <!-- <finalSlider></finalSlider> -->
+    
     <finalHeader></finalHeader>
+    <finalSlider></finalSlider>
     <finalMainWrapper class="" />
     <!-- <finalSearchMarket></finalSearchMarket> -->
 
@@ -12,8 +13,7 @@
 
 <script>
 import finalHeader from "../components/finalHeader";
-// import finalSlider from "@/components/finalSlider.vue"; //almost
-// import finalSearchMarket from "@/components/finalSearchMarket.vue";
+import finalSlider from "@/components/finalSlider.vue"; //almost
 import finalFooterVue from "@/components/finalFooter.vue";
 // import finalSharingVue from "@/components/finalSharing.vue";
 import finalMainWrapper from "@/components/finalMainWrapper.vue";
@@ -24,8 +24,7 @@ export default {
 
   components: {
     finalHeader,
-    // finalSlider, //almost
-    // finalSearchMarket,
+    finalSlider, //almost
     // finalMostPopular, //almost
     finalFooterVue,
     // finalSharingVue,
@@ -51,6 +50,6 @@ export default {
 </script>
 <style lang="scss">
 .body {
-  background-color: black;
+
 }
 </style>

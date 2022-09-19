@@ -1,9 +1,9 @@
 <template>
-  <div class="finalCatalogPC catalog">
+  <div class="finalCatalogXbox catalog">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
-      <h1 class="catalog__title-text">Games for PC</h1>
-      <span class="catalog__title-subtitle mb-3"> PC games, or personal computer games, started with the video game crash of 1983. PC games became popular after the development of the microprocessor and microcomputer. Some of the first PC games were Bertie the Brain, OXO and Spacewar! As the 3D graphics accelerators became faster and CPU power improved, PC games became more realistic and more accessible to produce. The PC market sales rocketed in the 80s when IBM computers and sound cards were generated. The platform involves different peripherals, gaming hardware, and software. These are mouse and keyboard; gamepads and motion controllers aren't obligatory, but still popularly accepted. Better hardware improves the game's accuracy; it usually lets the players use more NPCs than equivalents on other platforms. With the platform, the players can perform every sort of game. For example, shooters are easy to play due to the mouse controllers. However, the main reason for the PC games popularity is their lower prices and the backward compatibility with older titles, which leaves much to be desired on cosoles.</span>
+      <h1 class="catalog__title-text">Games for Xbox </h1>
+      <span class="catalog__title-subtitle mb-3"> Xbox One is a home video game console released by Microsoft in 2013. Unlike its main competitor — PlayStation 4, the accent in the development was made in multitasking and using a console as a home media player to watch TV, listen to music and play the games. There is three hardware option available to gamers: original console, One S version (with a smaller body, no external power supply, and native HDR/4k support) and One X (pro-gamer-oriented system with updated hardware and 4k rendering in real time). While PS4 is known for exclusive-orientation, Xbox One's games are mostly multi-platform titles. This supports Microsoft's initial idea to prevent selling used games between the players. However, given the competition from the Sony side, the corporation quickly gave up. Among the notable exclusive games, there are Sunset Overdrive, Halo 5: Guardians and Forza Motorsport 5.</span>
       <div class="d-flex">
         <div>
           <b-form-select
@@ -23,7 +23,7 @@
     </div>
     <div class="catalog__container">
       <finalCatalogItem
-        v-for="(game, gameIndex) in PLATFORMSPC.results"
+        v-for="(game, gameIndex) in PLATFORMSXBOX.results"
         :key="game.id"
         :product_data="game"
         @addToFavorite="addToFavorite"
@@ -33,7 +33,7 @@
     <div class="overflow-auto catalog__pagination d-flex justify-center">
       <b-pagination
         v-model="currentPage"
-        :total-rows="PLATFORMSPC.count / perPage"
+        :total-rows="PLATFORMSXBOX.count / perPage"
         :per-page="perPage"
         first-text="First"
         prev-text="Prev"
@@ -49,11 +49,11 @@
 import { mapActions, mapGetters } from "vuex";
 import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
-import finalFooter from "../components/finalFooter.vue";
+import finalFooter from "./finalFooter.vue";
 import Vue from "vue";
 
 export default {
-  name: "finalCatalogPc",
+  name: "finalCatalogXbox",
   components: {
     finalCatalogItem,
     finalHeader,
@@ -91,12 +91,12 @@ export default {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["", "&platforms=4", ""]
+      default: () => ["", "&platforms=1,186,14,80", ""]
     }
   },
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getPlatformsPcByPage", [
+      this.$store.dispatch("getPlatformsXboxByPage", [
         next,
         this.filterRequest.join("")
       ]);
@@ -111,18 +111,18 @@ export default {
 
     filterRequest: {
       handler(newValue) {
-        this.$store.dispatch("getPlatformsPcFilter", newValue.join(""));
+        this.$store.dispatch("getPlatformsXboxFilter", newValue.join(""));
         this.currentPage = 1;
       },
       deep: true
     }
   },
   computed: {
-    ...mapGetters(["PLATFORMSPC"])
+    ...mapGetters(["PLATFORMSXBOX"])
   },
   methods: {
     ...mapActions([
-      "GET_PLATFORMS_PC_FROM_API",
+      "GET_PLATFORMS_XBOX_FROM_API",
       "ADD_TO_FAVORITE",
       "DELETE_FROM_FAVORITE"
     ]),
@@ -134,7 +134,7 @@ export default {
     }
   },
   mounted() {
-    this.GET_PLATFORMS_PC_FROM_API().then((responce) => {
+    this.GET_PLATFORMS_XBOX_FROM_API().then((responce) => {
       console.log(responce);
     });
   }

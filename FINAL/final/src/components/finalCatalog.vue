@@ -1,28 +1,29 @@
 <template>
   <div class="finalCatalog catalog">
-    <div class="catalog__title d-flex justify-start align-end">
-      <h1>All Games</h1>
-
-      <div>
-        <b-form-select
-          v-model="selectedFilter"
-          :options="filterBy"
-          :plain="true"
-        ></b-form-select>
-      </div>
-      <div>
-        <b-form-select
-          v-model="selectedPlatform"
-          :options="platforms"
-          :plain="true"
-        ></b-form-select>
-      </div>
-      <div>
-        <b-form-select
-          v-model="selectReleaseDate"
-          :options="releaseDate"
-          :plain="true"
-        ></b-form-select>
+    <div class="catalog__title d-flex justify-center align-start flex-column">
+      <h1 class="catalog__title-text">All Games</h1>
+      <div class="d-flex">
+        <div>
+          <b-form-select
+            v-model="selectedFilter"
+            :options="filterBy"
+            :plain="true"
+          ></b-form-select>
+        </div>
+        <div>
+          <b-form-select
+            v-model="selectedPlatform"
+            :options="platforms"
+            :plain="true"
+          ></b-form-select>
+        </div>
+        <div>
+          <b-form-select
+            v-model="selectReleaseDate"
+            :options="releaseDate"
+            :plain="true"
+          ></b-form-select>
+        </div>
       </div>
     </div>
     <div class="catalog__container">
@@ -66,7 +67,6 @@ export default {
       selectedPlatform: "",
       selectReleaseDate: "",
 
-
       filterBy: [
         { value: "", text: "Order By:" },
         { value: "&ordering=-rating", text: "Rating" },
@@ -77,16 +77,30 @@ export default {
       ],
       platforms: [
         { value: "", text: "Platform" },
-        { value: "&platforms=1", text: "Xbox One" },
-        { value: "&platforms=3", text: "iOS" },
         { value: "&platforms=4", text: "PC" },
-        { value: "&platforms=5", text: "macOS" },
+        { value: "&platforms=1,186,14,80", text: "Xbox" },
+        { value: "&platforms=187,18,16,15,27,19,17", text: "Sony Playstation" },
+        { value: "&platforms=7,8,9,13,83", text: "Nintendo" },
+        { value: "&platforms=10,11", text: "Wii" },
+        { value: "&platforms=3,41", text: "iOS" },
+        { value: "&platforms=21", text: "Android" },
+        { value: "&platforms=5,55", text: "macOS" },
         { value: "&platforms=6", text: "Linux" },
-        { value: "&platforms=7", text: "Nintendo Switch" },
-        { value: "&platforms=8", text: "Nintendo 3DS" },
-        { value: "&platforms=9", text: "Nintendo DS" },
-        { value: "&platforms=10", text: "Wii U" },
-        { value: "&platforms=11", text: "Wii" }
+        { value: "&platforms=24,43,26", text: "Game Boy" },
+        { value: "&platforms=107,119,117,74", text: "Sega" },
+        { value: "&platforms=28,31,23,22,25,34,46,50", text: "Atari" },
+        { value: "&platforms=79,49", text: "SNES" },
+        { value: "&platforms=167", text: "Genesis" },
+        { value: "&platforms=106", text: "DreamCast" },
+        { value: "&platforms=105", text: "GameCube" },
+        { value: "&platforms=166", text: "Commodore / Amiga" },
+        { value: "&platforms=111", text: "3DO" },
+        { value: "&platforms=112", text: "Jaguar" },
+        { value: "&platforms=77", text: "GameGear" },
+        { value: "&platforms=12", text: "Neo Geo" },
+    
+
+
       ],
       releaseDate: [
         { value: "", text: "Release Date" },
@@ -103,33 +117,36 @@ export default {
   },
   props: {
     filterRequest: {
-        type: Array,
-        required: false,
-        default: () => ["","","&ordering=-popularity"],
+      type: Array,
+      required: false,
+      default: () => ["", "", "&ordering=-popularity"]
     }
-},
+  },
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getPopularByPage",[next, this.filterRequest.join('')]);
+      this.$store.dispatch("getPopularByPage", [
+        next,
+        this.filterRequest.join("")
+      ]);
       window.scrollTo(0, 0);
     },
-    
-    selectedFilter(){
-      Vue.set(this.filterRequest, 2, this.selectedFilter)
+
+    selectedFilter() {
+      Vue.set(this.filterRequest, 2, this.selectedFilter);
     },
-    selectedPlatform(){
-      Vue.set(this.filterRequest, 1, this.selectedPlatform)
+    selectedPlatform() {
+      Vue.set(this.filterRequest, 1, this.selectedPlatform);
     },
-    selectReleaseDate(){
-      Vue.set(this.filterRequest, 0, this.selectReleaseDate)
+    selectReleaseDate() {
+      Vue.set(this.filterRequest, 0, this.selectReleaseDate);
     },
-    filterRequest:{
-      handler(newValue){
-        this.$store.dispatch('getPopularFilter',newValue.join(''))
+    filterRequest: {
+      handler(newValue) {
+        this.$store.dispatch("getPopularFilter", newValue.join(""));
         this.currentPage = 1;
       },
       deep: true
-    },
+    }
   },
   computed: {
     ...mapGetters(["GAMES"])
@@ -152,13 +169,13 @@ export default {
       // console.log(responce);
     });
   }
-}
+};
 </script>
 
 <style lang="scss">
 .catalog {
   color: white;
-  background-color: black;
+  background-color: #151515;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -168,23 +185,29 @@ export default {
 
   &__title {
     text-align: left;
-    width: 90%;
-    padding: 0 40px;
+    width: 88%;
+
     margin: 0 auto;
 
+    &-text{
+      font-size: 72px;
+    line-height: 74px;
+    font-weight: 700;
+    text-transform: uppercase;
+    }
     .form-control {
       display: flex;
       flex: 0 0 auto;
       -webkit-box-align: center;
       -webkit-box-pack: center;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-
+      text-align: left;
       margin: 0 4px !important;
       -webkit-box-flex: 0;
       width: auto;
-      min-width: 150px;
-      padding: 5px 16px;
+      min-width: 125px;
+      padding: 3px 2px;
       background-color: hsla(0, 0%, 100%, 0.07) !important;
       border-radius: 8px;
       font-size: 14px;
@@ -214,7 +237,7 @@ export default {
     width: 100%;
     align-items: flex-start;
     justify-content: center;
-    padding-bottom: 250px;
+    padding: 0 80px 250px;
   }
   &__pagination {
     padding-bottom: 180px;

@@ -66,15 +66,17 @@
           </v-btn>
           <div class="d-flex justify-end align-center">
             <v-rating
-            background-color="green lighten-2"
-            color="green"
-            half-increments
-            hover
-            length="5"
-            size="20"
-            :value="product_data.rating"
-          ></v-rating>
-          <div>({{product_data.rating}})</div>
+              background-color="green lighten-2"
+              color="green"
+              half-increments
+              hover
+              length="5"
+              size="20"
+              :value="product_data.rating"
+            ></v-rating>
+            <div>
+              {{ product_data.rating }}({{ product_data.reviews_count }})
+            </div>
           </div>
         </div>
       </div>
@@ -123,7 +125,7 @@ export default {
     return {
       allowAutoplay: false,
       btnLike: "grey",
-      favoriteList: [],
+      favoriteList: []
     };
   },
   props: {
@@ -131,13 +133,13 @@ export default {
       type: Object,
       default() {
         return {};
-      },
-    },
+      }
+    }
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination,
+    HooperPagination
   },
   methods: {
     onSlider: function () {
@@ -152,8 +154,8 @@ export default {
         this.btnLike = "red";
         this.$emit("addToFavorite", this.product_data);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -166,16 +168,16 @@ export default {
   margin: 0;
 }
 .finalCatalogItem {
-  max-width: 20%;
-  flex-basis: 20%;
+  max-width: 23%;
+  flex-basis: 23%;
   padding: 0px;
-  margin: 12px;
+  margin: 10px;
   text-decoration: none;
   position: relative;
   transition: 0.1s;
   // min-height: 380px;
-  min-width: 320px;
-  box-sizing: border-box;
+  max-width: 320px;
+  min-width: 300px;
   background-color: #202020;
   border-radius: 12px;
   -webkit-box-shadow: 0 10px 20px 0 rgb(0 0 0 / 7%);
@@ -187,6 +189,7 @@ export default {
     overflow: visible;
     z-index: 2;
     border-radius: 12px 12px 0 0;
+    cursor: pointer;
   }
   &:hover .finalCatalogItem__btm {
     opacity: 1;
@@ -201,7 +204,7 @@ export default {
   &__btm {
     position: absolute;
     top: 0;
-    opacity: 0;
+    opacity: 1;
     z-index: -1;
     border-radius: 0 0 12px 12px;
     overflow: hidden;
@@ -261,6 +264,7 @@ export default {
     border-radius: 12px 12px 0 0;
     background-color: #202020;
     overflow: hidden;
+
   }
 
   &__slider {
@@ -270,6 +274,7 @@ export default {
     height: 56%;
 
     .hooper {
+
       &-list {
         .hooper-pagination {
           width: 100% !important;
@@ -375,7 +380,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      opacity: 0;
+      opacity: 1;
     }
   }
 

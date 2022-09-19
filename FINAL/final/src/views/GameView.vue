@@ -31,14 +31,14 @@
           <div class="gameCard__cover"></div>
           <div class="gameCard__container">
             <div class="gameCard__container-pageTitle pageTitle">
-              <h4 class="pageTitle__text">Shops</h4>
+              <h4 class="pageTitle__text">Game Info</h4>
             </div>
             <div
               class="gameCard__container-game d-flex flex-wrap justify-space-between"
             >
               <div class="gameCard__container-left game">
                 <div class="game__title d-flex flex-column align-start">
-                  <div class="mb-5">
+                  <div class="mb-2">
                     <span class="game__title-released mr-2">{{
                       gameInfo.released
                     }}</span>
@@ -54,23 +54,13 @@
                   </h1>
                 </div>
                 <div class="game__subtitle">
-                  <div class="game__subtitle-author author">
-                    <h3
-                      class="author__name"
-                      v-for="publisher of gameInfo.publishers"
-                      :key="publisher.id"
-                    >
-                      {{ publisher.name }}
-                    </h3>
-                  </div>
-
-                  <div class="game__subtitle-rating rating">
+                  <div class="game__subtitle-rating rating" @click="addRating">
                     <v-rating
                       :value="gameInfo.rating"
-                      color="grey"
-                      dense
+                      color="warning"
+                      background-color="warning lighten-1"
+                      hover
                       half-increments
-                      readonly
                       size="24"
                     ></v-rating>
                     <span class="rating__answers">{{
@@ -85,10 +75,10 @@
                 </div>
               </div>
               <div class="gameCard__container-right">
-                <div class="d-flex flex-column justify-start align-center">
-                  <h4 style="color: white">Where To Buy:</h4>
+                <div class="d-flex flex-column justify-start align-start">
+                  <h4 class="gameCard__container-title">Where To Buy:</h4>
                   <div
-                    class="gameCard__container-buy buy justify-lg-start"
+                    class="gameCard__container-buy buy justify-center"
                     v-if="storesInfo.length != 0"
                   >
                     <v-btn
@@ -155,7 +145,7 @@
                     class="w-50 d-flex flex-column justify-center align-start"
                   >
                     <h5>Metascore</h5>
-                    <a :href="gameInfo.metacritic_url" class="metacritic">{{
+                    <a v-if="gameInfo.metacritic" :href="gameInfo.metacritic_url" class="metacritic">{{
                       gameInfo.metacritic
                     }}</a>
                   </div>
@@ -204,7 +194,9 @@
                   >
                     <h5>Web Site</h5>
                     <div class="game__subtitle-genre genre">
-                      <a :href="gameInfo.website">{{ gameInfo.website }}</a>
+                      <a class="genre__link" :href="gameInfo.website">{{
+                        gameInfo.website
+                      }}</a>
                     </div>
                   </div>
                 </div>
@@ -329,7 +321,7 @@
                 v-for="achivement in achivements"
                 :key="achivement.id"
                 :style="{
-                  backgroundImage: 'url(' + gameInfo.background_image + ')',
+                  backgroundImage: 'url(' + gameInfo.background_image + ')'
                 }"
               >
                 <div class="achivement__fwd">
@@ -459,14 +451,14 @@ export default {
       fadeInDown5001000: {
         classes: "fadeInDown",
         delay: 500,
-        duration: 1000,
-      },
+        duration: 1000
+      }
     };
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination,
+    HooperPagination
   },
   methods: {
     AchivShow: function (achivementId) {
@@ -475,6 +467,11 @@ export default {
       console.log(this.AchivInfo);
       return achivementId;
     },
+    addRating() {
+      console.log(this.gameInfo.ratings_count);
+      this.gameInfo.ratings_count += 1;
+      return this.gameInfo.ratings_count;
+    }
   },
   async beforeMount() {
     let gameId = this.gameId;
@@ -508,7 +505,7 @@ export default {
     for (let i = 0; i < respGameId.data.platforms.length; i++) {
       this.platforms.push({
         name: respGameId.data.platforms[i].platform.name,
-        released: respGameId.data.platforms[i].released_at,
+        released: respGameId.data.platforms[i].released_at
       });
     }
 
@@ -521,11 +518,11 @@ export default {
     for (let i = 0; i < this.storesInfo.length; i++) {
       this.storesData.push({
         name: this.storesNames[i],
-        url: this.storesInfo[i].url,
+        url: this.storesInfo[i].url
       });
     }
     // console.log("this.storesData", this.storesData);
-  },
+  }
 };
 </script>
 
@@ -635,110 +632,77 @@ export default {
       background: linear-gradient(
         90deg,
         rgba(0, 0, 0, 0.85) 11.61%,
-        rgba(0, 0, 0, 0) 100%
+        rgba(0, 0, 0, 0.77) 100%
       );
       z-index: 0;
     }
     &__container {
       z-index: 2;
-      width: 95%;
-      padding: 40px 0;
+      padding: 20px 0;
       margin: 0 auto;
       max-width: 90%;
+      height: 100%;
       position: relative;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
+      align-items: center;
+      justify-content: flex-start;
       position: relative;
 
-      .pageTitle {
-        top: 80px;
-        margin-bottom: 40px;
-        color: white;
-
-        &__text {
-          margin-bottom: 0;
-        }
-      }
-
-      .game {
-        width: 60%;
-        &__title {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          &-text {
-            font-family: "Josefin Sans", sans-serif;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 72px;
-            letter-spacing: 0;
-            line-height: 74px;
-            overflow-wrap: break-word;
-            color: #fefcfe;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-          }
-
-          &-released {
-            font-size: 12px;
-            line-height: normal;
-            font-weight: 400;
-            border-radius: 4px;
-            background-color: #fff;
-            padding: 2px 7.5px;
-          }
-          &-playTime {
-            font-size: 12px;
-            line-height: normal;
-            font-weight: 400;
-            text-transform: uppercase;
-            color: #fff;
-            letter-spacing: 2px;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-          }
-        }
-
-        &__subtitle {
-          display: inline-flex;
-          margin: 20px 0;
-          flex-wrap: wrap;
-          justify-content: flex-start;
-
-          .author {
+      &-game {
+        height: 100%;
+        .game {
+          width: 50%;
+          margin-right: 10px;
+          &__title {
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            &__name {
+
+            &-text {
               font-family: "Josefin Sans", sans-serif;
               font-style: normal;
+              font-weight: 700;
+              font-size: 72px;
+              letter-spacing: 0;
+              line-height: 74px;
+              overflow-wrap: break-word;
+              color: #fefcfe;
+              text-rendering: optimizeLegibility;
+              -webkit-font-smoothing: antialiased;
+            }
+
+            &-released {
+              font-size: 12px;
+              line-height: normal;
               font-weight: 400;
-              font-size: 20px;
-              line-height: 31px;
-              display: flex;
-              align-items: center;
-              color: #c6c6c6;
-              margin-bottom: 0;
+              border-radius: 4px;
+              background-color: #fff;
+              padding: 2px 7.5px;
+            }
+            &-playTime {
+              font-size: 12px;
+              line-height: normal;
+              font-weight: 400;
+              text-transform: uppercase;
+              color: #fff;
+              letter-spacing: 2px;
+              text-rendering: optimizeLegibility;
+              -webkit-font-smoothing: antialiased;
             }
           }
 
-          .genre {
-            display: flex;
+          &__subtitle {
+            display: inline-flex;
+            margin: 10px 0;
+            flex-wrap: wrap;
             justify-content: flex-start;
-            align-items: center;
 
-            .genre__list {
-              display: inline-flex;
+            .author {
+              display: flex;
               justify-content: flex-start;
               align-items: center;
-              padding-left: 0;
-              margin-bottom: 0;
-
-              &-item {
-                list-style: none;
+              &__name {
                 font-family: "Josefin Sans", sans-serif;
                 font-style: normal;
                 font-weight: 400;
@@ -747,83 +711,207 @@ export default {
                 display: flex;
                 align-items: center;
                 color: #c6c6c6;
+                margin-bottom: 0;
+              }
+            }
 
-                & + .genre__list-item {
-                  &:before {
-                    content: "&";
-                    margin: 0 10px;
-                    font-family: "Josefin Sans", sans-serif;
-                    font-weight: 400;
-                    font-weight: 300;
-                    font-size: 30px;
-                    line-height: 41px;
-                    display: flex;
-                    align-items: center;
-                    color: #c6c6c6;
+            .genre {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              text-decoration: none;
+
+              .genre__list {
+                display: inline-flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding-left: 0;
+                margin-bottom: 0;
+
+                &-item {
+                  list-style: none;
+                  font-family: "Josefin Sans", sans-serif;
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 20px;
+                  line-height: 31px;
+                  display: flex;
+                  align-items: center;
+                  color: #c6c6c6;
+
+                  & + .genre__list-item {
+                    &:before {
+                      content: "&";
+                      margin: 0 10px;
+                      font-family: "Josefin Sans", sans-serif;
+                      font-weight: 400;
+                      font-weight: 300;
+                      font-size: 30px;
+                      line-height: 41px;
+                      display: flex;
+                      align-items: center;
+                      color: #c6c6c6;
+                    }
                   }
                 }
               }
             }
-          }
 
-          .rating {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-
-            &__answers {
-              font-family: "Josefin Sans", sans-serif;
-              font-weight: 400;
-              font-style: normal;
-              font-size: 20px;
-              line-height: 31px;
+            .rating {
               display: flex;
+              justify-content: flex-start;
               align-items: center;
-              color: #c6c6c6;
+
+              &__answers {
+                font-family: "Josefin Sans", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                font-size: 20px;
+                line-height: 31px;
+                display: flex;
+                align-items: center;
+                color: #c6c6c6;
+              }
+            }
+
+            .author ~ div {
+              margin-left: 10px;
+              // &:before {
+              //   content: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='24' width='24'><path d='M11,21h-1l1-7H7.5c-0.88,0-0.33-0.75-0.31-0.78C8.48,10.94,10.42,7.54,13.01,3h1l-1,7h3.51c0.4,0,0.62,0.19,0.4,0.66 C12.97,17.55,11,21,11,21z' fill='%23134578' /></svg>");
+              //   margin: 0 10px;
+              //   font-family: "Josefin Sans", sans-serif;
+              //   font-style: normal;
+              //   font-weight: 600;
+              //   font-size: 30px;
+              //   line-height: 41px;
+              //   display: flex;
+              //   align-items: center;
+              //   color: #c6c6c6;
+              // }
             }
           }
 
-          .author ~ div {
-            margin-left: 10px;
-            &:before {
-              content: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='24' width='24'><path d='M11,21h-1l1-7H7.5c-0.88,0-0.33-0.75-0.31-0.78C8.48,10.94,10.42,7.54,13.01,3h1l-1,7h3.51c0.4,0,0.62,0.19,0.4,0.66 C12.97,17.55,11,21,11,21z' fill='%23134578' /></svg>");
-              margin: 0 10px;
+          &__info {
+            &-text {
+              width: 100%;
+              max-width: 100%;
+              height: 230px;
+              max-height: 230px;
               font-family: "Josefin Sans", sans-serif;
-              font-style: normal;
-              font-weight: 600;
-              font-size: 30px;
-              line-height: 41px;
-              display: flex;
-              align-items: center;
-              color: #c6c6c6;
+              font-weight: 300;
+              letter-spacing: 1.5px;
+              font-size: 15px;
+              line-height: 33px;
+              color: #fefcfe;
             }
           }
         }
+        .gameCard__container-right {
+          width: 425px;
 
-        &__info {
-          &-text {
+          .gameCard__container-title {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 400;
+            color: hsla(0, 0%, 100%, 0.4);
+          }
+          .buy {
+            display: flex;
+            justify-content: space-between !important;
+            align-items: flex-start;
+            flex-wrap: wrap;
             width: 100%;
-            max-width: 100%;
-            height: 230px;
-            max-height: 230px;
-            font-family: "Josefin Sans", sans-serif;
-            font-weight: 300;
-            letter-spacing: 1.5px;
-            font-size: 15px;
-            line-height: 33px;
-            color: #fefcfe;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -moz-box;
-            -moz-box-orient: vertical;
-            display: -webkit-box;
-            -webkit-line-clamp: 7;
-            -webkit-box-orient: vertical;
-            line-clamp: 3;
-            box-orient: vertical;
+
+            &__btn {
+              width: 200px;
+              height: 40px !important;
+              color: hsla(0, 0%, 100%, 0.5) !important;
+              border-radius: 6px !important;
+              background-color: hsla(0, 0%, 100%, 0.1) !important;
+
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin: 5px;
+              padding: 6px 12px !important;
+              padding-bottom: 0px !important;
+              text-align: left !important;
+              background-color: #2c2e30 !important;
+              transition: 0.3s ease-in-out;
+
+              .v-btn__content {
+                width: 100% !important;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
+
+              &:hover {
+                transform: scale(1.1);
+              }
+              &:active {
+                box-shadow: 0px 0px 0px 4px #000000, 0px 0px 0px 8px #ffffff,
+                  0px 0px 15px 4px #ffffff !important;
+              }
+
+              &:focus {
+                box-shadow: 0px 0px 0px 4px #000000, 0px 0px 0px 8px #ffffff,
+                  0px 0px 15px 4px #ffffff !important;
+              }
+
+              &-text {
+                font-family: "Josefin Sans", sans-serif;
+                font-size: 16px;
+                font-weight: 300;
+                letter-spacing: 0;
+                color: #fefcfe !important;
+                line-height: 16px;
+                margin-bottom: 0 !important;
+              }
+            }
+          }
+          .info__container {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            margin: 10px 0;
+            border-radius: 10px;
+            padding: 5px;
+            .metacritic {
+              color: #6dc849;
+              border-color: rgba(109, 200, 73, 0.4);
+              min-width: 32px;
+              display: inline-block;
+              -webkit-box-sizing: border-box;
+              box-sizing: border-box;
+              padding: 2px 0;
+              font-weight: 700;
+              text-align: center;
+              border-radius: 4px;
+              border: 1px solid;
+              background-color: black;
+            }
+            .genre__link {
+              text-decoration: none;
+              color: white;
+              transition: 0.1s;
+              &:hover {
+                color: grey;
+              }
+            }
           }
         }
       }
+      .pageTitle {
+        top: 40px;
+        margin-bottom: 40px;
+        color: white;
+        width: 100%;
+
+        &__text {
+          margin-bottom: 0;
+        }
+      }
+
       .achivement {
         width: 100%;
         padding: 20px;
@@ -872,56 +960,6 @@ export default {
               width: 100%;
               height: 100%;
             }
-          }
-        }
-      }
-      .buy {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: wrap;
-        width: 100%;
-
-        &__btn {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-right: 20px !important;
-          padding: 6px 12px !important;
-          padding-bottom: 0px !important;
-          text-align: left !important;
-          background-color: #2c2e30 !important;
-          height: 37px !important;
-          transition: 0.1s ease-in-out;
-          border-radius: 4px;
-          color: #fefcfe !important;
-
-          .v-btn__content {
-            width: 100% !important;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-
-          &:hover {
-            transform: scale(1.1);
-          }
-          &:active {
-            box-shadow: 0px 0px 0px 4px #000000, 0px 0px 0px 8px #ffffff,
-              0px 0px 15px 4px #ffffff !important;
-          }
-
-          &:focus {
-            box-shadow: 0px 0px 0px 4px #000000, 0px 0px 0px 8px #ffffff,
-              0px 0px 15px 4px #ffffff !important;
-          }
-
-          &-text {
-            font-family: "Josefin Sans", sans-serif;
-            font-size: 16px;
-            color: #fefcfe !important;
-            line-height: 16px;
-            margin-bottom: 0 !important;
           }
         }
       }
@@ -1072,25 +1110,5 @@ export default {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 300;
   font-size: 20px;
-}
-
-.info__container {
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-}
-
-.metacritic {
-  color: #6dc849;
-  border-color: rgba(109, 200, 73, 0.4);
-  min-width: 32px;
-  display: inline-block;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 2px 0;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px solid;
-  background-color: black;
 }
 </style>

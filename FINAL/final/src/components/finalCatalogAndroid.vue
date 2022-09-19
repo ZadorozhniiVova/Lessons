@@ -1,9 +1,9 @@
 <template>
-  <div class="finalCatalogPC catalog">
+  <div class="finalCatalogAndroid catalog">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
-      <h1 class="catalog__title-text">Games for PC</h1>
-      <span class="catalog__title-subtitle mb-3"> PC games, or personal computer games, started with the video game crash of 1983. PC games became popular after the development of the microprocessor and microcomputer. Some of the first PC games were Bertie the Brain, OXO and Spacewar! As the 3D graphics accelerators became faster and CPU power improved, PC games became more realistic and more accessible to produce. The PC market sales rocketed in the 80s when IBM computers and sound cards were generated. The platform involves different peripherals, gaming hardware, and software. These are mouse and keyboard; gamepads and motion controllers aren't obligatory, but still popularly accepted. Better hardware improves the game's accuracy; it usually lets the players use more NPCs than equivalents on other platforms. With the platform, the players can perform every sort of game. For example, shooters are easy to play due to the mouse controllers. However, the main reason for the PC games popularity is their lower prices and the backward compatibility with older titles, which leaves much to be desired on cosoles.</span>
+      <h1 class="catalog__title-text">Games for Android </h1>
+      <span class="catalog__title-subtitle mb-3"> Android is a mobile operating system based on Linux kernel. The OS uses open-source code so that any developer can modify it. There is a considerable amount of Android devices from various mobile companies. Android application marketplace — Play Market is the most substantial accumulation of mobile games for one platform with iOS being the second largest one. Partly, such title comes from a little moderation required for an app to be published in the store, so there naturally are many scam apps and viruses there not to mention that any Android app can be pirated relatively easy. The separate bunch of Android devices is gaming consoles on the OS. It is the usual mobile phones but with higher performance values and built-in gamepads for more convenient use. The Google Play Games service was introduced featuring achievements, comparing scores between friends and listing various game tops.</span>
       <div class="d-flex">
         <div>
           <b-form-select
@@ -23,7 +23,7 @@
     </div>
     <div class="catalog__container">
       <finalCatalogItem
-        v-for="(game, gameIndex) in PLATFORMSPC.results"
+        v-for="(game, gameIndex) in PLATFORMSANDROID.results"
         :key="game.id"
         :product_data="game"
         @addToFavorite="addToFavorite"
@@ -33,7 +33,7 @@
     <div class="overflow-auto catalog__pagination d-flex justify-center">
       <b-pagination
         v-model="currentPage"
-        :total-rows="PLATFORMSPC.count / perPage"
+        :total-rows="PLATFORMSANDROID.count / perPage"
         :per-page="perPage"
         first-text="First"
         prev-text="Prev"
@@ -49,11 +49,11 @@
 import { mapActions, mapGetters } from "vuex";
 import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
-import finalFooter from "../components/finalFooter.vue";
+import finalFooter from "./finalFooter.vue";
 import Vue from "vue";
 
 export default {
-  name: "finalCatalogPc",
+  name: "finalCatalogAndroid",
   components: {
     finalCatalogItem,
     finalHeader,
@@ -91,12 +91,12 @@ export default {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["", "&platforms=4", ""]
+      default: () => ["", "&platforms=21", ""]
     }
   },
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getPlatformsPcByPage", [
+      this.$store.dispatch("getPlatformsAndroidByPage", [
         next,
         this.filterRequest.join("")
       ]);
@@ -111,18 +111,18 @@ export default {
 
     filterRequest: {
       handler(newValue) {
-        this.$store.dispatch("getPlatformsPcFilter", newValue.join(""));
+        this.$store.dispatch("getPlatformsAndroidFilter", newValue.join(""));
         this.currentPage = 1;
       },
       deep: true
     }
   },
   computed: {
-    ...mapGetters(["PLATFORMSPC"])
+    ...mapGetters(["PLATFORMSANDROID"])
   },
   methods: {
     ...mapActions([
-      "GET_PLATFORMS_PC_FROM_API",
+      "GET_PLATFORMS_ANDROID_FROM_API",
       "ADD_TO_FAVORITE",
       "DELETE_FROM_FAVORITE"
     ]),
@@ -134,7 +134,7 @@ export default {
     }
   },
   mounted() {
-    this.GET_PLATFORMS_PC_FROM_API().then((responce) => {
+    this.GET_PLATFORMS_ANDROID_FROM_API().then((responce) => {
       console.log(responce);
     });
   }

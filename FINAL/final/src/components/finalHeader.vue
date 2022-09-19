@@ -196,15 +196,38 @@
             </li>
           </ul>
           <div class="buttonLogin">
-            <b-button
+            <v-btn
+              color="red"
+              fab
+              dark
               v-if="!userName"
               @click="loadModal"
               variant="outline-primary"
-              >Login</b-button
             >
-            <b-button v-else @click="clearUserData" variant="outline-primary"
-              >Logout</b-button
+            <VueToyFace
+              size="50"
+              rounded="75"
+              :group="2"
+              :toy-number="3"
+              class="avatar"
+            />
+            </v-btn>
+            <v-btn class="d-flex justify-center align-center"
+              color="green"
+              fab
+              dark
+              v-else @click="clearUserData"
+              variant="outline-primary"
             >
+            <VueToyFace
+              size="50"
+              rounded="75"
+              :group="2"
+              :toy-number="10"
+              class="avatar"
+            />
+            </v-btn>
+            
           </div>
         </nav>
       </div>
@@ -216,6 +239,7 @@
 <script>
 import finalLoginModal from "@/components/finalLoginModal.vue";
 import finalSearchBar from "./finalSearchBar.vue";
+import VueToyFace from "vue-toy-face";
 
 export default {
   name: "finalHeader",
@@ -223,6 +247,7 @@ export default {
   components: {
     finalLoginModal,
     finalSearchBar,
+    VueToyFace
   },
   data() {
     return {
@@ -261,12 +286,12 @@ export default {
 // }
 .header {
   width: 100%;
-  background-color: transparent;
+  background-color: #151515;
   // background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
 
   &__container {
     // max-width: 1440px;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     padding: 24px 40px;
     display: flex;
@@ -274,13 +299,13 @@ export default {
     align-items: center;
 
     .logo {
-      width: 120px;
+      width: 100px;
       height: 50px;
-      min-width: 120px;
+      min-width: 100px;
       min-height: 50px;
-      margin-right: 20px;
+      
       display: flex;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
       transition: 0.15s ease-in-out;
 
@@ -298,7 +323,7 @@ export default {
       }
 
       &__img {
-        width: 100%;
+        width: 90%;
         &-letters {
           transition: 0.15s ease-in-out;
           fill: #6dc849;
@@ -344,11 +369,11 @@ export default {
         list-style: none;
         flex-wrap: wrap;
         margin-bottom: 0;
-        width: 100px;
+        width: 80px;
 
         &-el {
-          width: 30px;
-          height: 30px;
+          width: 20px;
+          height: 20px;
           max-width: 30px;
           transition: 0.3s;
           display: flex;
@@ -365,8 +390,8 @@ export default {
             text-decoration: none;
 
             .link__img {
-              width: 30px;
-              height: 30px;
+              width: 100%;
+              height: 100%;
               transition: 0.3s;
               fill: white;
             }

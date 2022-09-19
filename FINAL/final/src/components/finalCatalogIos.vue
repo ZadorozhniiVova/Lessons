@@ -1,9 +1,9 @@
 <template>
-  <div class="finalCatalogPC catalog">
+  <div class="finalCatalogIos catalog">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
-      <h1 class="catalog__title-text">Games for PC</h1>
-      <span class="catalog__title-subtitle mb-3"> PC games, or personal computer games, started with the video game crash of 1983. PC games became popular after the development of the microprocessor and microcomputer. Some of the first PC games were Bertie the Brain, OXO and Spacewar! As the 3D graphics accelerators became faster and CPU power improved, PC games became more realistic and more accessible to produce. The PC market sales rocketed in the 80s when IBM computers and sound cards were generated. The platform involves different peripherals, gaming hardware, and software. These are mouse and keyboard; gamepads and motion controllers aren't obligatory, but still popularly accepted. Better hardware improves the game's accuracy; it usually lets the players use more NPCs than equivalents on other platforms. With the platform, the players can perform every sort of game. For example, shooters are easy to play due to the mouse controllers. However, the main reason for the PC games popularity is their lower prices and the backward compatibility with older titles, which leaves much to be desired on cosoles.</span>
+      <h1 class="catalog__title-text">Games for iOS</h1>
+      <span class="catalog__title-subtitle mb-3"> iOS is an operating system initially developed by Apple and named iPhone OS by the title of the only phone developed by a corporation. While it was intended for mobile phones and media players at first, it has grown to tablets and TV-console. The OS is considered the second most famous system after Android. iOS is widely known for its closed source code and high data encryption making it nearly impossible to boot the system on the device other than Apple's. The system features a lot of apps unique to the Apple users including Siri — a voice assistant which can access apps as well as Game Center — a various apps manager allowing gamers to share their achievements while playing with friends. App Store is considered to be the most profound mobile application platform with strict selection and moderating policies. The most popular iOS hack is called Jailbreak and allows the user to overclock the CPU and access the hidden homebrew apps within the system.</span>
       <div class="d-flex">
         <div>
           <b-form-select
@@ -23,7 +23,7 @@
     </div>
     <div class="catalog__container">
       <finalCatalogItem
-        v-for="(game, gameIndex) in PLATFORMSPC.results"
+        v-for="(game, gameIndex) in PLATFORMSIOS.results"
         :key="game.id"
         :product_data="game"
         @addToFavorite="addToFavorite"
@@ -33,7 +33,7 @@
     <div class="overflow-auto catalog__pagination d-flex justify-center">
       <b-pagination
         v-model="currentPage"
-        :total-rows="PLATFORMSPC.count / perPage"
+        :total-rows="PLATFORMSIOS.count / perPage"
         :per-page="perPage"
         first-text="First"
         prev-text="Prev"
@@ -49,11 +49,11 @@
 import { mapActions, mapGetters } from "vuex";
 import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
-import finalFooter from "../components/finalFooter.vue";
+import finalFooter from "./finalFooter.vue";
 import Vue from "vue";
 
 export default {
-  name: "finalCatalogPc",
+  name: "finalCatalogIos",
   components: {
     finalCatalogItem,
     finalHeader,
@@ -91,12 +91,12 @@ export default {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["", "&platforms=4", ""]
+      default: () => ["", "&platforms=3", ""]
     }
   },
   watch: {
     currentPage(next) {
-      this.$store.dispatch("getPlatformsPcByPage", [
+      this.$store.dispatch("getPlatformsIosByPage", [
         next,
         this.filterRequest.join("")
       ]);
@@ -111,18 +111,18 @@ export default {
 
     filterRequest: {
       handler(newValue) {
-        this.$store.dispatch("getPlatformsPcFilter", newValue.join(""));
+        this.$store.dispatch("getPlatformsIosFilter", newValue.join(""));
         this.currentPage = 1;
       },
       deep: true
     }
   },
   computed: {
-    ...mapGetters(["PLATFORMSPC"])
+    ...mapGetters(["PLATFORMSIOS"])
   },
   methods: {
     ...mapActions([
-      "GET_PLATFORMS_PC_FROM_API",
+      "GET_PLATFORMS_IOS_FROM_API",
       "ADD_TO_FAVORITE",
       "DELETE_FROM_FAVORITE"
     ]),
@@ -134,7 +134,7 @@ export default {
     }
   },
   mounted() {
-    this.GET_PLATFORMS_PC_FROM_API().then((responce) => {
+    this.GET_PLATFORMS_IOS_FROM_API().then((responce) => {
       console.log(responce);
     });
   }
