@@ -80,8 +80,6 @@
           @include transition(0.3s);
           margin-right: 10px;
 
-          
-
           &:hover {
             @include scale(1.05);
           }
@@ -98,9 +96,7 @@
     &__nav {
       @include flexCenter;
       flex-wrap: wrap;
-      
-      
-      
+
       .menu {
         @include flex-between;
         width: 450px;
@@ -120,12 +116,27 @@
               color: $Yellow;
             }
           }
+          &:first-child .menu__el-link {
+            color: $Yellow;
+          }
         }
       }
     }
-    .nav__basket{
-      padding:26px 15px;
+    .nav__basket {
+      padding: 26px 15px;
       margin-right: 36px;
+
+      &-link {
+        &:hover .nav__basket-link__img--fill {
+          fill: $Yellow;
+        }
+        &__img {
+          &--fill {
+            fill: $black;
+            @include transition(0.3s);
+          }
+        }
+      }
     }
     .nav__btn {
       font-family: $titleFont;
@@ -141,30 +152,178 @@
       border-radius: 0px;
       padding: 18.5px 52px;
       @include transition(0.2s);
-      
 
-      &:hover{
+      &:hover {
         background-color: $blue;
-        color:$Yellow
+        color: $Yellow;
       }
-      &:active{
-        @include scale(1.02)
+      &:active {
+        @include scale(1.02);
       }
     }
   }
 }
-.main{
+.main {
   width: 100%;
-  
-  &__welcome{
+
+  &__welcome {
     width: 100%;
     background-color: $blue;
-    
-    .container{
+
+    .container {
       max-width: $lg;
       width: 90%;
       padding: 100px 0;
-      padding: 0 21px 0 23px;
+      margin: 0 auto;
+      @include flex-between;
+
+      &__text {
+        margin-left: 23px;
+        width: 45.3%;
+        @include flex-left-column;
+
+        &-hello {
+          font-family: $titleFont;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 21px;
+          line-height: 36px;
+          letter-spacing: 1.2px;
+          text-transform: capitalize;
+          color: $white;
+          @include flexStart;
+          flex-wrap: nowrap;
+
+          &::before {
+            content: "";
+            width: 35px;
+            height: 2px;
+            background: url("../img/UI/line.png");
+            display: block;
+            margin-right: 14px;
+          }
+        }
+        &-title {
+          @include flex-left-column;
+          padding-bottom: 20px;
+          margin: 10px 0;
+          &__text {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 64px;
+            line-height: 122%;
+            letter-spacing: 1.3px;
+            color: $white;
+            margin-bottom: 24px;
+          }
+          &__subtitle {
+            font-family: $textFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 158%;
+            color: $lightBlue;
+          }
+        }
+        .button {
+          padding: 12px 0;
+          margin-bottom: 37px;
+          &__order {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 28px;
+            letter-spacing: 0.57px;
+            text-transform: capitalize;
+            color: $blue;
+            background-color: $Yellow;
+            border: 2px solid $Yellow;
+            border-radius: 0px;
+            padding: 18.5px 52px;
+            @include transition(0.2s);
+            display: inline-block;
+            margin-right: 51px;
+            width: 222px;
+            height: 66px;
+
+            &:hover {
+              background-color: $blue;
+              color: $Yellow;
+            }
+            &:active {
+              @include scale(1.02);
+            }
+          }
+          &__demo {
+            display: inline-block;
+            height: 31px;
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 31px;
+            letter-spacing: 0.38px;
+            text-transform: capitalize;
+            color: $white;
+            border-bottom: 1px solid $white;
+          }
+        }
+        .info {
+          @include flexStart;
+
+          &__box {
+            margin-right: 60px;
+            display: inline-flex;
+
+            &:last-child {
+              margin-right: 0;
+            }
+            &-title {
+              @include flexStart;
+              font-family: $titleFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 24px;
+              line-height: 120%;
+              letter-spacing: 0.48px;
+              color: $white;
+              margin-bottom: 12px;
+              &::before {
+                content: "";
+                background: url("../img/UI/circle.png");
+                height: 16px;
+                width: 16px;
+                line-height: 120%;
+                display: inline-block;
+                margin-right: 10px;
+                bottom: 0;
+              }
+            }
+            &-subtitle {
+              font-family: $textFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 17px;
+              line-height: 159%;
+              color: $lightBlue;
+              padding-left: 26px;
+            }
+          }
+        }
+      }
+
+      &__img {
+        margin-right: 21px;
+        width: 45.68%;
+        max-height: 800px;
+        filter: drop-shadow(-1px 2px 11px rgba(0, 0, 0, 0.2));
+
+        &-poster {
+          max-width: 100%;
+        }
+      }
     }
   }
 }
