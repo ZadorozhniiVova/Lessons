@@ -130,3 +130,10 @@
     -ms-transform: translateX($X);
     -o-transform: translateX($X);
 }
+@mixin translateXY($X,$Y){
+    transform: translate($X,$Y);
+    -webkit-transform: translate($X,$Y);
+    -moz-transform: translate($X,$Y);
+    -ms-transform: translate($X,$Y);
+    -o-transform: translate($X,$Y);
+}
