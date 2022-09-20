@@ -576,62 +576,286 @@
               line-height: 26px;
               color: $Yellow;
             }
-            .mail{
+            .mail {
               @include flexStart;
               flex-wrap: nowrap;
               padding: 10px 0 4px;
 
               &__text,
-              &__link{
+              &__link {
                 font-family: $textFont;
-              font-style: normal;
-              font-weight: 400;
-              font-size: 18px;
-              line-height: 28px;
-              color: $lightBlue;
-              @include transition(0.3s);
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 28px;
+                color: $lightBlue;
+                @include transition(0.3s);
               }
-              &__text{
+              &__text {
                 margin-right: 10px;
               }
-              &__link{
+              &__link {
                 letter-spacing: 0.19px;
               }
 
-              &__link:hover{
+              &__link:hover {
                 opacity: 0.8;
                 color: white;
               }
-
             }
-            .phone{
+            .phone {
               @include flexStart;
               flex-wrap: nowrap;
 
               &__text,
-              &__num{
+              &__num {
                 font-family: $textFont;
-              font-style: normal;
-              font-weight: 400;
-              font-size: 18px;
-              line-height: 28px;
-              color: $lightBlue;
-              @include transition(0.3s);
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 28px;
+                color: $lightBlue;
+                @include transition(0.3s);
               }
-              &__text{
+              &__text {
                 margin-right: 10px;
               }
-              &__num{
+              &__num {
                 letter-spacing: 0.19px;
               }
 
-              &__num:hover{
+              &__num:hover {
                 opacity: 0.8;
                 color: white;
               }
-
             }
+          }
+        }
+      }
+    }
+  }
+  &__stores {
+    background-color: $whiteBg;
+    width: 100%;
+    padding: 110px 0 130px;
+    .container {
+      @include flex-center-column;
 
+      padding-top: 16px;
+      max-width: $lg;
+      width: 90%;
+      margin: 0 auto;
+
+      &__title {
+        font-family: $titleFont;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 42px;
+        line-height: 50px;
+        text-align: center;
+        text-transform: capitalize;
+        color: $blue;
+        @include flex-center-column;
+        margin-bottom: 40px;
+        &::after {
+          content: "";
+          width: 50px;
+          height: 3px;
+          background: url("../img/UI/line.png");
+          display: block;
+          margin: 23px 0 10px;
+        }
+      }
+      &__store {
+        @include flex-between;
+        width: 100%;
+        flex-wrap: wrap;
+
+        .item {
+          @include flex-center-column;
+          max-width: 313px;
+          width: 313px;
+          // width: calc(313px / 1300px * 100%);
+          text-align: center;
+
+          &__poster {
+            width: 189px;
+            height: 100px;
+            min-width: 189px;
+          }
+          &__name {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 34px;
+            text-align: center;
+            color: $blue;
+            margin: 22px 0 16px;
+          }
+          &__descr {
+            font-family: $textFont;
+            max-width: 304px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 28px;
+            text-align: center;
+            color: $greyBlue;
+          }
+        }
+      }
+    }
+  }
+  &__sell {
+    background-color: $blue;
+    width: 100%;
+
+    .container {
+      padding: 70px 0 70px;
+      max-width: $lg;
+      width: 90%;
+      margin: 0 auto;
+      @include flex-between;
+      flex-wrap: wrap;
+
+      &__text {
+        @include flex-left-column;
+        width: calc(610px / 1300px * 100%);
+        &-title {
+          font-family: $titleFont;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 45px;
+          line-height: 54px;
+          text-transform: capitalize;
+          color: $white;
+          &::after {
+            content: "";
+            width: 50px;
+            height: 3px;
+            background: url("../img/UI/line.png");
+            display: block;
+            margin: 24px 0 27px;
+          }
+        }
+        &-subtitle {
+          width: calc(539px / 610px * 100%);
+          font-family: $textFont;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 19px;
+          line-height: 28px;
+          color: $lightBlue;
+          margin-bottom: 27px;
+        }
+        &-order {
+          padding: 19px 52px;
+          font-family: $titleFont;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 19px;
+          line-height: 28px;
+          letter-spacing: 0.38px;
+          color: $white;
+          border: 2px solid $Yellow;
+          display: inline-block;
+
+          @include transition(0.3s);
+          &:hover {
+            @include scale(1.02);
+          }
+        }
+      }
+      &__poster {
+        width: calc(560px / 1300px * 100%);
+        min-width: 200px;
+        max-width: 560px;
+        &-img {
+          width: 100%;
+        }
+      }
+    }
+  }
+  &__learn {
+    width: 100%;
+    padding: 120px 0 140px;
+
+    .container {
+      padding: 70px 0 70px;
+      max-width: $lg;
+      width: 90%;
+      margin: 0 auto;
+      flex-wrap: wrap;
+      &__title {
+        font-family: $titleFont;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 42px;
+        line-height: 50px;
+        text-align: center;
+        text-transform: capitalize;
+        color: $blue;
+        @include flex-center-column;
+        margin-top: 16px;
+        margin-bottom: 80px;
+        &::after {
+          content: "";
+          width: 50px;
+          height: 3px;
+          background: url("../img/UI/line.png");
+          display: block;
+          margin-top: 23px;
+          margin-bottom: 10px;
+        }
+      }
+      &__content {
+        @include flex-between;
+        flex-wrap: wrap;
+
+        .text {
+          display: grid;
+          grid-template-columns: repeat(2, 303px);
+          grid-auto-rows: 272px;
+          gap: 30px;
+          padding: 30px 30px 48px 0;
+
+          &__container {
+            background-color: $gridBlue;
+            @include flex-left-column;
+            padding: 30px 30px 27px 30px;
+
+            &-num {
+              font-family: $titleFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 23px;
+              line-height: 29px;
+              color: $blue;
+              width: 50px;
+              height: 50px;
+              @include flexCenter;
+              background-color: $Yellow;
+              @include border-radius(50%);
+              margin-bottom: 30px;
+            }
+            &-descr {
+              font-family: $titleFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 24px;
+              line-height: 34px;
+              color: $blue;
+            }
+          }
+        }
+        .poster{
+          border: 10px solid #FFCA42;
+          width: calc(555px/1300px*100%);
+
+          &__img{
+            width: 100%;
+            @include translateXY(-30px, -30px)
           }
         }
       }
