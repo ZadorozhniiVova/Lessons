@@ -1,9 +1,24 @@
+@import "variables.scss";
+@import "mixins.scss";
 
-@import 'variables.scss';
-@import 'mixins.scss';
-
-@import 'basic.scss';
-
+@import "basic.scss";
 
 // Страницы в конце
-@import 'style.scss';
+//header
+@import "./sections/header/header.scss";
+
+//main
+@import "./sections/main/main.scss";
+@import "./sections/main/mainWelcome.scss";
+@import "./sections/main/mainAuthorBook.scss";
+@import "./sections/main/mainAuthorAbout.scss";
+@import "./sections/main/mainStores.scss";
+@import "./sections/main/mainSell.scss";
+@import "./sections/main/mainLearn.scss";
+@import "./sections/main/mainKnowledge.scss";
+@import "./sections/main/mainComments.scss";
+@import "./sections/main/mainResources.scss";
+@import "./sections/main/mainSubscribe.scss";
+
+//footer
+@import "./sections/footer/footer.scss";

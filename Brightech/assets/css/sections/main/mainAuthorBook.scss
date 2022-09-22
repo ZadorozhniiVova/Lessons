@@ -1,0 +1,235 @@
+.main__authorBook {
+  width: 100%;
+  background-color: $whiteBg;
+  padding: 110px 0 90px;
+  @include maxWidth($md) {
+    padding: 90px 0;
+  }
+  @include maxWidth($s) {
+    padding: 50px 0;
+  }
+  @include maxWidth(560px) {
+    padding: 20px 0;
+  }
+  .container {
+    padding: 16px 10px 60px;
+    @include flex-center-column;
+    max-width: $lg;
+    width: 95%;
+    margin: 0 auto;
+    @include maxWidth($md) {
+      padding: 16px 0 40px;
+    }
+    &__title {
+      font-family: $titleFont;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 42px;
+      line-height: 120%;
+      text-align: center;
+      text-transform: capitalize;
+      color: $blue;
+      @include flex-center-column;
+      @include maxWidth($md) {
+        font-size: 38px;
+      }
+      @include maxWidth(560px) {
+        font-size: 36px;
+      }
+      &::after {
+        content: "";
+        width: 50px;
+        height: 3px;
+        background: url("../img/UI/line.png");
+        display: block;
+        margin: 23px 0 10px;
+        @include maxWidth($md) {
+          margin: 17px 10px;
+        }
+        @include maxWidth(560px) {
+          margin: 14px 7px;
+        }
+      }
+    }
+    .store {
+      width: 100%;
+      @include flex-between;
+      flex-wrap: wrap;
+      padding: 60px 10px;
+
+      @include maxWidth($md) {
+        padding: 40px 0;
+      }
+      @include maxWidth(1030px) {
+        @include flex-center-column;
+      }
+      @include maxWidth($s) {
+        padding: 20px 0;
+      }
+      @include maxWidth(560px) {
+        padding: 10px 0;
+      }
+      &__item {
+        @include flex-between;
+        width: 49.374%;
+        @include maxWidth(1030px) {
+          width: 100%;
+          @include flexCenter;
+          & + .store__item {
+            margin-top: 20px;
+          }
+        }
+        @include maxWidth(560px) {
+          @include flex-center-column;
+
+          text-align: center;
+        }
+
+        &-poster {
+          width: 45.97%;
+
+          filter: drop-shadow(0px 0px 11px rgba(0, 0, 0, 0.2));
+          @include maxWidth(1030px) {
+            width: 50%;
+            padding: 0 20px;
+          }
+          @include maxWidth(560px) {
+            padding: 0;
+          }
+        }
+        .item__info {
+          width: 315px;
+          max-width: 315px;
+          @include maxWidth($md) {
+            width: auto;
+          }
+          @include maxWidth(1030px) {
+            width: 50%;
+            @include flex-left-column;
+            padding: 0 20px;
+          }
+          @include maxWidth(560px) {
+            width: 100%;
+            padding: 0 10px;
+            @include flex-center-column;
+          }
+          &-title {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 32px;
+            line-height: 38px;
+            letter-spacing: 0.32px;
+            color: $blue;
+
+            @include maxWidth($md) {
+              font-size: 28px;
+            }
+            @include maxWidth(1030px) {
+              font-size: 32px;
+            }
+            @include maxWidth($s) {
+              font-size: 26px;
+              line-height: 30px;
+            }
+            @include maxWidth(560px) {
+              font-size: 30px;
+            }
+          }
+          &-price {
+            font-family: $textFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 21px;
+            line-height: 33px;
+            color: $Yellow;
+            margin: 7px 0 17px;
+
+            @include maxWidth($md) {
+              font-size: 17px;
+              margin: 7px 0;
+              line-height: 25px;
+            }
+          }
+          &-discr {
+            font-family: $textFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 28px;
+            color: $greyBlue;
+            width: 287px;
+            @include maxWidth($md) {
+              font-size: 15px;
+              line-height: 24px;
+              width: 250px;
+            }
+            @include maxWidth(560px) {
+              width: 90%;
+            }
+          }
+          &-condition {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 29px;
+            color: $blue;
+            margin: 13px 0 27px;
+            @include flexStart;
+
+            @include maxWidth($md) {
+              margin: 13px 0;
+              font-size: 20px;
+            }
+            @include maxWidth(1050px) {
+              margin: 9px 0;
+            }
+
+            &::before {
+              content: "";
+              background: url("../img/UI/circle.png");
+              height: 16px;
+              background-size: contain;
+              width: 16px;
+              line-height: 120%;
+              display: inline-block;
+              margin-right: 10px;
+              bottom: 0;
+              @include maxWidth($md) {
+                width: 10px;
+                height: 10px;
+              }
+            }
+          }
+          &-order {
+            padding: 19px 52px;
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 28px;
+            letter-spacing: 0.38px;
+            color: $blue;
+            border: 2px solid $Yellow;
+            display: inline-block;
+            background-color: $whiteBg;
+            @include transition(0.3s);
+
+            @include maxWidth($md) {
+              padding: 18px 30px;
+            }
+            @include maxWidth($s) {
+              padding: 18px;
+              font-size: 16px;
+              line-height: 20px;
+            }
+            &:hover {
+              @include scale(1.02);
+            }
+          }
+        }
+      }
+    }
+  }
+}

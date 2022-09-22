@@ -1,0 +1,232 @@
+.main__comments {
+  width: 100%;
+  padding: 120px 0 130px;
+  background-color: $whiteBg;
+  @include maxWidth($md) {
+    padding: 70px 0 90px;
+  }
+  @include maxWidth($s) {
+    padding: 40px 0 60px;
+  }
+  .container {
+    @include flex-between;
+    max-width: $lg;
+    width: 95%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    @include maxWidth(1340px) {
+      @include flex-center-column;
+    }
+
+    &__text {
+      max-width: 468px;
+      padding: 16px 33px 10px 0;
+      @include maxWidth(1340px) {
+        @include flex-center-column;
+        text-align: center;
+        width: 100%;
+        padding: 0;
+        max-width: 80%;
+      }
+      @include maxWidth($md) {
+        @include flex-center-column;
+        max-width: 90%;
+      }
+      @include maxWidth($s) {
+        @include flex-center-column;
+        max-width: 95%;
+      }
+
+      &-title {
+        font-family: $titleFont;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 42px;
+        line-height: 50px;
+        text-transform: capitalize;
+        color: $blue;
+        @include maxWidth(1340px) {
+          @include flex-center-column;
+          text-align: center;
+          width: 100%;
+        }
+        @include maxWidth($md) {
+          font-size: 38px;
+        }
+        @include maxWidth(560px) {
+          font-size: 36px;
+        }
+
+        &::after {
+          content: "";
+          width: 50px;
+          height: 3px;
+          background: url("../img/UI/line.png");
+          display: block;
+          margin: 23px 0 33px;
+        }
+      }
+
+      &-comment {
+        font-family: $textFont;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 34px;
+        color: $greyBlue;
+        margin-bottom: 14px;
+
+        @include maxWidth($s) {
+          width: 80%;
+          font-size: 16px;
+          line-height: 22px;
+        }
+      }
+      .rating {
+        &__value {
+          display: inline-flex;
+          margin-bottom: 12px;
+
+          &-img {
+            width: 120px;
+            height: 20px;
+            margin-right: 10px;
+            @include maxWidth($s) {
+              width: 80px;
+            }
+          }
+          &-score {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 26px;
+            color: $blue;
+            @include maxWidth($s) {
+              font-size: 18px;
+              line-height: 20px;
+            }
+          }
+        }
+        &__description {
+          font-family: $textFont;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 28px;
+          color: $blue;
+        }
+      }
+    }
+    .comments {
+      @include flexStart;
+      padding: 10px 0 20px;
+      @include maxWidth(1340px) {
+        width: 100%;
+        @include flexCenter;
+      }
+      @include maxWidth($s) {
+        @include flex-center-column;
+      }
+
+      &__wrapper {
+        margin-right: 20px;
+
+        @include maxWidth($s) {
+          margin-right: 0;
+        }
+
+        .box {
+          background: #1b3764;
+          box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.11);
+          max-width: 381px;
+          padding: 30px 35px 24px;
+          @include transition(0.3s);
+
+          @include maxWidth(900px) {
+            padding: 15px 17px 12px;
+          }
+          @include maxWidth($s) {
+            padding: 10px 12px 7px;
+          }
+          &:hover {
+            @include scale(1.02);
+          }
+          & + .box {
+            margin-top: 20px;
+            @include maxWidth($s) {
+              margin-bottom: 20px;
+            }
+            // @include maxWidth(1340px) {
+            //   margin-top: 0px;
+            //   margin:0 20px;
+
+            // }
+          }
+          &__user {
+            @include flexStart;
+            margin-bottom: 20px;
+            &-img {
+              width: 85px;
+              margin-right: 20px;
+              @include maxWidth(900px) {
+                width: 65px;
+              }
+            }
+            &-info {
+              @include flex-left-column;
+              &__name {
+                font-family: $titleFont;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 29px;
+                color: $white;
+                margin-bottom: 15px;
+
+                @include maxWidth(900px) {
+                  font-size: 20px;
+                  line-height: 25px;
+                }
+              }
+              &__rating {
+                width: 73px;
+                height: 13px;
+                @include maxWidth(900px) {
+                  width: 60px;
+                }
+              }
+            }
+          }
+          &__comment-title {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 33px;
+            color: $white;
+            margin-bottom: 13px;
+            @include maxWidth(900px) {
+              font-size: 18px;
+              line-height: 27px;
+            }
+          }
+          &__comment-text {
+            font-family: $textFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 29px;
+            color: $lightBlue;
+            padding-right: 8px;
+            @include maxWidth(900px) {
+              font-size: 14px;
+              line-height: 25px;
+              padding-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,413 @@
+.footer {
+    width: 100%;
+    background-color: $blue;
+    padding: 60px 0 25px;
+    @include maxWidth(1180px) {
+      padding: 30px 0;
+    }
+  
+    .container {
+      width: 100%;
+  
+      max-width: $lg;
+      margin: 0 auto;
+      width: 90%;
+      @include flex-center-column;
+  
+      .content {
+        width: 100%;
+        padding: 32px 0 70px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+  
+        @include maxWidth(1180px) {
+          padding: 20px 0 50px;
+        }
+        @include maxWidth(1000px) {
+          @include flex-center-column;
+        }
+        @include maxWidth($s) {
+          padding: 20px 0;
+        }
+  
+        &__link {
+          padding-right: 18px;
+          @include flex-left-column;
+          @include maxWidth(1350px) {
+            padding-right: 8px;
+          }
+          @include maxWidth(1000px) {
+            @include flex-center-column;
+            padding-right: 0;
+            width: 100%;
+          }
+          .logo {
+            width: 119px;
+            max-width: 119px;
+            margin-bottom: 20px;
+            &:hover {
+              .logo__img-book {
+                fill: $blueBg;
+              }
+              .logo__img-text {
+                fill: $Yellow;
+              }
+            }
+  
+            &__img {
+              width: 100%;
+  
+              &-book {
+                fill: $Yellow;
+                @include transition(0.3s);
+              }
+              &-text {
+                fill: $blueBg;
+                @include transition(0.3s);
+              }
+            }
+          }
+          .socials {
+            width: 100%;
+            @include flexStart;
+            @include maxWidth(1000px) {
+              @include flexCenter;
+            }
+  
+            &__item {
+              width: 55px;
+              height: 55px;
+              @include flexCenter;
+              border: 1px solid #ffca42;
+              margin-right: 10px;
+              background-color: $blue;
+              @include transition(0.1s);
+  
+              @include maxWidth(1180px) {
+                width: 40px;
+                height: 40px;
+              }
+  
+              @include maxWidth(1000px) {
+                margin-right: 0;
+              }
+              &:hover {
+                .socials__item-img--fill {
+                  fill: $blue;
+                }
+              }
+  
+              &:hover.socials__item {
+                background-color: $Yellow;
+                -webkit-box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+                -moz-box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+                box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+              }
+  
+              &-img {
+                &--fill {
+                  fill: $white;
+                }
+              }
+  
+              & + .socials__item {
+                @include maxWidth(1000px) {
+                  margin-left: 10px;
+                }
+              }
+            }
+          }
+        }
+  
+        &__menu {
+          @include flex-between;
+          @include maxWidth(1000px) {
+            justify-content: center;
+            width: 80%;
+            margin: 20px 0;
+            width: 100%;
+            @include maxWidth($s) {
+              margin: 10px 0;
+            }
+          }
+  
+          .nav {
+            @include flex-left-column;
+  
+            &__name {
+              font-family: $titleFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 24px;
+              line-height: 34px;
+              letter-spacing: 0.384px;
+              color: $white;
+              margin-bottom: 14px;
+              @include maxWidth(1180px) {
+                font-size: 22px;
+                line-height: 30px;
+              }
+              @include maxWidth($s) {
+                font-size: 18px;
+                line-height: 22px;
+              }
+            }
+            &__list {
+              &-el {
+                @include flexStart;
+                padding-bottom: 9px;
+              }
+              &-before {
+                width: 4px;
+                height: 4px;
+                & + .nav__list-before {
+                  margin-left: 3px;
+                }
+                use {
+                  width: 4px;
+                  height: 4px;
+                }
+              }
+              &-link {
+                margin-left: 11px;
+                font-family: $textFont;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 31px;
+                letter-spacing: 0.18px;
+                color: $lightBlue;
+                @include transition(0.1s);
+  
+                @include maxWidth(1180px) {
+                  font-size: 16px;
+                  line-height: 29px;
+                  margin-left: 8px;
+                }
+                @include maxWidth($s) {
+                  font-size: 12px;
+                  line-height: 22px;
+                }
+  
+                &:hover {
+                  color: $Yellow;
+                }
+                &:focus {
+                  color: $Yellow;
+                }
+                &:active {
+                  color: $Yellow;
+                }
+              }
+            }
+          }
+          .explore {
+            padding: 0 30px 9px;
+            @include maxWidth(1350px) {
+              padding: 0 20px 9px;
+            }
+            @include maxWidth(1180px) {
+              padding: 0 10px 9px;
+            }
+            @include maxWidth($xs) {
+              padding-left: 0;
+            }
+            .nav__list-el {
+              margin-left: 11px;
+              @include maxWidth(1180px) {
+                margin-left: 8px;
+              }
+              @include maxWidth($xs) {
+                margin-left: 2px;
+              }
+            }
+          }
+          .utility {
+            padding: 0 43px 9px 40px;
+            @include maxWidth(1350px) {
+              padding: 0 20px 9px;
+            }
+            @include maxWidth(1180px) {
+              padding: 0 10px 9px;
+            }
+            .nav__list {
+              .nav__list-el {
+                margin-left: 13px;
+                @include maxWidth(1180px) {
+                  margin-left: 8px;
+                }
+                @include maxWidth($xs) {
+                  margin-left: 0;
+                }
+              }
+            }
+            @include maxWidth(1000px) {
+              // width: 50%;
+            }
+          }
+        }
+  
+        &__contacts {
+          @include flex-left-column;
+          padding: 0px 73px 33px 20px;
+          @include maxWidth(1350px) {
+            padding: 0 10px 33px;
+          }
+          @include maxWidth($s) {
+            padding: 0;
+          }
+  
+          &-title {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 34px;
+            letter-spacing: 0.384px;
+            color: $white;
+            margin-bottom: 27px;
+  
+            @include maxWidth(1180px) {
+              font-size: 22px;
+              line-height: 30px;
+            }
+            @include maxWidth($s) {
+              font-size: 18px;
+              line-height: 22px;
+              margin-bottom: 14px;
+            }
+          }
+          .container {
+            @include flex-left-column;
+            padding: 0;
+            width: 100%;
+            max-width: 436px;
+  
+            &__contact {
+              width: 100%;
+              display: inline-flex;
+              &:nth-child(even) {
+                margin: 28px 0;
+                @include maxWidth($s) {
+                  margin: 14px 0;
+                }
+              }
+  
+              &-name {
+                font-family: $titleFont;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 27px;
+                letter-spacing: 0.36px;
+                color: $white;
+                margin-right: 28px;
+                width: 81px;
+                min-width: 81px;
+                display: inline-block;
+  
+                @include maxWidth(1350px) {
+                  margin-right: 18px;
+                }
+                @include maxWidth(1180px) {
+                  font-size: 16px;
+                  line-height: 25px;
+                  width: 64px;
+                  min-width: 64px;
+                }
+                @include maxWidth($s) {
+                  font-size: 14px;
+                  line-height: 22px;
+                  margin-right: 10px;
+                  width: 57px;
+                  min-width: 57px;
+                }
+              }
+              &-link {
+                width: 234px;
+                font-family: $textFont;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 27px;
+                color: $lightBlue;
+                @include transition(0.1s);
+                @include maxWidth(1180px) {
+                  font-size: 15px;
+                  line-height: 25px;
+                }
+                @include maxWidth($s) {
+                  font-size: 13px;
+                  line-height: 18px;
+                }
+  
+                &:hover {
+                  color: $Yellow;
+                }
+                &:focus {
+                  color: $Yellow;
+                }
+                &:active {
+                  color: $Yellow;
+                }
+              }
+            }
+          }
+        }
+      }
+      .creator {
+        width: 100%;
+        padding-top: 25px;
+        text-align: center;
+  
+        &__link {
+          font-family: $textFont;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 17px;
+          line-height: 26px;
+          text-align: center;
+          letter-spacing: 0.17px;
+          color: $lightBlue;
+          @include transition(0.1s);
+          @include maxWidth(1180px) {
+            font-size: 14px;
+            line-height: 22px;
+          }
+          @include maxWidth($s) {
+            font-size: 12px;
+            line-height: 16px;
+          }
+          &:hover {
+            color: $Yellow;
+          }
+          &:focus {
+            color: $Yellow;
+          }
+          &:active {
+            color: $Yellow;
+          }
+        }
+        &__name {
+          font-family: $textFont;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 17px;
+          line-height: 26px;
+          text-align: center;
+          letter-spacing: 0.17px;
+          color: $white;
+          @include maxWidth(1180px) {
+            font-size: 14px;
+            line-height: 22px;
+          }
+          @include maxWidth($s) {
+            font-size: 12px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }

@@ -1,0 +1,281 @@
+.main__resources {
+  width: 100%;
+  padding: 110px 0;
+  background-color: $gridBlue;
+  @include maxWidth($md) {
+    padding: 70px 0 90px;
+  }
+  @include maxWidth($s) {
+    padding: 40px 0 60px;
+  }
+
+  .container {
+    @include flex-center-column;
+    max-width: $lg;
+    width: 92%;
+    margin: 0 auto;
+    position: relative;
+    &__title {
+      font-family: $titleFont;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 42px;
+      line-height: 50px;
+      text-align: center;
+      text-transform: capitalize;
+      color: $blue;
+      @include flex-center-column;
+      margin-top: 16px;
+      margin-bottom: 60px;
+      @include maxWidth($md) {
+        font-size: 38px;
+        margin-bottom: 50px;
+      }
+      @include maxWidth($s) {
+        margin-bottom: 40px;
+      }
+
+      @include maxWidth(560px) {
+        font-size: 30px;
+        margin-bottom: 30px;
+      }
+      &::after {
+        content: "";
+        width: 50px;
+        height: 3px;
+        background: url("../img/UI/line.png");
+        display: block;
+        margin: 23px 0 10px;
+        @include maxWidth($md) {
+          margin: 17px 10px;
+        }
+        @include maxWidth(560px) {
+          margin: 14px 7px;
+        }
+      }
+    }
+
+    &__slider {
+      width: 100%;
+      @include maxWidth(600px) {
+        padding: 0 30px;
+      }
+      .swiper {
+        width: 100%;
+        height: fit-content;
+        max-height: fit-content;
+      }
+
+      .articles {
+        position: relative;
+        .swiper-wrapper {
+          max-height: fit-content;
+          height: fit-content;
+          .slide {
+            width: calc(420px / 1300px * 100%);
+            // max-width: 420px;
+            height: fit-content;
+            max-height: fit-content;
+
+            &__poster {
+              border-radius: 5px 5px 0px 0px;
+              overflow: hidden;
+              width: 100%;
+
+              &-img {
+                width: 100%;
+              }
+            }
+            &__content {
+              width: 100%;
+              height: fit-content;
+              padding: 25px 30px 30px;
+              @include maxWidth(1170px) {
+                padding: 20px 25px 25px;
+                @include flex-left-column;
+              }
+              @include maxWidth(960px) {
+                padding: 10px 15px 15px;
+                @include flex-left-column;
+              }
+
+              &-title {
+                font-family: $titleFont;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 34px;
+                letter-spacing: 0.24px;
+                color: $blue;
+                @include maxWidth(1170px) {
+                  font-size: 20px;
+                  line-height: 30px;
+                  width: 100%;
+                }
+                @include maxWidth(960px) {
+                  height: 60px;
+                }
+              }
+              &-text {
+                font-family: $textFont;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 19px;
+                line-height: 30px;
+                color: $greyBlue;
+                padding: 19px 0 13px;
+                @include maxWidth(1170px) {
+                  font-size: 16px;
+                  line-height: 25px;
+                }
+                @include maxWidth(1024px) {
+                  font-size: 14px;
+                  line-height: 20px;
+                  padding: 14px 0 9px;
+                }
+                @include maxWidth($s) {
+                  font-size: 12px;
+                  line-height: 20px;
+                  margin: 12px 0 7px;
+                  padding: 0;
+                  height: 60px;
+                }
+              }
+              .info {
+                @include flex-between;
+                width: 100%;
+
+                &__link {
+                  font-family: $titleFont;
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 19px;
+                  line-height: 23px;
+                  letter-spacing: 0.38px;
+                  text-transform: capitalize;
+                  color: $blue;
+                  padding-bottom: 4px;
+                  border-bottom: 2px solid #1b3764;
+                  width: 94px;
+                  @include transition(0.1s);
+                  @include maxWidth(960px) {
+                    font-size: 16px;
+                    line-height: 18px;
+                    width: 80px;
+                  }
+
+                  &:hover {
+                    opacity: 0.8;
+                  }
+                }
+                &__date {
+                  font-family: $textFont;
+                  font-style: normal;
+                  font-weight: 400;
+                  font-size: 16px;
+                  line-height: 26px;
+                  color: $blue;
+
+                  @include maxWidth(960px) {
+                    font-size: 12px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .swiper-button-next {
+        top: 61%;
+      }
+      .swiper-button-prev {
+        top: 61%;
+      }
+      // .swiper-button-next,
+      // .swiper-button-prev{
+      //   @include maxWidth(1300px) {
+      //     top:57%;
+      //   }
+      //   @include maxWidth(1250px) {
+      //     top:55%;
+      //   }
+      //   @include maxWidth(1200px) {
+      //     top:53%;
+      //   }
+      //   @include maxWidth(1150px) {
+      //     top:51%;
+      //   }
+      //   @include maxWidth(1100px) {
+      //     top:50%;
+      //   }
+      //   @include maxWidth(1000px) {
+      //     top:48%;
+      //   }
+      //   @include maxWidth(1000px) {
+      //     top:48%;
+      //   }
+      //   @include maxWidth(950px) {
+      //     top:48%;
+      //   }
+      // }
+      .swiper-button-next::after,
+      .swiper-button-prev::after {
+        content: "";
+      }
+      .swiper {
+        width: 100%;
+        height: fit-content;
+      }
+      .swiper-button-next {
+        width: 50px;
+        right: -25px;
+        @include maxWidth(960px) {
+          width: 40px;
+        }
+        @include maxWidth(600px) {
+          width: 30px;
+          right: 13px;
+        }
+        .arrow__bg,
+        .arrow__arrow {
+          @include transition(0.1s);
+        }
+
+        &:active .arrow__bg {
+          fill: $blue;
+        }
+
+        &:active .arrow__arrow {
+          stroke: $Yellow;
+        }
+      }
+      .swiper-button-prev {
+        width: 50px;
+        left: -25px;
+        @include maxWidth(960px) {
+          width: 40px;
+        }
+        @include maxWidth(600px) {
+          width: 30px;
+          left: 13px;
+        }
+        .arrow__bg,
+        .arrow__arrow {
+          @include transition(0.1s);
+        }
+
+        &:active .arrow__bg {
+          fill: $blue;
+        }
+
+        &:active .arrow__arrow {
+          stroke: $Yellow;
+        }
+      }
+      .swiper-button-next::after,
+      .swiper-button-prev::after {
+        content: "";
+      }
+    }
+  }
+}

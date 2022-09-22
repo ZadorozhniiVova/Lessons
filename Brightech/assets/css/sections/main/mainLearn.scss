@@ -1,0 +1,184 @@
+.main__learn {
+  width: 100%;
+  padding: 120px 0 140px;
+  background-color: $whiteBg;
+  @include maxWidth($md) {
+    padding: 80px 0;
+  }
+  @include maxWidth($s) {
+    padding: 50px 0;
+  }
+  @include maxWidth(560px) {
+    padding: 30px 0;
+  }
+
+  .container {
+    padding: 70px 0;
+    max-width: $lg;
+    width: 95%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+
+    @include maxWidth($md) {
+      padding: 50px 0;
+    }
+    @include maxWidth($s) {
+      padding: 40px 0;
+    }
+    @include maxWidth(560px) {
+      padding: 25px 0;
+    }
+    &__title {
+      font-family: $titleFont;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 42px;
+      line-height: 50px;
+      text-align: center;
+      text-transform: capitalize;
+      color: $blue;
+      @include flex-center-column;
+      margin-top: 16px;
+      margin-bottom: 80px;
+      @include maxWidth($md) {
+        margin-bottom: 50px;
+        font-size: 38px;
+        @include flex-center-column;
+        text-align: center;
+      }
+      @include maxWidth(920px) {
+        margin-bottom: 30px;
+      }
+      @include maxWidth(560px) {
+        font-size: 36px;
+      }
+
+      &::after {
+        content: "";
+        width: 50px;
+        height: 3px;
+        background: url("../img/UI/line.png");
+        display: block;
+        margin: 23px 0 10px;
+        @include maxWidth($md) {
+          margin: 17px 10px;
+        }
+        @include maxWidth(560px) {
+          margin: 14px 7px;
+        }
+      }
+    }
+    &__content {
+      @include flex-between;
+      flex-wrap: wrap;
+
+      @include maxWidth(920px) {
+        @include flex-center-column;
+        flex-direction: column-reverse;
+      }
+      .text {
+        display: grid;
+        width: calc(666px / 1300px * 100%);
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 272px;
+        gap: 30px;
+        padding: 30px 30px 48px 0;
+        @include maxWidth($md) {
+          padding: 15px 15px 20px 0px;
+          grid-auto-rows: 220px;
+          gap: 15px;
+        }
+        @include maxWidth(920px) {
+          padding: 0;
+          margin-top: 30px;
+          margin-bottom: 0px;
+          width: 80%;
+        }
+        @include maxWidth(560px) {
+          width: 100%;
+          grid-auto-rows: 180px;
+        }
+
+        &__container {
+          background-color: $gridBlue;
+          @include flex-left-column;
+          padding: 30px 30px 27px 30px;
+          justify-content: flex-start;
+          @include maxWidth($md) {
+            padding: 20px 20px 17px 20px;
+            grid-auto-rows: 250px;
+          }
+          @include maxWidth(1000px) {
+            padding: 10px;
+          }
+
+          &-num {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 29px;
+            color: $blue;
+            width: 50px;
+            height: 50px;
+            @include flexCenter;
+            background-color: $Yellow;
+            @include border-radius(50%);
+            margin-bottom: 30px;
+            @include maxWidth($md) {
+              margin-bottom: 15px;
+              width: 40px;
+              height: 40px;
+            }
+            @include maxWidth(560px) {
+              font-size: 19px;
+              line-height: 25px;
+            }
+          }
+          &-descr {
+            font-family: $titleFont;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 34px;
+            color: $blue;
+            @include maxWidth($md) {
+              font-size: 22px;
+              line-height: 30px;
+            }
+            @include maxWidth(560px) {
+              font-size: 16px;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+      .poster {
+        border: 10px solid #ffca42;
+        width: calc(555px / 1300px * 100%);
+        @include maxWidth($md) {
+          width: 48%;
+          border: 7px solid #ffca42;
+        }
+        @include maxWidth($xs) {
+          min-width: 200px;
+          border: 4px solid #ffca42;
+        }
+        &__img {
+          width: 100%;
+          @include translateXY(-30px, -30px);
+          filter: drop-shadow(-1px 2px 11px rgba(0, 0, 0, 0.2));
+          @include maxWidth($md) {
+            @include translateXY(-35px, -35px);
+          }
+          @include maxWidth($s) {
+            @include translateXY(-30px, -30px);
+          }
+          @include maxWidth($xs) {
+            @include translateXY(-20px, -20px);
+          }
+        }
+      }
+    }
+  }
+}

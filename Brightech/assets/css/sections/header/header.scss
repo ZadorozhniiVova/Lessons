@@ -1,0 +1,395 @@
+.header {
+    width: 100%;
+    background-color: $blue;
+    .container {
+      max-width: $lg;
+      padding: 20px 0;
+      margin: 0 auto;
+      width: 90%;
+      @include flex-between;
+      @include maxWidth($md) {
+        width: 95%;
+      }
+      @include maxWidth($s) {
+        padding: 10px 0;
+      }
+  
+      &__link {
+        padding: 12px 0;
+        @include flex-between;
+        @include maxWidth($s) {
+          padding: 0;
+        }
+        .logo {
+          margin-right: 35px;
+          width: 119px;
+          height: 35px;
+  
+          @include maxWidth($md) {
+            margin-right: 5px;
+          }
+  
+          &__img {
+            width: 100%;
+            @include transition(0.3s);
+  
+            &-book {
+              fill: #f5f8fc;
+              @include transition(0.3s);
+            }
+  
+            &-text {
+              fill: #ffca42;
+              @include transition(0.3s);
+            }
+          }
+  
+          &:hover .logo__img {
+            @include scale(1.05);
+          }
+          &:hover .logo__img-book {
+            fill: #ffca42;
+          }
+          &:hover .logo__img-text {
+            fill: #f5f8fc;
+          }
+          &:focus .logo__img {
+            @include scale(1.05);
+          }
+          &:focus .logo__img-book {
+            fill: #ffca42;
+          }
+          &:focus .logo__img-text {
+            fill: #f5f8fc;
+          }
+          &:active .logo__img {
+            @include scale(1.05);
+          }
+          &:active .logo__img-book {
+            fill: #ffca42;
+          }
+          &:active .logo__img-text {
+            fill: #f5f8fc;
+          }
+        }
+        .socials {
+          @include flexStart;
+          flex-wrap: wrap;
+  
+          &__item {
+            min-width: 45px;
+            min-height: 45px;
+            @include flexCenter;
+            background-color: $white;
+            @include transition(0.1s);
+            margin-right: 10px;
+            @include maxWidth(900px) {
+              min-width: 30px;
+              min-height: 30px;
+            }
+            @include maxWidth($s) {
+              display: none;
+            }
+  
+            &:hover {
+              @include scale(1.05);
+            }
+            &:focus {
+              @include scale(1.05);
+            }
+            &:active {
+              @include scale(1.05);
+            }
+          }
+        }
+      }
+  
+      &__nav {
+        @include flexCenter;
+        flex-wrap: wrap;
+  
+        .menu {
+          @include flex-between;
+          width: 450px;
+          padding: 23px 24px 20px;
+          @include maxWidth($md) {
+            width: 400px;
+            padding: 23px 12px 20px;
+          }
+          @include maxWidth(1000px) {
+            width: 300px;
+          }
+          @include maxWidth($s) {
+            display: none;
+          }
+  
+          &__el {
+            &-link {
+              font-family: $textFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 17px;
+              line-height: 26px;
+              letter-spacing: 0.17px;
+              color: $navColor;
+              @include maxWidth($s) {
+                font-size: 14px;
+                line-height: 15px;
+              }
+              &:hover {
+                color: $Yellow;
+              }
+            }
+            &:first-child .menu__el-link {
+              color: $Yellow;
+            }
+          }
+        }
+      }
+      .nav__basket {
+        padding: 26px 15px;
+        margin-right: 36px;
+        @include maxWidth($md) {
+          margin-right: 10px;
+        }
+        @include maxWidth(900px) {
+          margin-right: 0;
+        }
+        @include maxWidth($s) {
+          display: none;
+        }
+  
+        &-link {
+          &:hover .nav__basket-link__img--fill {
+            fill: $Yellow;
+          }
+          &__img {
+            &--fill {
+              fill: $black;
+              @include transition(0.3s);
+            }
+          }
+        }
+      }
+      .nav__btn {
+        font-family: $titleFont;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19px;
+        line-height: 28px;
+        letter-spacing: 0.57px;
+        text-transform: capitalize;
+        color: $blue;
+        background-color: $Yellow;
+        border: 2px solid $Yellow;
+        border-radius: 0px;
+        padding: 18.5px 52px;
+        @include transition(0.2s);
+        @include maxWidth($md) {
+          padding: 18px 30px;
+        }
+        @include maxWidth(900px) {
+          padding: 18px;
+          font-size: 16px;
+        }
+        @include maxWidth($s) {
+          display: none;
+        }
+  
+        &:hover {
+          background-color: $blue;
+          color: $Yellow;
+          -webkit-box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+          -moz-box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+          box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+        }
+        &:active {
+          @include scale(1.02);
+        }
+      }
+      .nav-bar {
+        z-index: 2;
+        position: fixed;
+        background-color: $blue;
+        top: 0;
+        right: 100%;
+        height: 100vh;
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: position 2.9s;
+        -webkit-transition: position 2.9s;
+        -moz-transition: position 2.9s;
+        -ms-transition: position 2.9s;
+        -o-transition: position 2.9s;
+        .toggle-menu {
+          visibility: hidden;
+          background-color: $blue;
+          position: fixed;
+          top: 13px;
+          right: 10px;
+          width: 35px;
+          height: 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          padding: 2px 2px 2px 3px;
+          border-radius: 5px;
+          cursor: pointer;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -o-border-radius: 5px;
+          @include maxWidth($s) {
+            visibility: visible;
+          }
+          .line {
+            width: 100%;
+            height: 3px;
+            border-radius: 5px;
+            background-color: $Yellow;
+            transition: transform 0.2s ease-out;
+            -webkit-transition: transform 0.2s ease-out;
+            -moz-transition: transform 0.2s ease-out;
+            -ms-transition: transform 0.2s ease-out;
+            -o-transition: transform 0.2s ease-out;
+          }
+        }
+  
+        .nav-list {
+          list-style: none;
+          &-item {
+            text-align: center;
+            padding: 5px;
+            @include flexCenter;
+  
+            .nav-link {
+              text-decoration: none;
+              position: relative;
+              padding-bottom: 4px;
+              font-family: $textFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 17px;
+              line-height: 26px;
+              letter-spacing: 0.17px;
+              color: $navColor;
+              @include maxWidth($s) {
+                font-size: 14px;
+                line-height: 15px;
+              }
+              &:hover {
+                color: $Yellow;
+              }
+  
+              &:first-child .menu__el-link {
+                color: $Yellow;
+              }
+  
+              &::before {
+                position: absolute;
+                content: "";
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 1px;
+                background-color: $Yellow;
+                transform: scaleX(0);
+  
+                transform-origin: left;
+                @include transition(0.2s);
+              }
+  
+              &:hover::before {
+                transform: scaleX(1);
+              }
+            }
+  
+            .nav__btn-aside {
+              margin-right: 0;
+              font-family: $titleFont;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 28px;
+              letter-spacing: 0.57px;
+              text-transform: capitalize;
+              color: $blue;
+              background-color: $Yellow;
+              border: 2px solid $Yellow;
+              border-radius: 0px;
+              padding: 9px;
+              @include transition(0.2s);
+  
+              &:hover {
+                background-color: $blue;
+                color: $Yellow;
+                -webkit-box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+                -moz-box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+                box-shadow: 2px 3px 25px 0px rgba(255, 255, 255, 0.43);
+              }
+              &:active {
+                @include scale(1.02);
+              }
+            }
+          }
+  
+          .nav__basket {
+            padding: 26px 15px;
+            margin-right: 0;
+  
+            &-link {
+              &:hover .nav__basket-link__img--fill {
+                fill: $Yellow;
+              }
+              &__img {
+                &--fill {
+                  fill: $black;
+                  @include transition(0.3s);
+                }
+              }
+            }
+          }
+          .socials__item {
+            min-width: 30px;
+            min-height: 30px;
+            @include flexCenter;
+            background-color: $white;
+            @include transition(0.1s);
+            margin: 5px;
+  
+            &:hover {
+              @include scale(1.05);
+            }
+            &:focus {
+              @include scale(1.05);
+            }
+            &:active {
+              @include scale(1.05);
+            }
+          }
+        }
+      }
+  
+      .toggle {
+        left: 0;
+        box-shadow: 1px 0 15px 2px rgba(0, 0, 0, 0.4);
+        .line1 {
+          background-color: #000000;
+          transform: scale(0.9) rotateZ(-45deg) translate(-6px, 4px);
+        }
+        .line2 {
+          display: none;
+        }
+        .line3 {
+          background-color: #000000;
+          transform: scale(0.9) rotateZ(45deg) translate(-6px, -4px);
+        }
+  
+        &-menu {
+          background-color: white;
+        }
+      }
+    }
+  }
