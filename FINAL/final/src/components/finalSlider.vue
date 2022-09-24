@@ -8,8 +8,8 @@
           :centerMode="true"
           :infiniteScroll="true"
           :autoPlay="true"
-          :playSpeed="3000"
-          :transition="1000"
+          :playSpeed="5000"
+          :transition="2000"
           :wheelControl="false"
           group="MainSlider"
           class="finalSlider__left-left"
@@ -19,7 +19,7 @@
             :key="game.id"
             class="finalSlider__left-left-slide leftSlide"
           >
-            <div class="leftSlide__item" style="width: 100%; height: 100%">
+            <div class="leftSlide__item">
               <img class="leftSlide__item-img" :src="game.background_image" />
             </div>
           </slide>
@@ -30,8 +30,8 @@
           :centerMode="true"
           :infiniteScroll="true"
           :autoPlay="true"
-          :playSpeed="3000"
-          :transition="1000"
+          :playSpeed="5000"
+          :transition="2000"
           :wheelControl="false"
           group="MainSlider"
           class="finalSlider__left-right"
@@ -41,7 +41,7 @@
             :key="game.id"
             class="finalSlider__left-right-slide rightSlide"
           >
-            <div class="rightSlide__item" style="width: 100%; height: 100%">
+            <div class="rightSlide__item">
               <img class="rightSlide__item-img" :src="game.background_image" />
             </div>
           </slide>
@@ -53,8 +53,8 @@
         :centerMode="true"
         :infiniteScroll="true"
         :autoPlay="true"
-        :playSpeed="3000"
-        :transition="1000"
+        :playSpeed="5000"
+        :transition="2000"
         :wheelControl="false"
         group="MainSlider"
         class="finalSlider__right"
@@ -71,12 +71,12 @@
       </hooper>
     </div>
     <hooper
-      :itemsToShow="5"
+      :itemsToShow="3"
       :centerMode="true"
       :infiniteScroll="true"
       :autoPlay="true"
-      :playSpeed="3000"
-      :transition="1000"
+      :playSpeed="5000"
+      :transition="500"
       :wheelControl="false"
       :mouseDrag="true"
       group="MainSlider"
@@ -100,37 +100,33 @@ import Api from "../service/api";
 import { Hooper, Slide } from "hooper";
 import "hooper/dist/hooper.css";
 
+// , 494384, 463723, 29238, 437059
 export default {
   name: "MyComponent",
   data() {
     return {
-      sliderItemsID: [452642, 3328, 428839, 494384, 463723, 29238, 437059],
+      sliderItemsID: [452642, 3328, 428839],
       sliderGames: [],
-      sliderGamesStores: []
+      sliderGamesStores: [],
     };
   },
   components: {
     Hooper,
-    Slide
+    Slide,
   },
   methods: {},
   async mounted() {
-    // this.$store.dispatch("loadAllGames");
-    // this.$store.dispatch("loadAllPlatforms");
-    // console.log(this.sliderItemsID);
     let sliderGames = this.sliderGames;
     let sliderGamesStores = this.sliderGamesStores;
 
     this.sliderItemsID.forEach(async function (element) {
-      // console.log(element)
       let respGames = await Api().get(
-        `games/${element}?&key=a93f8e4bce884b11ae59a173f67e656c`
+        `games/${element}?&key=fa71b951c31e4e3b9af2efbdf3fe7c97`
       );
       let respStore = await Api().get(
-        `games/${element}/stores?&key=a93f8e4bce884b11ae59a173f67e656c`
+        `games/${element}/stores?&key=fa71b951c31e4e3b9af2efbdf3fe7c97 `
       );
 
-      // console.log("respGames", respGames.data);
       sliderGames.push(respGames.data);
       sliderGamesStores.push(respStore.data.results);
     });
@@ -142,11 +138,13 @@ export default {
     // platforms() {
     //   return this.$store.state.platforms;
     // },
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/_mixins.scss";
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -156,21 +154,50 @@ export default {
   display: flex;
   width: 100%;
   margin: 0 auto;
-  height: 600px;
+  height: 70vh;
   padding: 20px 0;
   background-color: #151515;
 
+  @include maxWidth(1300px) {
+    height: 60vh;
+  }
+  @include maxWidth(1000px) {
+    height: 50vh;
+  }
+  @include maxWidth(800px) {
+    height: 40vh;
+  }
+  @include maxWidth(650px) {
+    height: 40vh;
+    padding: 0;
+  }
+  // @include maxWidth(500px) {
+  //   height: 30vh;
+  // }
+  // @include maxWidth(400px) {
+  //   height: 25vh;
+  // }
+
   &__container {
     width: 90%;
-    height: 80%;
+    height: 100%;
+    max-width: 1300px;
     min-height: 80%;
     margin: 0 auto;
+    margin-bottom: 10px;
+    @include maxWidth(650px) {
+      width: 100%;
+    }
 
     .finalSlider__left {
       display: flex;
       background-color: #151515;
       height: 100%;
       width: 70%;
+
+      @include maxWidth(650px) {
+        width: 100%;
+      }
       .finalSlider__left-left {
         height: 100%;
         width: 50%;
@@ -185,6 +212,11 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            &-img {
+              height: 100%;
+              width: 200%;
+            }
           }
         }
       }
@@ -205,6 +237,10 @@ export default {
             justify-content: center;
             align-items: center;
             transform: rotate(180deg);
+            &-img {
+              height: 100%;
+              width: 200%;
+            }
           }
         }
       }
@@ -212,6 +248,9 @@ export default {
     .finalSlider__right {
       width: 30%;
       height: 100%;
+      @include maxWidth(650px) {
+        display: none;
+      }
 
       &-slide {
         // height: fit-content !important;
@@ -224,21 +263,48 @@ export default {
     }
   }
   &__bottom {
-    width: 90% !important;
+    width: 70% !important;
     overflow: hidden;
-    height: 50px;
+    margin: 10px 0;
+    min-height: 75px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    @include maxWidth(650px) {
+      display: none;
+    }
 
     &-slide {
       .bottomSlide__item {
-        height: 100%;
-        font-size: 18px;
         font-weight: 400;
         color: rgba(255, 255, 255, 0.4);
+        transition: 0.4s ease-in-out;
+        &-name {
+          font-family: "Fredericka the Great", cursive;
+          font-size: 30px;
+          width: 100%;
+          text-align: center;
+          @include maxWidth(1300px) {
+            font-size: 25px;
+          }
+          @include maxWidth(1000px) {
+            font-size: 22px;
+          }
+          @include maxWidth(800px) {
+            font-size: 18px;
+          }
+          @include maxWidth(700px) {
+            font-size: 14px;
+          }
+          @include maxWidth(500px) {
+            font-size: 10px;
+          }
+          @include maxWidth(400px) {
+            font-size: 8px;
+          }
+        }
       }
-      &.is-active .bottomSlide__item{
+      &.is-active .bottomSlide__item {
         color: white !important;
       }
     }

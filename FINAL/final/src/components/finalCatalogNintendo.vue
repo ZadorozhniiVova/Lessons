@@ -2,8 +2,26 @@
   <div class="finalCatalogNintendo catalog">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
-      <h1 class="catalog__title-text">Games for Nintendo </h1>
-      <span class="catalog__title-subtitle mb-3"> Nintendo Switch is a hybrid video game console made by Nintendo. The system represents a tablet-like device with a touchscreen with detachable controllers on the sides. The system can be inserted into a docking station connected to the TV and serve as a home console. This allows the games on the system to be played both on a big screen or in the handheld with no need to reset the system to change the modes. The central controller for the Switch is a pair of Joy-Cons – small controllers both of which feature four face buttons, an analog stick, two side buttons, and high-definition vibration. The controllers can be used separately by different players, together using a grip accessory or attached to the system in handheld mode. Unlike many previous Nintendo consoles, as for 2019, the system has strong support from third-party developers, especially from the indie scene. The Switch introduced Nintendo Switch Online, a subscription-based service that resembles Xbox Live Gold and PlayStation Plus. It allows players to play online multiplayer, offers a selection of classic Nintendo games and lets players use cloud saves.</span>
+      <h1 class="catalog__title-text">Games for Nintendo</h1>
+      <span class="catalog__title-subtitle mb-3">
+        Nintendo Switch is a hybrid video game console made by Nintendo. The
+        system represents a tablet-like device with a touchscreen with
+        detachable controllers on the sides. The system can be inserted into a
+        docking station connected to the TV and serve as a home console. This
+        allows the games on the system to be played both on a big screen or in
+        the handheld with no need to reset the system to change the modes. The
+        central controller for the Switch is a pair of Joy-Cons – small
+        controllers both of which feature four face buttons, an analog stick,
+        two side buttons, and high-definition vibration. The controllers can be
+        used separately by different players, together using a grip accessory or
+        attached to the system in handheld mode. Unlike many previous Nintendo
+        consoles, as for 2019, the system has strong support from third-party
+        developers, especially from the indie scene. The Switch introduced
+        Nintendo Switch Online, a subscription-based service that resembles Xbox
+        Live Gold and PlayStation Plus. It allows players to play online
+        multiplayer, offers a selection of classic Nintendo games and lets
+        players use cloud saves.</span
+      >
       <div class="d-flex">
         <div>
           <b-form-select
@@ -57,7 +75,7 @@ export default {
   components: {
     finalCatalogItem,
     finalHeader,
-    finalFooter
+    finalFooter,
   },
   data() {
     return {
@@ -72,7 +90,7 @@ export default {
         { value: "&ordering=-metacritic", text: "Metacritic" },
         { value: "&ordering=-name", text: "Name" },
         { value: "&ordering=-popularity", text: "Popularity" },
-        { value: "&ordering=-released", text: "Date Added" }
+        { value: "&ordering=-released", text: "Date Added" },
       ],
       releaseDate: [
         { value: "", text: "Release Date" },
@@ -83,22 +101,22 @@ export default {
         { value: "&dates=1980-09-01,1989-12-31", text: "1980-1989" },
         { value: "&dates=1970-09-01,1979-12-31", text: "1970-1979" },
         { value: "&dates=1960-09-01,1969-12-31", text: "1960-1969" },
-        { value: "&dates=1950-09-01,1959-12-31", text: "1950-1959" }
-      ]
+        { value: "&dates=1950-09-01,1959-12-31", text: "1950-1959" },
+      ],
     };
   },
   props: {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["", "&platforms=7,8,9,13,83", ""]
-    }
+      default: () => ["", "&platforms=7,8,9,13,83", ""],
+    },
   },
   watch: {
     currentPage(next) {
       this.$store.dispatch("getPlatformsNintendoByPage", [
         next,
-        this.filterRequest.join("")
+        this.filterRequest.join(""),
       ]);
       window.scrollTo(0, 0);
     },
@@ -114,29 +132,29 @@ export default {
         this.$store.dispatch("getPlatformsNintendoFilter", newValue.join(""));
         this.currentPage = 1;
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   computed: {
-    ...mapGetters(["PLATFORMSNINTENDO"])
+    ...mapGetters(["PLATFORMSNINTENDO"]),
   },
   methods: {
     ...mapActions([
       "GET_PLATFORMS_NINTENDO_FROM_API",
       "ADD_TO_FAVORITE",
-      "DELETE_FROM_FAVORITE"
+      "DELETE_FROM_FAVORITE",
     ]),
     deleteFromFavorite(index) {
       this.DELETE_FROM_FAVORITE(index);
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
-    }
+    },
   },
   mounted() {
     this.GET_PLATFORMS_NINTENDO_FROM_API().then((responce) => {
       console.log(responce);
     });
-  }
+  },
 };
 </script>

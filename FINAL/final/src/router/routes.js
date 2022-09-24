@@ -7,12 +7,12 @@ import finalFavorite from "../components/finalFavorite";
 import finalCatalogBestYear from "../components/finalCatalogBestYear";
 import finalCatalogBest2021 from "../components/finalCatalogBest2021";
 import finalCatalogBestAllTime from "../components/finalCatalogBestAllTime";
-import finalCatalogPC from "../components/finalCatalogPC"
-import finalCatalogXbox from "../components/finalCatalogXbox"
-import finalCatalogNintendo from  "../components/finalCatalogNintendo"
-import finalCatalogIos from "../components/finalCatalogIos"
-import finalCatalogAndroid from "../components/finalCatalogAndroid"
-import finalCatalogPS from "../components/finalCatalogPS"
+import finalCatalogPC from "../components/finalCatalogPC";
+import finalCatalogXbox from "../components/finalCatalogXbox";
+import finalCatalogNintendo from "../components/finalCatalogNintendo";
+import finalCatalogIos from "../components/finalCatalogIos";
+import finalCatalogAndroid from "../components/finalCatalogAndroid";
+import finalCatalogPS from "../components/finalCatalogPS";
 
 Vue.use(VueRouter);
 
@@ -87,9 +87,6 @@ const routes = [
     name: "PlatformAndroid",
     component: finalCatalogAndroid,
   },
-  
-
-  
 ];
 
 const router = new VueRouter({

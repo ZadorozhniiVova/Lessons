@@ -1,12 +1,9 @@
 <template>
-  <div class="finalSideMenu">
+  <div class="finalSideMenu" :class="{ showSideMenu: isOpenSideMenu }">
     <v-card style="background-color: black">
       <v-navigation-drawer permanent expand-on-hover>
-        <v-list v-if="name">
-          <v-list-item
-            class="px-0 d-flex justify-center"
-            v-if="name !== undefined"
-          >
+        <v-list v-if="changeStatus">
+          <v-list-item class="px-0 d-flex justify-center">
             <VueToyFace
               size="40"
               rounded="75"
@@ -18,7 +15,7 @@
           <v-list-item link class="userName">
             <v-list-item-content>
               <v-list-item-title class="text-h8">
-                {{ name }}
+                {{ userName }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -35,7 +32,25 @@
           </v-list-item>
           <v-list-item link class="userName">
             <v-list-item-content>
-              <v-list-item-title class="text-h8"> Guest </v-list-item-title>
+              <v-list-item-title class="text-h8" @click="showStatus">
+                Guest
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list class="login">
+          <v-list-item link class="userName" v-if="!changeStatus">
+            <v-list-item-content class="sideMenu__login">
+              <v-list-item-title class="text-h8" @click="openLogin()"
+                >Login</v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item link class="userName" v-else>
+            <v-list-item-content class="sideMenu__login">
+              <v-list-item-title class="text-h8" @click="clearUserData()"
+                >Logout</v-list-item-title
+              >
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -48,12 +63,20 @@
             <router-link
               class="d-flex align-center side__link"
               :to="{ name: 'home' }"
-              ><v-list-item-icon
+              ><v-list-item-icon>
+                <svg
+                  class="sideMenu__img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 50 50"
                 >
-                <svg class="sideMenu__img" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50">    <path
-                  class="side__menu-icon" d="M 25 1.0507812 C 24.7825 1.0507812 24.565859 1.1197656 24.380859 1.2597656 L 1.3808594 19.210938 C 0.95085938 19.550938 0.8709375 20.179141 1.2109375 20.619141 C 1.5509375 21.049141 2.1791406 21.129062 2.6191406 20.789062 L 4 19.710938 L 4 46 C 4 46.55 4.45 47 5 47 L 19 47 L 19 29 L 31 29 L 31 47 L 45 47 C 45.55 47 46 46.55 46 46 L 46 19.710938 L 47.380859 20.789062 C 47.570859 20.929063 47.78 21 48 21 C 48.3 21 48.589063 20.869141 48.789062 20.619141 C 49.129063 20.179141 49.049141 19.550938 48.619141 19.210938 L 25.619141 1.2597656 C 25.434141 1.1197656 25.2175 1.0507812 25 1.0507812 z M 35 5 L 35 6.0507812 L 41 10.730469 L 41 5 L 35 5 z"/></svg></v-list-item-icon
-              >
-              <v-list-item-title class="side__title">Home</v-list-item-title></router-link
+                  <path
+                    class="side__menu-icon"
+                    d="M 25 1.0507812 C 24.7825 1.0507812 24.565859 1.1197656 24.380859 1.2597656 L 1.3808594 19.210938 C 0.95085938 19.550938 0.8709375 20.179141 1.2109375 20.619141 C 1.5509375 21.049141 2.1791406 21.129062 2.6191406 20.789062 L 4 19.710938 L 4 46 C 4 46.55 4.45 47 5 47 L 19 47 L 19 29 L 31 29 L 31 47 L 45 47 C 45.55 47 46 46.55 46 46 L 46 19.710938 L 47.380859 20.789062 C 47.570859 20.929063 47.78 21 48 21 C 48.3 21 48.589063 20.869141 48.789062 20.619141 C 49.129063 20.179141 49.049141 19.550938 48.619141 19.210938 L 25.619141 1.2597656 C 25.434141 1.1197656 25.2175 1.0507812 25 1.0507812 z M 35 5 L 35 6.0507812 L 41 10.730469 L 41 5 L 35 5 z"
+                  /></svg
+              ></v-list-item-icon>
+              <v-list-item-title class="side__title"
+                >Home</v-list-item-title
+              ></router-link
             >
           </v-list-item>
 
@@ -84,7 +107,9 @@
                   {{ FAVORITE.length }}
                 </div></v-list-item-icon
               >
-              <v-list-item-title class="side__title">Favorite</v-list-item-title></router-link
+              <v-list-item-title class="side__title"
+                >Favorite</v-list-item-title
+              ></router-link
             >
           </v-list-item>
 
@@ -141,7 +166,7 @@
             <router-link
               :to="{
                 name: 'bestOfAllTime',
-                params: { favorite_data: FAVORITE }
+                params: { favorite_data: FAVORITE },
               }"
               class="d-flex align-center side__link"
               ><v-list-item-icon>
@@ -176,7 +201,9 @@
                   />
                 </svg>
               </v-list-item-icon>
-              <v-list-item-title class="side__title"> PC</v-list-item-title></router-link
+              <v-list-item-title class="side__title">
+                PC</v-list-item-title
+              ></router-link
             >
           </v-list-item>
 
@@ -193,7 +220,9 @@
                   />
                 </svg>
               </v-list-item-icon>
-              <v-list-item-title class="side__title">Playstation</v-list-item-title></router-link
+              <v-list-item-title class="side__title"
+                >Playstation</v-list-item-title
+              ></router-link
             >
           </v-list-item>
           <!-- XBOX -->
@@ -201,7 +230,7 @@
             <router-link
               :to="{
                 name: 'PlatformXbox',
-                params: { favorite_data: FAVORITE }
+                params: { favorite_data: FAVORITE },
               }"
               class="d-flex align-center side__link"
               ><v-list-item-icon>
@@ -212,7 +241,9 @@
                   />
                 </svg>
               </v-list-item-icon>
-              <v-list-item-title class="side__title">Xbox</v-list-item-title></router-link
+              <v-list-item-title class="side__title"
+                >Xbox</v-list-item-title
+              ></router-link
             >
           </v-list-item>
 
@@ -221,7 +252,7 @@
             <router-link
               :to="{
                 name: 'PlatformNintendo',
-                params: { favorite_data: FAVORITE }
+                params: { favorite_data: FAVORITE },
               }"
               class="d-flex align-center side__link"
               ><v-list-item-icon>
@@ -236,7 +267,9 @@
                   ></path>
                 </svg>
               </v-list-item-icon>
-              <v-list-item-title class="side__title">Nintendo</v-list-item-title></router-link
+              <v-list-item-title class="side__title"
+                >Nintendo</v-list-item-title
+              ></router-link
             >
           </v-list-item>
 
@@ -245,7 +278,7 @@
             <router-link
               :to="{
                 name: 'PlatformIos',
-                params: { favorite_data: FAVORITE }
+                params: { favorite_data: FAVORITE },
               }"
               class="d-flex align-center side__link"
               ><v-list-item-icon>
@@ -256,7 +289,9 @@
                   ></path>
                 </svg>
               </v-list-item-icon>
-              <v-list-item-title class="side__title">iOS</v-list-item-title></router-link
+              <v-list-item-title class="side__title"
+                >iOS</v-list-item-title
+              ></router-link
             >
           </v-list-item>
 
@@ -265,7 +300,7 @@
             <router-link
               :to="{
                 name: 'PlatformAndroid',
-                params: { favorite_data: FAVORITE }
+                params: { favorite_data: FAVORITE },
               }"
               class="d-flex align-center side__link"
               ><v-list-item-icon>
@@ -279,7 +314,9 @@
                   ></path>
                 </svg>
               </v-list-item-icon>
-              <v-list-item-title class="side__title">Android</v-list-item-title></router-link
+              <v-list-item-title class="side__title"
+                >Android</v-list-item-title
+              ></router-link
             >
           </v-list-item>
           <!-- <v-list-item link>
@@ -300,35 +337,88 @@
   </div>
 </template>
 <script>
+import { eventBus } from "../main";
 import VueToyFace from "vue-toy-face";
 import { mapGetters } from "vuex";
 
 export default {
   name: "finalSideMenu",
+  props: {
+    changeOnLogin: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   data() {
     return {
-      name: localStorage.getItem("userName"),
-      email: localStorage.getItem("email")
+      userName: localStorage.getItem("userName"),
+      email: localStorage.getItem("email"),
+      isLoginModal: false,
+      changeStatus: false,
+      isOpenSideMenu: false,
     };
   },
   components: { VueToyFace },
+
   computed: {
-    ...mapGetters(["FAVORITE", "BESTOFYEAR", "BESTOF2021", "BESTOFALLTIME"])
-  }
+    ...mapGetters(["FAVORITE", "BESTOFYEAR", "BESTOF2021", "BESTOFALLTIME"]),
+  },
+  methods: {
+    openLogin: function () {
+      this.isLoginModal = !this.isLoginModal;
+      this.$emit("openLogin", this.isLoginModal);
+      this.isLoginModal = !this.isLoginModal;
+    },
+    clearUserData() {
+      localStorage.clear();
+      this.changeStatus = false;
+      this.$emit("changeStatus", false);
+    },
+    showStatus: function () {
+      console.log("this.changeOnLogin внутри меню", this.changeOnLogin);
+    },
+  },
+  watch: {
+    changeOnLogin(value) {
+      this.changeStatus = value;
+    },
+  },
+  created() {
+    eventBus.$on("openSideMenu", (data) => {
+      console.log("inside side panel");
+      this.isOpenSideMenu = data;
+    });
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/_mixins.scss";
 * {
   color: #6dc849 !important;
   font-family: "Josefin Sans", sans-serif;
+  @include maxWidth(860px) {
+    font-size: 14px;
+    line-height: 15px;
+  }
+  @include maxWidth(500px) {
+    font-size: 12px;
+    line-heigh: 13px;
+  }
 }
 
 .finalSideMenu {
   position: fixed;
   z-index: 1;
-  left: 0;
+  left: -100px;
   top: 15%;
+
+  @include transition(0.5s);
+
+  @include maxWidth(860px) {
+    top: 10%;
+  }
 
   .v-navigation-drawer {
     background-color: #151515 !important;
@@ -347,8 +437,7 @@ export default {
       transition: 0.1s;
       justify-content: center;
     }
-
-    .side__title{
+    .side__title {
       font-size: 16px;
     }
   }
@@ -385,7 +474,6 @@ export default {
   margin: 4px 0 !important;
 }
 .v-navigation-drawer {
-  // цвет заднего фона боковой панели
   background-color: #6dc849 !important;
 }
 
@@ -413,11 +501,53 @@ export default {
   width: 100%;
   padding: 0 !important;
   text-align: center;
-  width: 100%;
-  display: block;
+  @include flexCenter;
 }
 
 .side__link {
   width: 100%;
+}
+
+.login {
+  height: 30px !important;
+  padding: 0px;
+}
+.sideMenu__img,
+.v-list-item__icon {
+  @include maxWidth(860px) {
+    max-height: 20px !important;
+    min-height: 20px !important;
+  }
+  @include maxWidth(500px) {
+    max-height: 15px !important;
+    min-height: 15px !important;
+  }
+}
+
+.sideMenu__login {
+  padding: 5px 0 !important;
+  min-height: fit-content;
+}
+
+.showSideMenu {
+  left: 0 !important;
+}
+
+.v-list-item__content {
+  @include maxWidth(860px) {
+    padding: 0 !important;
+  }
+}
+
+.v-list-item,
+.v-list-item--link,
+.side__menu-el,
+.v-list-item--dense,
+.userName {
+  @include maxWidth(860px) {
+    max-height: 30px !important;
+    min-height: 30px !important;
+    font-size: 14px;
+  }
 }
 </style>

@@ -9,4 +9,13 @@ module.exports = {
       patterns: [path.resolve(__dirname, "./src/assets/scss/mixins.scss")],
     },
   },
+  css: {
+    loaderOptions: {
+      sass: {
+        sassOptions: {
+          data: ` @import "@/assets/scss/_mixins.scss";`,
+        },
+      },
+    },
+  },
 };

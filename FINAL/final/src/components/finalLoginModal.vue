@@ -3,6 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
+          <v-btn @click="closeModal" text color="primary"> Primary </v-btn>
           <div
             v-if="!registerActive"
             class="card login"
@@ -109,7 +110,6 @@ export default {
   props: {
     show: {
       type: Boolean,
-      default: false,
     },
   },
   data: function () {
@@ -126,6 +126,9 @@ export default {
   },
 
   methods: {
+    closeModal() {
+      this.$emit("closeModal", false);
+    },
     login() {
       console.log("work");
       localStorage.setItem("name", this.$modal.username);
@@ -137,22 +140,25 @@ export default {
         localStorage.setItem("userName", this.userLogin);
         localStorage.setItem("email", this.emailLogin);
         localStorage.setItem("password", this.passwordLogin);
-        this.show = false;
+        this.closeModal();
         this.$emit("login");
+        this.$emit("changeUserStatusOnLogin", true);
       }
     },
     doRegister() {
       if (
         this.emailReg === "" ||
         this.passwordReg === "" ||
-        this.confirmReg === ""
+        this.confirmReg !== this.passwordReg
       ) {
         this.emptyFields = true;
       } else {
         localStorage.setItem("userName", this.userReg);
         localStorage.setItem("email", this.emailReg);
         localStorage.setItem("password", this.passwordReg);
-        this.show = false;
+        this.closeModal();
+        this.$emit("login");
+        this.$emit("changeUserStatusOnLogin", true);
       }
     },
   },

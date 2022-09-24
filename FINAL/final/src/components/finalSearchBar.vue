@@ -9,7 +9,7 @@
       <template #result="{ result, props }">
         <router-link
           v-bind="props"
-          class="autocomplete-result wiki-result d-flex justify-start align-center"
+          class="autocomplete-result search-result d-flex justify-start align-center"
           :to="{ name: 'gameId', params: { id: `${result.id}` } }"
         >
           <div class="search__el d-flex justify-start align-center">
@@ -17,7 +17,7 @@
 
             <span class="search__el-name">{{ result.name }}</span>
           </div>
-          <div class="wiki-snippet" v-html="result.snippet" />
+          <div class="search-snippet" v-html="result.snippet" />
         </router-link>
       </template>
     </autocomplete>
@@ -32,7 +32,7 @@ export default {
   name: "finalSearchBar",
   data() {
     return {
-      key: "a93f8e4bce884b11ae59a173f67e656c",
+      key: "fa71b951c31e4e3b9af2efbdf3fe7c97",
       value: "",
     };
   },
@@ -64,12 +64,19 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/_mixins.scss";
 #finalSearchBar {
   margin: 0 auto;
   width: 100%;
   z-index: 6;
   height: 44px;
   border-radius: 24px;
+  padding: 0 10px;
+
+  @include maxWidth(860px) {
+    max-width: 220px;
+    height: 28px;
+  }
 }
 .autocomplete-input {
   font-size: 14px;
@@ -82,6 +89,15 @@ export default {
   border-radius: 24px;
   transition: color 0.3s, background-color 0.3s, opacity 0.3s,
     width 0.05s linear;
+
+  @include maxWidth(860px) {
+    max-width: 220px;
+    height: 28px;
+    padding: 0px 10px 0 38px;
+  }
+  @include maxWidth(500px) {
+    padding: 0px 10px;
+  }
 
   &:focus {
     border-color: rgba(0, 0, 0, 0.12);
@@ -102,22 +118,60 @@ export default {
   border: none !important;
 }
 
-.wiki-result {
+.search-result {
   padding: 16px;
   background: transparent;
   text-decoration: none;
+
+  @include maxWidth(860px) {
+    padding: 5px;
+  }
   .search__el-img {
-    width: 30px;
-    height: 40px;
-    max-width: 30px;
-    max-height: 40px;
+    width: 80px;
+    height: 60px;
+    max-width: 80px;
+    max-height: 60px;
     border-radius: 6px;
     margin-right: 5px;
+    @include maxWidth(860px) {
+      width: 40px;
+      height: 30px;
+      max-width: 50px;
+      max-height: 50px;
+    }
+  }
+  .search__el-name {
+    color: black;
+    font-size: 16px;
+    @include maxWidth(860px) {
+      font-size: 10px;
+    }
   }
 }
 
-.wiki-snippet {
+.search-snippet {
   font-size: 14px;
   color: rgba(0, 0, 0, 0.54);
+}
+
+.autocomplete[data-loading="true"]:after {
+  top: 12px !important;
+
+  @include maxWidth(860px) {
+    top: 4px !important;
+  }
+}
+.autocomplete-input {
+  @include maxWidth(500px) {
+    background-image: none;
+  }
+}
+.autocomplete-input::placeholder {
+  @include maxWidth(860px) {
+    font-size: 14px;
+  }
+  @include maxWidth(500px) {
+    font-size: 10px;
+  }
 }
 </style>

@@ -34,7 +34,10 @@ import "animate.css";
 import store from "./vuex/store";
 import Autocomplete from "@trevoreyre/autocomplete-vue";
 import "@trevoreyre/autocomplete-vue/dist/style.css";
+import ScrollUp from "vue-scroll-up";
+import "vue-scroll-up/dist/style.css";
 
+export const eventBus = new Vue();
 Vue.component("VueSlickCarousel", VueSlickCarousel);
 Vue.use(Buefy);
 Vue.use(Table);
@@ -65,6 +68,7 @@ new Vue({
   routes,
   Vuesax,
   Autocomplete,
+  ScrollUp,
 
   render: (h) => h(App),
   mounted() {},

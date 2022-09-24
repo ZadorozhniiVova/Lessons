@@ -56,7 +56,7 @@ export default {
   components: {
     finalCatalogItem,
     finalHeader,
-    finalFooter
+    finalFooter,
   },
   data() {
     return {
@@ -71,7 +71,7 @@ export default {
         { value: "&ordering=-metacritic", text: "Metacritic" },
         { value: "&ordering=-name", text: "Name" },
         { value: "&ordering=-popularity", text: "Popularity" },
-        { value: "&ordering=-released", text: "Date Added" }
+        { value: "&ordering=-released", text: "Date Added" },
       ],
       platforms: [
         { value: "", text: "Platform" },
@@ -84,22 +84,22 @@ export default {
         { value: "&platforms=8", text: "Nintendo 3DS" },
         { value: "&platforms=9", text: "Nintendo DS" },
         { value: "&platforms=10", text: "Wii U" },
-        { value: "&platforms=11", text: "Wii" }
-      ]
+        { value: "&platforms=11", text: "Wii" },
+      ],
     };
   },
   props: {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["&dates=2021-01-01,2021-12-31", "", ""]
-    }
+      default: () => ["&dates=2021-01-01,2021-12-31", "", ""],
+    },
   },
   watch: {
     currentPage(next) {
       this.$store.dispatch("getBestOf2021ByPage", [
         next,
-        this.filterRequest.join("")
+        this.filterRequest.join(""),
       ]);
       window.scrollTo(0, 0);
     },
@@ -115,29 +115,29 @@ export default {
         this.$store.dispatch("getBestOf2021Filter", newValue.join(""));
         this.currentPage = 1;
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   computed: {
-    ...mapGetters(["BESTOF2021"])
+    ...mapGetters(["BESTOF2021"]),
   },
   methods: {
     ...mapActions([
       "GET_BEST_2021_FROM_API",
       "ADD_TO_FAVORITE",
-      "DELETE_FROM_FAVORITE"
+      "DELETE_FROM_FAVORITE",
     ]),
     deleteFromFavorite(bestOf2021Index) {
       this.DELETE_FROM_FAVORITE(bestOf2021Index);
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
-    }
+    },
   },
   mounted() {
     this.GET_BEST_2021_FROM_API().then((responce) => {
       console.log(responce);
     });
-  }
+  },
 };
 </script>

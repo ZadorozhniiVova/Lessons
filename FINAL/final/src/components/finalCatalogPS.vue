@@ -2,8 +2,22 @@
   <div class="finalCatalogPS catalog">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
-      <h1 class="catalog__title-text">Games for PlayStation </h1>
-      <span class="catalog__title-subtitle mb-3"> PlayStation is a home video game console launched by Sony. There are currently three versions of the hardware variations: original console (also called "fat"); a slim version with optical audio output removed, weight and size reduced as well as USB interfaces differently placed; and Pro version with 4k and HDR support added and PS VR functions improved. PS4 supports VR with the special helmet called PS VR. The starting game lineup of the system is considered to be a one of the most successful in history. The console maintains the status of an exclusive-oriented platform with many remasters and Playstation-only games. Together with the start of the system, there was a multiplayer requirement introduced — now everyone seeking to play via PlayStation Network must have PS Plus active. It is a paid subscription granting the player 5 games per month for all three platforms.</span>
+      <h1 class="catalog__title-text">Games for PlayStation</h1>
+      <span class="catalog__title-subtitle mb-3">
+        PlayStation is a home video game console launched by Sony. There are
+        currently three versions of the hardware variations: original console
+        (also called "fat"); a slim version with optical audio output removed,
+        weight and size reduced as well as USB interfaces differently placed;
+        and Pro version with 4k and HDR support added and PS VR functions
+        improved. PS4 supports VR with the special helmet called PS VR. The
+        starting game lineup of the system is considered to be a one of the most
+        successful in history. The console maintains the status of an
+        exclusive-oriented platform with many remasters and Playstation-only
+        games. Together with the start of the system, there was a multiplayer
+        requirement introduced — now everyone seeking to play via PlayStation
+        Network must have PS Plus active. It is a paid subscription granting the
+        player 5 games per month for all three platforms.</span
+      >
       <div class="d-flex">
         <div>
           <b-form-select
@@ -57,7 +71,7 @@ export default {
   components: {
     finalCatalogItem,
     finalHeader,
-    finalFooter
+    finalFooter,
   },
   data() {
     return {
@@ -72,7 +86,7 @@ export default {
         { value: "&ordering=-metacritic", text: "Metacritic" },
         { value: "&ordering=-name", text: "Name" },
         { value: "&ordering=-popularity", text: "Popularity" },
-        { value: "&ordering=-released", text: "Date Added" }
+        { value: "&ordering=-released", text: "Date Added" },
       ],
       releaseDate: [
         { value: "", text: "Release Date" },
@@ -83,22 +97,22 @@ export default {
         { value: "&dates=1980-09-01,1989-12-31", text: "1980-1989" },
         { value: "&dates=1970-09-01,1979-12-31", text: "1970-1979" },
         { value: "&dates=1960-09-01,1969-12-31", text: "1960-1969" },
-        { value: "&dates=1950-09-01,1959-12-31", text: "1950-1959" }
-      ]
+        { value: "&dates=1950-09-01,1959-12-31", text: "1950-1959" },
+      ],
     };
   },
   props: {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["", "&platforms=187,18,16,15,27,19,17", ""]
-    }
+      default: () => ["", "&platforms=187,18,16,15,27,19,17", ""],
+    },
   },
   watch: {
     currentPage(next) {
       this.$store.dispatch("getPlatformsPsByPage", [
         next,
-        this.filterRequest.join("")
+        this.filterRequest.join(""),
       ]);
       window.scrollTo(0, 0);
     },
@@ -114,29 +128,29 @@ export default {
         this.$store.dispatch("getPlatformsPsFilter", newValue.join(""));
         this.currentPage = 1;
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   computed: {
-    ...mapGetters(["PLATFORMSPS"])
+    ...mapGetters(["PLATFORMSPS"]),
   },
   methods: {
     ...mapActions([
       "GET_PLATFORMS_PS_FROM_API",
       "ADD_TO_FAVORITE",
-      "DELETE_FROM_FAVORITE"
+      "DELETE_FROM_FAVORITE",
     ]),
     deleteFromFavorite(index) {
       this.DELETE_FROM_FAVORITE(index);
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
-    }
+    },
   },
   mounted() {
     this.GET_PLATFORMS_PS_FROM_API().then((responce) => {
       console.log(responce);
     });
-  }
+  },
 };
 </script>

@@ -40,21 +40,6 @@
           class="finalCatalogItem__info-name"
           >{{ product_data.name }}</router-link
         >
-
-        <!-- <div class="finalCatalogItem__info-rating">
-        <v-rating
-          :value="product_data.rating"
-          color="red"
-          dense
-          half-increments
-          readonly
-          size="14"
-        ></v-rating>
-
-        <div class="grey--text ms-2">
-          {{ product_data.rating }} ({{ product_data.reviews_count }})
-        </div>
-      </div> -->
         <div class="finalCatalogItem__btn">
           <v-btn
             class="finalCatalogItem__btn-favorite"
@@ -125,7 +110,7 @@ export default {
     return {
       allowAutoplay: false,
       btnLike: "grey",
-      favoriteList: []
+      favoriteList: [],
     };
   },
   props: {
@@ -133,13 +118,13 @@ export default {
       type: Object,
       default() {
         return {};
-      }
-    }
+      },
+    },
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination
+    HooperPagination,
   },
   methods: {
     onSlider: function () {
@@ -154,12 +139,13 @@ export default {
         this.btnLike = "red";
         this.$emit("addToFavorite", this.product_data);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/_mixins.scss";
 * {
   font-family: "Josefin Sans", sans-serif;
   font-style: normal;
@@ -168,16 +154,19 @@ export default {
   margin: 0;
 }
 .finalCatalogItem {
-  max-width: 23%;
-  flex-basis: 23%;
+  // max-width: 23%;
+  // flex-basis: 23%;
   padding: 0px;
-  margin: 10px;
+  // margin: 10px;
   text-decoration: none;
   position: relative;
   transition: 0.1s;
   // min-height: 380px;
-  max-width: 320px;
-  min-width: 300px;
+  // max-width: 250px;
+  // min-width: 200px;
+  height: 100%;
+  width: 100%;
+  min-width: 100%;
   background-color: #202020;
   border-radius: 12px;
   -webkit-box-shadow: 0 10px 20px 0 rgb(0 0 0 / 7%);
@@ -210,7 +199,10 @@ export default {
     overflow: hidden;
     width: 100%;
     background-color: #202020 !important;
-    padding: 16px;
+    padding: 12px;
+    @include maxWidth(1024px) {
+      padding: 10px;
+    }
 
     .info {
       background-color: #202020 !important;
@@ -264,7 +256,6 @@ export default {
     border-radius: 12px 12px 0 0;
     background-color: #202020;
     overflow: hidden;
-
   }
 
   &__slider {
@@ -273,37 +264,35 @@ export default {
     min-height: 56%;
     height: 56%;
 
-    .hooper {
+    .hooper-pagination {
+      width: 100% !important;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: 0.3s;
 
-      &-list {
-        .hooper-pagination {
-          width: 100% !important;
-          justify-content: center;
-          align-items: center;
-          opacity: 0;
-          transition: 0.3s;
+      .hooper-indicators {
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
 
-          .hooper-indicators {
-            justify-content: center !important;
-            align-items: center !important;
+        li {
+          width: 30px !important;
+          margin: 0 3px !important;
+
+          .hooper-indicator {
             width: 100% !important;
+            background-color: grey !important;
+            opacity: 0.7 !important;
+          }
 
-            li {
-              width: 30px !important;
-              margin: 0 3px !important;
-
-              .hooper-indicator {
-                width: 100% !important;
-                background-color: grey !important;
-                opacity: 0.7 !important;
-              }
-
-              .hooper-indicator.is-active {
-                width: 100% !important;
-                background-color: white !important;
-                opacity: 0.7 !important;
-              }
-            }
+          &.is-active {
+            width: 100% !important;
+            background-color: #6dc849 !important;
+            opacity: 0.7 !important;
+          }
+          &:hover {
+            background-color: #6dc849;
           }
         }
       }
@@ -315,8 +304,11 @@ export default {
   }
 
   &__info {
-    padding: 16px;
+    padding: 12px;
     position: relative;
+    @include maxWidth(1024px) {
+      padding: 10px;
+    }
     &-metacritic {
       position: absolute;
       right: 10px;
@@ -368,9 +360,9 @@ export default {
       font-weight: 700;
       color: white !important;
       text-decoration: none;
-      font-size: 24px;
-      line-height: 25px;
-      height: 50px;
+      font-size: 20px;
+      line-height: 23px;
+      height: 46px;
       display: block;
       &:hover {
         opacity: 0.6;
@@ -399,7 +391,38 @@ export default {
     opacity: 1;
   }
 }
+.hooper-pagination {
+  width: 100% !important;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.3s;
 
+  .hooper-indicators {
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+
+    li {
+      width: 30px !important;
+      margin: 0 3px !important;
+
+      .hooper-indicator {
+        width: 100% !important;
+        background-color: grey !important;
+        opacity: 0.7 !important;
+        &.is-active {
+          width: 100% !important;
+          background-color: #6dc849 !important;
+          opacity: 0.7 !important;
+        }
+        &:hover {
+          background-color: #6dc849 !important;
+        }
+      }
+    }
+  }
+}
 .v-icon,
 .v-icon--link {
   padding: 4px !important;

@@ -9,6 +9,11 @@
     align-items:center;
     justify-content: flex-start;
 }
+@mixin flexTop{
+    display: flex;
+    align-items:flex-start;
+    justify-content: center;
+}
 
 @mixin text ($colorText: $color){
     font-size: 16px;
@@ -110,7 +115,7 @@
     -o-transform: rotate($deg);
 }
 
-@mixin resize($res){
+@mixin scale($res){
     transform:scale($res);
     -webkit-transform:scale($res);
     -moz-transform:scale($res);

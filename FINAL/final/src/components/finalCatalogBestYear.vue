@@ -56,7 +56,7 @@ export default {
   components: {
     finalCatalogItem,
     finalHeader,
-    finalFooter
+    finalFooter,
   },
   data() {
     return {
@@ -71,7 +71,7 @@ export default {
         { value: "&ordering=-metacritic", text: "Metacritic" },
         { value: "&ordering=-name", text: "Name" },
         { value: "&ordering=-popularity", text: "Popularity" },
-        { value: "&ordering=-released", text: "Date Added" }
+        { value: "&ordering=-released", text: "Date Added" },
       ],
       platforms: [
         { value: "", text: "Platform" },
@@ -84,22 +84,22 @@ export default {
         { value: "&platforms=8", text: "Nintendo 3DS" },
         { value: "&platforms=9", text: "Nintendo DS" },
         { value: "&platforms=10", text: "Wii U" },
-        { value: "&platforms=11", text: "Wii" }
-      ]
+        { value: "&platforms=11", text: "Wii" },
+      ],
     };
   },
   props: {
     filterRequest: {
       type: Array,
       required: false,
-      default: () => ["&dates=2022-01-01,2022-12-31", "", ""]
-    }
+      default: () => ["&dates=2022-01-01,2022-12-31", "", ""],
+    },
   },
   watch: {
     currentPage(next) {
       this.$store.dispatch("getBestOfYearByPage", [
         next,
-        this.filterRequest.join("")
+        this.filterRequest.join(""),
       ]);
       window.scrollTo(0, 0);
     },
@@ -115,21 +115,21 @@ export default {
         this.$store.dispatch("getBestOfYearFilter", newValue.join(""));
         this.currentPage = 1;
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     ...mapActions([
       "GET_BEST_OF_YEAR_FROM_API",
       "ADD_TO_FAVORITE",
-      "DELETE_FROM_FAVORITE"
+      "DELETE_FROM_FAVORITE",
     ]),
     deleteFromFavorite(bestOfYearIndex) {
       this.DELETE_FROM_FAVORITE(bestOfYearIndex);
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
-    }
+    },
   },
   mounted() {
     this.GET_BEST_OF_YEAR_FROM_API().then((responce) => {
@@ -138,7 +138,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["BESTOFYEAR"])
-  }
+    ...mapGetters(["BESTOFYEAR"]),
+  },
 };
 </script>

@@ -7,19 +7,18 @@ Vue.use(Vuex);
 
 let store = new Vuex.Store({
   state: {
-    key: "a93f8e4bce884b11ae59a173f67e656c",
+    key: "fa71b951c31e4e3b9af2efbdf3fe7c97",
     games: [],
     favorite: [],
     bestOfYear: [],
     bestOf2021: [],
     bestOfAllTime: [],
-    platformsPC:[],
-    platformsPS:[],
-    platformsXbox:[],
-    platformsNintendo:[],
-    platformsIos:[],
-    platformsAndroid:[],
-    
+    platformsPC: [],
+    platformsPS: [],
+    platformsXbox: [],
+    platformsNintendo: [],
+    platformsIos: [],
+    platformsAndroid: [],
   },
   mutations: {
     SET_GAMES_TO_STATE: (state, games) => {
@@ -76,7 +75,7 @@ let store = new Vuex.Store({
       return axios(
         `https://api.rawg.io/api/games?&ordering=-popularity&key=${this.state.key}`,
         {
-          method: "GET"
+          method: "GET",
         }
       )
         .then((games) => {
@@ -89,8 +88,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPopularFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getPopularFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_GAMES_TO_STATE", responce.data);
           return responce;
@@ -129,8 +128,8 @@ let store = new Vuex.Store({
         });
     },
 
-    getBestOfYearFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getBestOfYearFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_BEST_OF_YEAR_TO_STATE", responce.data);
           return responce;
@@ -167,8 +166,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getBestOf2021Filter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getBestOf2021Filter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_BEST_OF_2021_TO_STATE", responce.data);
           return responce;
@@ -190,7 +189,7 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    
+
     GET_POPULAR_ALL_TIME({ commit }) {
       return axios(
         `https://api.rawg.io/api/games?dates=1950-01-01,2022-12-31&rating&key=${this.state.key}`,
@@ -206,8 +205,8 @@ let store = new Vuex.Store({
         });
     },
 
-    getBestOfAllTimeFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getBestOfAllTimeFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_BEST_OF_ALL_TIME", responce.data);
           return responce;
@@ -230,7 +229,6 @@ let store = new Vuex.Store({
         });
     },
 
-    
     GET_PLATFORMS_PC_FROM_API({ commit }) {
       return axios(
         `https://api.rawg.io/api/games?platforms=4&key=${this.state.key}`,
@@ -246,8 +244,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPlatformsPcFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getPlatformsPcFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_PLATFORMS_PC", responce.data);
           return responce;
@@ -284,8 +282,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPlatformsPsFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getPlatformsPsFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_PLATFORMS_PS", responce.data);
           return responce;
@@ -322,8 +320,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPlatformsXboxFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getPlatformsXboxFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_PLATFORMS_XBOX", responce.data);
           return responce;
@@ -360,8 +358,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPlatformsNintendoFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getPlatformsNintendoFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_PLATFORMS_NINTENDO", responce.data);
           return responce;
@@ -397,8 +395,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPlatformsIosFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getPlatformsIosFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_PLATFORMS_IOS", responce.data);
           return responce;
@@ -434,8 +432,8 @@ let store = new Vuex.Store({
           return error;
         });
     },
-    getPlatformsAndroidFilter({ commit },filterRequest) {
-      Api.getFilterFromApi  (this.state.key,filterRequest)
+    getPlatformsAndroidFilter({ commit }, filterRequest) {
+      Api.getFilterFromApi(this.state.key, filterRequest)
         .then((responce) => {
           commit("SET_PLATFORMS_ANDROID", responce.data);
           return responce;
@@ -463,7 +461,7 @@ let store = new Vuex.Store({
     },
     DELETE_FROM_FAVORITE({ commit }, favoriteGameIndex) {
       commit("DELETE_FROM_FAVORITE", favoriteGameIndex);
-    }
+    },
 
     //https://api.rawg.io/api/games?&key=a93f8e4bce884b11ae59a173f67e656c&ordering=-name&platforms=1&dates=2020-01-01,2022-12-31 - запрос с сортировкой
   },
@@ -483,25 +481,25 @@ let store = new Vuex.Store({
     BESTOFALLTIME(state) {
       return state.bestOfAllTime;
     },
-    PLATFORMSPC(state){
-      return state.platformsPC
+    PLATFORMSPC(state) {
+      return state.platformsPC;
     },
-    PLATFORMSPS(state){
-      return state.platformsPS
+    PLATFORMSPS(state) {
+      return state.platformsPS;
     },
-    PLATFORMSXBOX(state){
-      return state.platformsXbox
+    PLATFORMSXBOX(state) {
+      return state.platformsXbox;
     },
-    PLATFORMSNINTENDO(state){
-      return state.platformsNintendo
+    PLATFORMSNINTENDO(state) {
+      return state.platformsNintendo;
     },
-    PLATFORMSIOS(state){
-      return state.platformsIos
+    PLATFORMSIOS(state) {
+      return state.platformsIos;
     },
-    PLATFORMSANDROID(state){
-      return state.platformsAndroid
+    PLATFORMSANDROID(state) {
+      return state.platformsAndroid;
     },
-  }
+  },
 });
 
 export default store;

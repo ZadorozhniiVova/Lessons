@@ -1,32 +1,69 @@
 <template>
   <v-app class="app">
-    <FinalSideMenu />
+    <finalBtnOpenSideMenu />
+    <finalBtnScrollUp />
+    <finalSideMenu
+      @openLogin="isLoginModal($event)"
+      @changeStatus="changeStatus"
+      :changeOnLogin="changeOnLogin"
+    />
     <!-- <preloader /> -->
     <v-main>
       <router-view />
     </v-main>
+    <finalLoginModal
+      :show="isShowModal"
+      @closeModal="closeModal($event)"
+      @changeUserStatusOnLogin="changeUserStatusOnLogin($event)"
+    />
   </v-app>
 </template>
 
 <script>
 // import Preloader from "@/components/finalPreloader.vue";
-import FinalSideMenu from "@/components/finalSideMenu.vue";
+import finalLoginModal from "@/components/finalLoginModal.vue";
+import finalSideMenu from "@/components/finalSideMenu.vue";
+import finalBtnOpenSideMenu from "@/components/finalBtnOpenSideMenu.vue";
+import finalBtnScrollUp from "@/components/finalBtnScrollUp.vue";
 export default {
   name: "App",
   data() {
     return {
       name: localStorage.userName,
+      isShowModal: false,
+      changeOnLogin: false,
     };
   },
   components: {
     // Preloader,
-    FinalSideMenu,
-    // finalLoginModal,
+    finalSideMenu,
+    finalLoginModal,
+    finalBtnOpenSideMenu,
+    finalBtnScrollUp,
+  },
+  methods: {
+    isLoginModal(isShow) {
+      console.log("receive");
+      this.isShowModal = isShow;
+    },
+    closeModal(close) {
+      console.log(close);
+      this.isShowModal = close;
+    },
+    changeUserStatusOnLogin(changeOnLogin) {
+      console.log("inAPPinn", this.changeOnLogin);
+      this.changeOnLogin = changeOnLogin;
+      console.log("inAPPout", this.changeOnLogin);
+    },
+    changeStatus(logOut) {
+      this.changeOnLogin = logOut;
+    },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "./assets/scss/_mixins.scss";
 @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 .screenLoader {

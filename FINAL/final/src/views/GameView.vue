@@ -1,19 +1,5 @@
 <template>
   <div class="gamePage">
-    <!-- <hooper
-      class="gameSliderNav"
-      group="groupGame"
-      :vertical="true"
-      :transition="800"
-      :itemsToShow="3"
-      :centerMode="true"
-      style="position: absolute; left: 20px"
-    >
-      <slide> Game Info </slide>
-      <slide> Images </slide>
-      <slide> slide 3 </slide>
-      <slide> slide 4 </slide>
-    </hooper> -->
     <hooper
       class="game__slider"
       group="groupGame"
@@ -56,6 +42,7 @@
                 <div class="game__subtitle">
                   <div class="game__subtitle-rating rating" @click="addRating">
                     <v-rating
+                      class="game__rating"
                       :value="gameInfo.rating"
                       color="warning"
                       background-color="warning lighten-1"
@@ -98,11 +85,12 @@
                   </div>
                   <div v-else><h2 style="color: white">Out of Selling</h2></div>
                 </div>
+                <h4 class="gameCard__container-title">About:</h4>
                 <div class="info__container d-flex justify-start align-start">
                   <div
                     class="w-50 d-flex flex-column justify-center align-start"
                   >
-                    <h5>Genre</h5>
+                    <h5 class="info__container-title">Genre</h5>
                     <div class="game__subtitle-genre genre">
                       <div class="genre__list">
                         <span
@@ -118,8 +106,8 @@
                   <div
                     class="w-50 d-flex flex-column justify-center align-start"
                   >
-                    <h5>Release date</h5>
-                    <p>{{ gameInfo.released }}</p>
+                    <h5 class="info__container-title">Release date</h5>
+                    <p class="genre__list-item">{{ gameInfo.released }}</p>
                   </div>
                 </div>
                 <div
@@ -128,7 +116,7 @@
                   <div
                     class="w-50 d-flex flex-column justify-center align-start"
                   >
-                    <h5>Platforms</h5>
+                    <h5 class="info__container-title">Platforms</h5>
                     <div class="game__subtitle-genre genre">
                       <div class="genre__list">
                         <span
@@ -144,10 +132,13 @@
                   <div
                     class="w-50 d-flex flex-column justify-center align-start"
                   >
-                    <h5>Metascore</h5>
-                    <a v-if="gameInfo.metacritic" :href="gameInfo.metacritic_url" class="metacritic">{{
-                      gameInfo.metacritic
-                    }}</a>
+                    <h5 class="info__container-title">Metascore</h5>
+                    <a
+                      v-if="gameInfo.metacritic"
+                      :href="gameInfo.metacritic_url"
+                      class="metacritic"
+                      >{{ gameInfo.metacritic }}</a
+                    >
                   </div>
                 </div>
                 <div
@@ -156,7 +147,7 @@
                   <div
                     class="w-50 d-flex flex-column justify-center align-start"
                   >
-                    <h5>Developer</h5>
+                    <h5 class="info__container-title">Developer</h5>
                     <div class="game__subtitle-genre genre">
                       <div class="genre__list">
                         <span
@@ -172,7 +163,7 @@
                   <div
                     class="w-50 d-flex flex-column justify-center align-start"
                   >
-                    <h5>Publisher</h5>
+                    <h5 class="info__container-title">Publisher</h5>
                     <div class="game__subtitle-genre genre">
                       <div class="genre__list">
                         <span
@@ -190,9 +181,9 @@
                   class="info__container d-flex justify-space-between align-start"
                 >
                   <div
-                    class="w-50 d-flex flex-column justify-center align-start"
+                    class="w-100 d-flex flex-column justify-center align-start"
                   >
-                    <h5>Web Site</h5>
+                    <h5 class="info__container-title">Web Site</h5>
                     <div class="game__subtitle-genre genre">
                       <a class="genre__link" :href="gameInfo.website">{{
                         gameInfo.website
@@ -321,7 +312,7 @@
                 v-for="achivement in achivements"
                 :key="achivement.id"
                 :style="{
-                  backgroundImage: 'url(' + gameInfo.background_image + ')'
+                  backgroundImage: 'url(' + gameInfo.background_image + ')',
                 }"
               >
                 <div class="achivement__fwd">
@@ -372,13 +363,9 @@
               </hooper>
 
               <hooper
-                group="screenshots"
-                :itemsToShow="3"
-                :centerMode="true"
                 class="screenschots__slider-Btm"
-                :vertical="false"
-                :autoPlay="true"
-                :playSpeed="1500"
+                group="screenshots"
+                :settings="hooperScreenShotBtmSettings"
               >
                 <slide
                   class="screenschots__slideBtm"
@@ -422,7 +409,6 @@
     </hooper>
   </div>
 </template>
-
 <script>
 import Api from "../service/api";
 import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
@@ -431,6 +417,7 @@ import "animate.css";
 export default {
   data() {
     return {
+      key: "fa71b951c31e4e3b9af2efbdf3fe7c97",
       gameId: this.$route.params.id,
       gameInfo: [],
       genres: [],
@@ -442,6 +429,22 @@ export default {
       achivements: [],
       screenshots: [],
       AchivInfo: "",
+      hooperScreenShotBtmSettings: {
+        vertical: false,
+        autoPlay: true,
+        playSpeed: 4000,
+        infiniteScroll: true,
+        // itemsToShow: 3,
+        breakpoints: {
+          500: { itemsToShow: 2 },
+          800: {
+            itemsToShow: 2,
+          },
+          900: {
+            itemsToShow: 3,
+          },
+        },
+      },
 
       //stiles
       isOpacity: false,
@@ -451,14 +454,14 @@ export default {
       fadeInDown5001000: {
         classes: "fadeInDown",
         delay: 500,
-        duration: 1000
-      }
+        duration: 1000,
+      },
     };
   },
   components: {
     Hooper,
     Slide,
-    HooperPagination
+    HooperPagination,
   },
   methods: {
     AchivShow: function (achivementId) {
@@ -471,32 +474,43 @@ export default {
       console.log(this.gameInfo.ratings_count);
       this.gameInfo.ratings_count += 1;
       return this.gameInfo.ratings_count;
-    }
+    },
   },
   async beforeMount() {
     let gameId = this.gameId;
-    let respGameId = await Api().get(
-      `games/${gameId}?&key=a93f8e4bce884b11ae59a173f67e656c`
-    );
+    let respGameId = await Api().get(`games/${gameId}?&key=${this.key}`);
     let respGameIdMarket = await Api().get(
-      `games/${gameId}/stores?&key=a93f8e4bce884b11ae59a173f67e656c`
+      `games/${gameId}/stores?&key=${this.key}`
     );
 
-    let respGameIdAchiv = await Api().get(
-      `games/${gameId}/achievements?&key=a93f8e4bce884b11ae59a173f67e656c`
+    let respGameIdAchivPage1 = await Api().get(
+      `games/${gameId}/achievements?&key=${this.key}&page=1`
+    );
+    let respGameIdAchivPage2 = await Api().get(
+      `games/${gameId}/achievements?&key=${this.key}&page=2`
+    );
+    let respGameIdAchivPage3 = await Api().get(
+      `games/${gameId}/achievements?&key=${this.key}&page=3`
     );
     let respGameIdScreenshots = await Api().get(
-      `games/${gameId}/screenshots?&key=a93f8e4bce884b11ae59a173f67e656c`
+      `games/${gameId}/screenshots?&key=${this.key}`
     );
 
     console.log("respGameId", respGameId.data);
-    // console.log("respGameIdAchiv", respGameIdAchiv.data);
+    console.log("respGameIdAchivPage2", respGameIdAchivPage2.data);
 
     // console.log("respGameIdMarket.data.results", respGameIdMarket.data.results); //url
     this.gameInfo = respGameId.data;
     this.storesInfo = respGameIdMarket.data.results;
-    this.achivements = respGameIdAchiv.data.results;
-
+    respGameIdAchivPage1.data.results.forEach((element) => {
+      this.achivements.push(element);
+    });
+    respGameIdAchivPage2.data.results.forEach((element) => {
+      this.achivements.push(element);
+    });
+    respGameIdAchivPage3.data.results.forEach((element) => {
+      this.achivements.push(element);
+    });
     for (let i = 0; i < respGameIdScreenshots.data.results.length; i++) {
       this.screenshots.push(respGameIdScreenshots.data.results[i].image);
     }
@@ -505,7 +519,7 @@ export default {
     for (let i = 0; i < respGameId.data.platforms.length; i++) {
       this.platforms.push({
         name: respGameId.data.platforms[i].platform.name,
-        released: respGameId.data.platforms[i].released_at
+        released: respGameId.data.platforms[i].released_at,
       });
     }
 
@@ -518,15 +532,16 @@ export default {
     for (let i = 0; i < this.storesInfo.length; i++) {
       this.storesData.push({
         name: this.storesNames[i],
-        url: this.storesInfo[i].url
+        url: this.storesInfo[i].url,
       });
     }
     // console.log("this.storesData", this.storesData);
-  }
+  },
 };
 </script>
 
 <style lang="scss">
+@import "../assets/scss/_mixins.scss";
 * {
   box-sizing: border-box;
   margin: 0;
@@ -553,8 +568,16 @@ export default {
     top: 80px !important;
     width: 60px;
 
+    @include maxWidth(768px) {
+      left: -6px !important;
+      top: 36px !important;
+    }
+
     .hooper-indicators {
       padding-left: 20px !important;
+      @include maxWidth(768px) {
+        padding-left: 0px !important;
+      }
 
       li {
         height: 10px !important;
@@ -564,6 +587,13 @@ export default {
           height: 10px;
           border-radius: 50%;
           transition: 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #6dc849;
+          }
+          &.is-active {
+            background-color: #6dc849;
+          }
         }
 
         & + li {
@@ -572,51 +602,6 @@ export default {
       }
     }
   }
-
-  // .nav__btn {
-  //   bottom: 100px !important;
-  //   left: 20px !important;
-  //   top: auto !important;
-
-  //   .hooper-indicators {
-  //     &:first-child {
-  //       .hooper-indicator {
-  //         &:after {
-  //           content: "Game Info";
-  //           text-shadow: #999 0 0 10px;
-  //           color: white;
-  //           width: 200px;
-  //           display: inline-block;
-  //           font-family: "Josefin Sans", sans-serif;
-  //           font-style: normal;
-  //           font-weight: 700;
-  //           font-size: 24px;
-  //           line-height: 30px;
-  //           opacity: 0.3;
-  //           transition: 0.3s ease-in-out;
-  //         }
-  //         .hooper-sr-only {
-  //           position: absolute;
-  //           width: 1px;
-  //           height: 1px;
-  //           padding: 0;
-  //           margin: -1px;
-  //           overflow: hidden;
-  //           clip: rect(0, 0, 0, 0);
-  //           border: 0;
-  //         }
-  //       }
-  //       .is-active {
-  //         &::after {
-  //           opacity: 1;
-  //         }
-  //       }
-  //       li {
-  //         height: 20px !important;
-  //       }
-  //     }
-  //   }
-  // }
   .gameCard {
     background-position: center;
     background-size: cover;
@@ -648,12 +633,29 @@ export default {
       align-items: center;
       justify-content: flex-start;
       position: relative;
+      @include maxWidth(768px) {
+        max-width: 90%;
+        justify-content: center;
+        align-items: flex-start;
+      }
 
       &-game {
         height: 100%;
+        @include maxWidth(768px) {
+          align-items: flex-start !important;
+          justify-content: flex-start !important;
+        }
+
         .game {
-          width: 50%;
+          width: 55%;
           margin-right: 10px;
+
+          @include maxWidth(768px) {
+            width: 100%;
+            margin-right: 0;
+            height: auto;
+            max-height: 30%;
+          }
           &__title {
             display: flex;
             justify-content: flex-start;
@@ -670,6 +672,22 @@ export default {
               color: #fefcfe;
               text-rendering: optimizeLegibility;
               -webkit-font-smoothing: antialiased;
+              @include maxWidth(1260px) {
+                font-size: 60px;
+                line-height: 66px;
+                margin-bottom: 0;
+              }
+
+              @include maxWidth(768px) {
+                font-size: 45px;
+                line-height: 50px;
+                margin-bottom: 0;
+              }
+              @include maxWidth(550px) {
+                font-size: 30px;
+                line-height: 36px;
+                margin-bottom: 0;
+              }
             }
 
             &-released {
@@ -679,6 +697,9 @@ export default {
               border-radius: 4px;
               background-color: #fff;
               padding: 2px 7.5px;
+              @include maxWidth(768px) {
+                font-size: 10px;
+              }
             }
             &-playTime {
               font-size: 12px;
@@ -689,6 +710,14 @@ export default {
               letter-spacing: 2px;
               text-rendering: optimizeLegibility;
               -webkit-font-smoothing: antialiased;
+              @include maxWidth(768px) {
+                font-size: 10px;
+              }
+              @include maxWidth(550px) {
+                padding-right: 40px;
+                font-size: 8px;
+                letter-spacing: 1px;
+              }
             }
           }
 
@@ -697,123 +726,181 @@ export default {
             margin: 10px 0;
             flex-wrap: wrap;
             justify-content: flex-start;
-
-            .author {
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              &__name {
-                font-family: "Josefin Sans", sans-serif;
-                font-style: normal;
-                font-weight: 400;
-                font-size: 20px;
-                line-height: 31px;
-                display: flex;
-                align-items: center;
-                color: #c6c6c6;
-                margin-bottom: 0;
-              }
+            @include maxWidth(768px) {
+              margin: 5px 0;
+            }
+            @include maxWidth(500px) {
+              margin: 0;
             }
 
-            .genre {
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              text-decoration: none;
+            // .author {
+            //   display: flex;
+            //   justify-content: flex-start;
+            //   align-items: center;
+            //   &__name {
+            //     font-family: "Josefin Sans", sans-serif;
+            //     font-style: normal;
+            //     font-weight: 400;
+            //     font-size: 20px;
+            //     line-height: 31px;
+            //     display: flex;
+            //     align-items: center;
+            //     color: #c6c6c6;
+            //     margin-bottom: 0;
+            //   }
+            // }
 
-              .genre__list {
-                display: inline-flex;
-                justify-content: flex-start;
-                align-items: center;
-                padding-left: 0;
-                margin-bottom: 0;
+            // .genre {
+            //   display: flex;
+            //   justify-content: flex-start;
+            //   align-items: center;
+            //   text-decoration: none;
 
-                &-item {
-                  list-style: none;
-                  font-family: "Josefin Sans", sans-serif;
-                  font-style: normal;
-                  font-weight: 400;
-                  font-size: 20px;
-                  line-height: 31px;
-                  display: flex;
-                  align-items: center;
-                  color: #c6c6c6;
+            //   .genre__list {
+            //     display: inline-flex;
+            //     justify-content: flex-start;
+            //     align-items: center;
+            //     padding-left: 0;
+            //     margin-bottom: 0;
 
-                  & + .genre__list-item {
-                    &:before {
-                      content: "&";
-                      margin: 0 10px;
-                      font-family: "Josefin Sans", sans-serif;
-                      font-weight: 400;
-                      font-weight: 300;
-                      font-size: 30px;
-                      line-height: 41px;
-                      display: flex;
-                      align-items: center;
-                      color: #c6c6c6;
-                    }
-                  }
-                }
-              }
-            }
+            //     &-item {
+            //       list-style: none;
+            //       font-family: "Josefin Sans", sans-serif;
+            //       font-style: normal;
+            //       font-weight: 400;
+            //       font-size: 20px;
+            //       line-height: 31px;
+            //       display: flex;
+            //       align-items: center;
+            //       color: #c6c6c6;
+
+            //       & + .genre__list-item {
+            //         &:before {
+            //           content: "&";
+            //           margin: 0 10px;
+            //           font-family: "Josefin Sans", sans-serif;
+            //           font-weight: 400;
+            //           font-weight: 300;
+            //           font-size: 30px;
+            //           line-height: 41px;
+            //           display: flex;
+            //           align-items: center;
+            //           color: #c6c6c6;
+            //         }
+            //       }
+            //     }
+            //   }
+            // }
 
             .rating {
               display: flex;
               justify-content: flex-start;
               align-items: center;
+              .v-icon,
+              .v-rating {
+                @include maxWidth(768px) {
+                  padding: 1px !important;
+                  margin-bottom: 10px;
+                }
+                @include maxWidth(500px) {
+                  padding: 0px !important;
+                  font-size: 18px !important;
+                }
+              }
 
               &__answers {
                 font-family: "Josefin Sans", sans-serif;
                 font-weight: 400;
                 font-style: normal;
                 font-size: 20px;
-                line-height: 31px;
-                display: flex;
-                align-items: center;
+                line-height: 20px;
+                max-height: 20px;
+                // display: inline-block;
+                // padding-top: 2px;
+                // display: flex;
+                // @include flexCenter;
                 color: #c6c6c6;
+                @include maxWidth(768px) {
+                  margin: 0 2px 14px;
+                }
+                @include maxWidth(500px) {
+                  font-size: 14px !important;
+                  margin: 0 2px 16px;
+                }
               }
             }
 
-            .author ~ div {
-              margin-left: 10px;
-              // &:before {
-              //   content: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='24' width='24'><path d='M11,21h-1l1-7H7.5c-0.88,0-0.33-0.75-0.31-0.78C8.48,10.94,10.42,7.54,13.01,3h1l-1,7h3.51c0.4,0,0.62,0.19,0.4,0.66 C12.97,17.55,11,21,11,21z' fill='%23134578' /></svg>");
-              //   margin: 0 10px;
-              //   font-family: "Josefin Sans", sans-serif;
-              //   font-style: normal;
-              //   font-weight: 600;
-              //   font-size: 30px;
-              //   line-height: 41px;
-              //   display: flex;
-              //   align-items: center;
-              //   color: #c6c6c6;
-              // }
-            }
+            // .author ~ div {
+            //   margin-left: 10px;
+            // &:before {
+            //   content: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='24' width='24'><path d='M11,21h-1l1-7H7.5c-0.88,0-0.33-0.75-0.31-0.78C8.48,10.94,10.42,7.54,13.01,3h1l-1,7h3.51c0.4,0,0.62,0.19,0.4,0.66 C12.97,17.55,11,21,11,21z' fill='%23134578' /></svg>");
+            //   margin: 0 10px;
+            //   font-family: "Josefin Sans", sans-serif;
+            //   font-style: normal;
+            //   font-weight: 600;
+            //   font-size: 30px;
+            //   line-height: 41px;
+            //   display: flex;
+            //   align-items: center;
+            //   color: #c6c6c6;
+            // }
+            // }
           }
 
           &__info {
             &-text {
               width: 100%;
               max-width: 100%;
-              height: 230px;
-              max-height: 230px;
               font-family: "Josefin Sans", sans-serif;
               font-weight: 300;
-              letter-spacing: 1.5px;
-              font-size: 15px;
+              font-size: 20px;
               line-height: 33px;
               color: #fefcfe;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -moz-box;
+              -moz-box-orient: vertical;
+              display: -webkit-box;
+              -webkit-line-clamp: 15;
+              -webkit-box-orient: vertical;
+              line-clamp: 15;
+              box-orient: vertical;
+              @include maxWidth(1260px) {
+                line-height: 20px;
+              }
+              @include maxWidth(768px) {
+                font-size: 15px;
+                line-height: 18px;
+                line-clamp: 9;
+                -webkit-line-clamp: 9;
+              }
+              @include maxWidth(550px) {
+                font-size: 13px;
+                line-height: 14px;
+                line-clamp: 9;
+                -webkit-line-clamp: 9;
+              }
             }
           }
         }
         .gameCard__container-right {
           width: 425px;
+          @include maxWidth(1080px) {
+            width: 300px;
+          }
+          @include maxWidth(768px) {
+            width: 100%;
+          }
 
           .gameCard__container-title {
             margin: 0;
             font-size: 18px;
             font-weight: 400;
             color: hsla(0, 0%, 100%, 0.4);
+            @include maxWidth(1080px) {
+              width: 100%;
+              text-align: left;
+            }
           }
           .buy {
             display: flex;
@@ -821,6 +908,14 @@ export default {
             align-items: flex-start;
             flex-wrap: wrap;
             width: 100%;
+
+            @include maxWidth(1080px) {
+              justify-content: center !important;
+            }
+            @include maxWidth(768px) {
+              justify-content: flex-start !important;
+              margin: 5px 0;
+            }
 
             &__btn {
               width: 200px;
@@ -838,6 +933,21 @@ export default {
               text-align: left !important;
               background-color: #2c2e30 !important;
               transition: 0.3s ease-in-out;
+
+              @include maxWidth(1080px) {
+                width: 100%;
+                height: 30px !important;
+              }
+              @include maxWidth(768px) {
+                width: auto;
+                padding: 5px 12px 0 !important;
+                &:first-child {
+                  margin-left: 0;
+                }
+              }
+              @include maxWidth(550px) {
+                padding: 3px 8px 0 !important;
+              }
 
               .v-btn__content {
                 width: 100% !important;
@@ -867,6 +977,10 @@ export default {
                 color: #fefcfe !important;
                 line-height: 16px;
                 margin-bottom: 0 !important;
+                @include maxWidth(1080px) {
+                  font-size: 12px;
+                  line-height: 12px;
+                }
               }
             }
           }
@@ -876,6 +990,9 @@ export default {
             margin: 10px 0;
             border-radius: 10px;
             padding: 5px;
+            @include maxWidth(768px) {
+              margin: 5px 0;
+            }
             .metacritic {
               color: #6dc849;
               border-color: rgba(109, 200, 73, 0.4);
@@ -890,12 +1007,34 @@ export default {
               border: 1px solid;
               background-color: black;
             }
+            .genre__list-item {
+              font-size: 16px;
+              @include maxWidth(1080px) {
+                font-size: 12px;
+              }
+              @include maxWidth(768px) {
+                margin-bottom: 0 !important;
+                font-size: 10px;
+                line-height: 12px;
+              }
+            }
             .genre__link {
               text-decoration: none;
               color: white;
               transition: 0.1s;
+              font-size: 16px;
+              @include maxWidth(1080px) {
+                font-size: 12px;
+              }
               &:hover {
                 color: grey;
+              }
+            }
+            .info__container-title {
+              font-size: 20px;
+
+              @include maxWidth(1080px) {
+                font-size: 16px;
               }
             }
           }
@@ -906,6 +1045,9 @@ export default {
         margin-bottom: 40px;
         color: white;
         width: 100%;
+        @include maxWidth(768px) {
+          display: none;
+        }
 
         &__text {
           margin-bottom: 0;
@@ -914,16 +1056,23 @@ export default {
 
       .achivement {
         width: 100%;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        flex-direction: row;
-
+        height: 100%;
+        max-width: 1300px;
+        margin: 0 auto;
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(10, 1fr);
+        justify-items: center;
+        align-items: center;
+        @include maxWidth(1150px) {
+          grid-template-columns: repeat(6, 1fr);
+        }
+        @include maxWidth(600px) {
+          grid-template-columns: repeat(5, 1fr);
+        }
         .achivement__card {
-          width: 100px;
-          height: 160px;
-          margin: 20px;
+          width: 80px;
+          height: 140px;
           position: relative;
           overflow: hidden;
           border-radius: 2px;
@@ -931,8 +1080,8 @@ export default {
           border-radius: 5px;
           transition: 0.3s;
           transition: 0.3s;
-          animation: flipH 5s linear infinite;
-          perspective: 2000px;
+          animation: flipH 8s linear infinite;
+          perspective: 4000px;
           transform-style: preserve-3d;
           display: flex;
           justify-content: center;
@@ -941,6 +1090,31 @@ export default {
           border: 2px solid gold;
           background-position: center;
           background-size: cover;
+          -webkit-box-shadow: 10px 10px 43px -18px rgba(255, 234, 0, 0.77);
+          -moz-box-shadow: 10px 10px 43px -18px rgba(255, 234, 0, 0.77);
+          box-shadow: 10px 10px 43px -18px rgba(255, 234, 0, 0.77);
+          @include maxWidth(1300px) {
+            width: 60px;
+            height: 120px;
+          }
+
+          @include maxWidth(1150px) {
+            // width: 50px;
+            height: 110px;
+          }
+
+          @include maxWidth(700px) {
+            width: 50px;
+            height: 100px;
+          }
+          @include maxWidth(550px) {
+            width: 50px;
+            height: 80px;
+          }
+          @include maxWidth(550px) {
+            width: 40px;
+            height: 60px;
+          }
 
           &:hover {
             transform: scale(1.1);
@@ -977,6 +1151,9 @@ export default {
         padding: 2px;
         border: 2px solid white;
         background-color: black;
+        @include maxWidth(768px) {
+          display: none;
+        }
 
         &__value {
           padding: 15px 5px;
@@ -996,36 +1173,53 @@ export default {
       .screenschots {
         width: 100%;
         height: 100%;
-
+        @include flex-center-column;
+        @include maxWidth(768px) {
+          height: 80%;
+        }
+        @include maxWidth(650px) {
+          height: 60%;
+        }
+        .hooper-track {
+          height: 100%;
+        }
         .screenschots__slider-Top {
-          height: 500px;
+          height: 100%;
           margin-bottom: 10px;
 
           .screenschots__slideTop {
-            height: 500px;
-            border-radius: 5px;
+            height: 100%;
+            border-radius: 10px;
             overflow: hidden;
             // display: flex;
             // justify-content: center;
             // align-items: center;
 
             .screenschots__slideTop-img {
+              border-radius: 10px;
               margin: 0px;
               width: 100%;
+              height: 100%;
             }
           }
         }
 
         .screenschots__slider-Btm {
+          @include maxWidth(500px) {
+            display: none;
+          }
           .screenschots__slideBtm {
-            margin: 0 5px;
+            padding: 0 5px;
             border-radius: 5px;
-            overflow: hidden;
+            @include transition(0.4s);
+            // overflow: hidden;
 
             .screenschots__slideBtm-img {
+              border-radius: 5px;
               margin: 0px;
               height: 100%;
               width: 100%;
+              @include transition(0.4s);
             }
           }
         }
@@ -1054,6 +1248,14 @@ export default {
 .isOpacity {
   opacity: 1;
   text-shadow: none;
+}
+
+.gamePage
+  .gameCard__container-game
+  .gameCard__container-right
+  .info__container {
+  @include maxWidth(1080px) {
+  }
 }
 
 @keyframes flipH {
@@ -1090,9 +1292,9 @@ export default {
   transition: 1s ease-in-out;
 
   .closeModal__btn {
-    position: absolute;
-    top: 20px;
-    right: 80px;
+    // position: absolute;
+    botom: 20px;
+    right: 50%;
   }
 }
 .achivement__modal-img {
