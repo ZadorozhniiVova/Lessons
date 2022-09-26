@@ -46,6 +46,7 @@
             icon
             :color="btnLike"
             @click="addToFavorite"
+            v-if="$store.state.user"
           >
             <v-icon dark> mdi-heart </v-icon>
           </v-btn>
@@ -104,6 +105,7 @@
 <script>
 import "hooper/dist/hooper.css";
 import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
+
 export default {
   name: "finalCatalogItem",
   data() {
@@ -154,16 +156,10 @@ export default {
   margin: 0;
 }
 .finalCatalogItem {
-  // max-width: 23%;
-  // flex-basis: 23%;
   padding: 0px;
-  // margin: 10px;
   text-decoration: none;
   position: relative;
   transition: 0.1s;
-  // min-height: 380px;
-  // max-width: 250px;
-  // min-width: 200px;
   height: 100%;
   width: 100%;
   min-width: 100%;
@@ -178,7 +174,6 @@ export default {
     overflow: visible;
     z-index: 2;
     border-radius: 12px 12px 0 0;
-    cursor: pointer;
   }
   &:hover .finalCatalogItem__btm {
     opacity: 1;

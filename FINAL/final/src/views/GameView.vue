@@ -1,5 +1,5 @@
 <template>
-  <div class="gamePage">
+  <div class="gamePage" @mousemove="move">
     <hooper
       class="game__slider"
       group="groupGame"
@@ -205,55 +205,6 @@
           </div>
         </div>
       </slide>
-      <!-- <slide id="gameMainSlide">  //Характеристики
-        <div
-          class="gameCard"
-          :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
-        >
-          <div class="gameCard__cover"></div>
-          <div class="gameCard__container">
-            <div class="gameCard__container-pageTitle pageTitle">
-              <h4 class="pageTitle__text">Shops</h4>
-            </div>
-
-            <div class="gameCard__container-require require">
-              <template>
-                <v-card>
-                  <v-tabs vertical>
-                    <v-tab v-for="platform in platforms" :key="platform">
-                      <v-icon left> mdi-account </v-icon>
-                      {{ platform.name }}
-                    </v-tab>
-                    <v-tab-item>
-                      <v-card
-                        flat
-                        v-for="(platform,$index ) in platforms"
-                        :key="$index"
-                      >
-                        <v-card-text
-                          style="display: flex; justify-content: space-between"
-                        >
-                          <div>
-                            <p>
-                              {{ platform[$index].minReq }}
-                            </p>
-                          </div>
-                          <div>
-                            <p>
-                              {{ platform[$index].recReq }}
-                            </p>
-                          </div>
-                        </v-card-text>
-                      </v-card>
-                    </v-tab-item>
-                  </v-tabs>
-                </v-card>
-              </template>
-            </div>
-          </div>
-        </div>
-      </slide> -->
-
       <slide id="gameMainSlide" v-if="achivements.length > 0">
         <div
           v-if="isAchiv"
@@ -343,7 +294,7 @@
           :style="{ backgroundImage: 'url(' + gameInfo.background_image + ')' }"
         >
           <div class="gameCard__cover"></div>
-          <div class="gameCard__container">
+          <div class="gameCard__container gameCard__container-screenshots">
             <div class="gameCard__container-pageTitle pageTitle">
               <h4 class="pageTitle__text">Screenshots</h4>
             </div>
@@ -414,6 +365,7 @@ import Api from "../service/api";
 import { Hooper, Slide, Pagination as HooperPagination } from "hooper";
 import "hooper/dist/hooper.css";
 import "animate.css";
+import { eventBus } from "../main";
 export default {
   data() {
     return {
@@ -474,6 +426,13 @@ export default {
       console.log(this.gameInfo.ratings_count);
       this.gameInfo.ratings_count += 1;
       return this.gameInfo.ratings_count;
+    },
+    move($event) {
+      if ($event.pageX < 50) {
+        eventBus.$emit("isOpenSideMenu", true);
+      } else {
+        eventBus.$emit("isOpenSideMenu", false);
+      }
     },
   },
   async beforeMount() {
@@ -1184,13 +1143,22 @@ export default {
           height: 100%;
         }
         .screenschots__slider-Top {
-          height: 100%;
+          height: 70%;
+          width: 80%;
           margin-bottom: 10px;
+          @include maxWidth(1000px) {
+            width: 95%;
+          }
+          @include maxWidth(1000px) {
+            width: 98%;
+            height: 50%;
+          }
 
           .screenschots__slideTop {
             height: 100%;
             border-radius: 10px;
             overflow: hidden;
+            // display: contents;
             // display: flex;
             // justify-content: center;
             // align-items: center;
@@ -1205,6 +1173,10 @@ export default {
         }
 
         .screenschots__slider-Btm {
+          width: 80%;
+          @include maxWidth(1000px) {
+            width: 95%;
+          }
           @include maxWidth(500px) {
             display: none;
           }
@@ -1225,6 +1197,11 @@ export default {
         }
       }
     }
+  }
+  .gameCard__container-screenshots {
+    @include flexCenter;
+    // height:80% !important;
+    width: 100% !important;
   }
   .gameCard__screenshots {
     .pageTitle {
@@ -1293,7 +1270,7 @@ export default {
 
   .closeModal__btn {
     // position: absolute;
-    botom: 20px;
+    bottom: 20px;
     right: 50%;
   }
 }

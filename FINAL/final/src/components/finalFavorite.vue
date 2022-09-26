@@ -1,7 +1,10 @@
 <template>
-  <div class="finalFavorite catalog">
+  <div class="finalFavorite catalog" @mousemove="move">
     <finalHeader />
-    <h1 class="catalog__title">Favorite Games</h1>
+    <h1 class="catalog__title">
+      Favorite Games of
+      <span class="user__email">{{ $store.state.user.email }}</span>
+    </h1>
     <div class="catalog__container">
       <finalCatalogItem
         v-for="(favorite, favoriteGameIndex) in FAVORITE"
@@ -17,10 +20,10 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-// import finalFavoriteItem from "./finalFavoriteItem.vue";
 import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
 import finalFooter from "../components/finalFooter.vue";
+import { eventBus } from "../main";
 
 export default {
   name: "finalFavorite",
@@ -43,32 +46,18 @@ export default {
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
     },
+    move($event) {
+      if ($event.pageX < 50) {
+        eventBus.$emit("isOpenSideMenu", true);
+      } else {
+        eventBus.$emit("isOpenSideMenu", false);
+      }
+    },
+  },
+  created() {
+    eventBus.$on("user", (data) => {
+      this.user = data;
+    });
   },
 };
 </script>
-
-<style lang="scss" scoped>
-* {
-  color: white;
-  background-color: black;
-}
-.catalog {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  flex-direction: column;
-  height: 100%;
-  padding-bottom: 100px;
-
-  &__title {
-    text-align: center;
-  }
-  &__container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    align-items: flex-start;
-    justify-content: center;
-  }
-}
-</style>

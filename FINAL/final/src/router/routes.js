@@ -13,6 +13,7 @@ import finalCatalogNintendo from "../components/finalCatalogNintendo";
 import finalCatalogIos from "../components/finalCatalogIos";
 import finalCatalogAndroid from "../components/finalCatalogAndroid";
 import finalCatalogPS from "../components/finalCatalogPS";
+import { auth } from "../firebase";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,9 @@ const routes = [
     name: "favorite",
     component: finalFavorite,
     props: true,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/Best-of-Year",
@@ -93,6 +97,18 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (
+    to.matched.some((record) => record.meta.requiresAuth) &&
+    !auth.currentUser
+  ) {
+    next("/");
+    return;
+  }
+
+  next();
 });
 
 export default router;

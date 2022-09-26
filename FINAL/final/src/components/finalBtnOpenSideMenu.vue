@@ -17,8 +17,7 @@ export default {
   methods: {
     openSideMenu() {
       this.isOpenSideMenu = !this.isOpenSideMenu;
-      console.log("openSideMenu click on btn Header");
-      eventBus.$emit("openSideMenu", this.isOpenSideMenu);
+      eventBus.$emit("isOpenSideMenu", this.isOpenSideMenu);
     },
   },
 };
@@ -27,11 +26,13 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/_mixins.scss";
 .openMenuBtn {
+  visibility: hidden;
   position: fixed;
   right: 10px;
   z-index: 999;
   top: 27px;
   @include maxWidth(860px) {
+    visibility: visible;
     top: 13px;
     max-width: 40px;
     max-height: 40px;

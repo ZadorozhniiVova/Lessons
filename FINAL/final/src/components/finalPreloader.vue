@@ -5,7 +5,7 @@
         class="logo"
         :animation-duration="2000"
         :size="80"
-        color="#9708CC"
+        color="white"
       />
     </div>
   </transition>
@@ -37,13 +37,18 @@ export default {
 
 <style lang="scss">
 .preloader {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00dbde;
-  background-image: linear-gradient(43deg, #00dbde 0%, #fc00ff 100%);
+  background: rgb(109, 200, 73);
+  background: radial-gradient(
+    circle,
+    rgba(109, 200, 73, 1) 0%,
+    rgba(244, 241, 5, 1) 39%,
+    rgba(21, 21, 21, 1) 100%
+  );
   position: absolute;
   z-index: 99999;
 }

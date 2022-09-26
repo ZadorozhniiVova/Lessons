@@ -1,8 +1,9 @@
 <template>
-  <div class="body">
+  <div class="body" @mousemove="move">
     <finalHeader />
     <finalSlider />
-    <finalBestStores/>
+    <finalBestStores />
+    <finalComments />
     <finalMainWrapper />
     <finalFooterVue />
   </div>
@@ -12,9 +13,10 @@
 import finalHeader from "../components/finalHeader";
 import finalSlider from "@/components/finalSlider.vue";
 import finalBestStores from "@/components/finalBestStores.vue";
+import finalComments from "@/components/finalComments.vue";
 import finalFooterVue from "@/components/finalFooter.vue";
-import finalSharingVue from "@/components/finalSharing.vue";
 import finalMainWrapper from "@/components/finalMainWrapper.vue";
+import { eventBus } from "../main";
 
 export default {
   name: "HomeView",
@@ -23,9 +25,19 @@ export default {
     finalHeader,
     finalSlider,
     finalBestStores,
+    finalComments,
     finalFooterVue,
-    finalSharingVue,
+
     finalMainWrapper,
+  },
+  methods: {
+    move($event) {
+      if ($event.pageX < 50) {
+        eventBus.$emit("isOpenSideMenu", true);
+      } else {
+        eventBus.$emit("isOpenSideMenu", false);
+      }
+    },
   },
 };
 </script>

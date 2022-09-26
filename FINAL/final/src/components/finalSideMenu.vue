@@ -2,7 +2,7 @@
   <div class="finalSideMenu" :class="{ showSideMenu: isOpenSideMenu }">
     <v-card style="background-color: black">
       <v-navigation-drawer permanent expand-on-hover>
-        <v-list v-if="changeStatus">
+        <v-list v-if="$store.state.user">
           <v-list-item class="px-0 d-flex justify-center">
             <VueToyFace
               size="40"
@@ -15,7 +15,7 @@
           <v-list-item link class="userName">
             <v-list-item-content>
               <v-list-item-title class="text-h8">
-                {{ userName }}
+                {{ $store.state.user.email }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -39,7 +39,7 @@
           </v-list-item>
         </v-list>
         <v-list class="login">
-          <v-list-item link class="userName" v-if="!changeStatus">
+          <v-list-item link class="userName" v-if="!$store.state.user">
             <v-list-item-content class="sideMenu__login">
               <v-list-item-title class="text-h8" @click="openLogin()"
                 >Login</v-list-item-title
@@ -48,7 +48,9 @@
           </v-list-item>
           <v-list-item link class="userName" v-else>
             <v-list-item-content class="sideMenu__login">
-              <v-list-item-title class="text-h8" @click="clearUserData()"
+              <v-list-item-title
+                class="text-h8"
+                @click="$store.dispatch('logout')"
                 >Logout</v-list-item-title
               >
             </v-list-item-content>
@@ -82,7 +84,7 @@
 
           <!-- FAVORITE LIST -->
 
-          <v-list-item link class="side__menu-el">
+          <v-list-item link class="side__menu-el" v-if="$store.state.user">
             <router-link
               :to="{ name: 'favorite', params: { favorite_data: FAVORITE } }"
               class="d-flex align-center side__link"
@@ -102,7 +104,7 @@
 
                 <div
                   class="favorite__popUp d-flex justify-center"
-                  v-if="FAVORITE.length"
+                  v-if="FAVORITE.length && $store.state.user"
                 >
                   {{ FAVORITE.length }}
                 </div></v-list-item-icon
@@ -319,18 +321,6 @@
               ></router-link
             >
           </v-list-item>
-          <!-- <v-list-item link>
-            <v-list-item-icon>
-              <v-icon>mdi-account-multiple</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Shared with me</v-list-item-title>
-          </v-list-item>
-          <v-list-item link>
-            <v-list-item-icon>
-              <v-icon>mdi-star</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Starred</v-list-item-title>
-          </v-list-item> -->
         </v-list>
       </v-navigation-drawer>
     </v-card>
@@ -354,7 +344,7 @@ export default {
     return {
       userName: localStorage.getItem("userName"),
       email: localStorage.getItem("email"),
-      isLoginModal: false,
+      showLoginModal: false,
       changeStatus: false,
       isOpenSideMenu: false,
     };
@@ -366,18 +356,16 @@ export default {
   },
   methods: {
     openLogin: function () {
-      this.isLoginModal = !this.isLoginModal;
-      this.$emit("openLogin", this.isLoginModal);
-      this.isLoginModal = !this.isLoginModal;
+      this.showLoginModal = !this.showLoginModal;
+      eventBus.$emit("showLoginModal", this.showLoginModal);
+      this.showLoginModal = !this.showLoginModal;
+      eventBus.$emit("isOpenSideMenu", false);
     },
     clearUserData() {
-      localStorage.clear();
       this.changeStatus = false;
       this.$emit("changeStatus", false);
     },
-    showStatus: function () {
-      console.log("this.changeOnLogin внутри меню", this.changeOnLogin);
-    },
+    showStatus: function () {},
   },
   watch: {
     changeOnLogin(value) {
@@ -385,8 +373,7 @@ export default {
     },
   },
   created() {
-    eventBus.$on("openSideMenu", (data) => {
-      console.log("inside side panel");
+    eventBus.$on("isOpenSideMenu", (data) => {
       this.isOpenSideMenu = data;
     });
   },

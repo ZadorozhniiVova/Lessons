@@ -100,12 +100,11 @@ import Api from "../service/api";
 import { Hooper, Slide } from "hooper";
 import "hooper/dist/hooper.css";
 
-// , 494384, 463723, 29238, 437059
 export default {
   name: "MyComponent",
   data() {
     return {
-      sliderItemsID: [452642, 3328, 428839],
+      sliderItemsID: [452642, 3328, 428839, 494384, 463723, 29238, 437059],
       sliderGames: [],
       sliderGamesStores: [],
     };
@@ -168,15 +167,9 @@ export default {
     height: 40vh;
   }
   @include maxWidth(650px) {
-    height: 40vh;
+    height: 30vh;
     padding: 0;
   }
-  // @include maxWidth(500px) {
-  //   height: 30vh;
-  // }
-  // @include maxWidth(400px) {
-  //   height: 25vh;
-  // }
 
   &__container {
     width: 90%;
@@ -253,11 +246,8 @@ export default {
       }
 
       &-slide {
-        // height: fit-content !important;
-
         .rightSlide__item {
           width: 100%;
-          // height: fit-content;
         }
       }
     }

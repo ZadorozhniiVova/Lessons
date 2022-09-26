@@ -114,7 +114,6 @@ export default {
 .autocomplete-result-list {
   margin-top: 10px !important;
   border-radius: 16px !important;
-  // background-color: black !important;
   border: none !important;
 }
 

@@ -2,6 +2,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import Api from "../api";
+import { eventBus } from "../main";
+
+//auth
+import router from "@/router/routes";
+import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 Vue.use(Vuex);
 
@@ -19,6 +29,8 @@ let store = new Vuex.Store({
     platformsNintendo: [],
     platformsIos: [],
     platformsAndroid: [],
+    //auth
+    user: null,
   },
   mutations: {
     SET_GAMES_TO_STATE: (state, games) => {
@@ -68,6 +80,14 @@ let store = new Vuex.Store({
     },
     SET_PLATFORMS_ANDROID: (state, platform) => {
       state.platformsAndroid = platform;
+    },
+
+    //auth
+    SET_USER(state, user) {
+      state.user = user;
+    },
+    CLEAR_USER(state) {
+      state.user = null;
     },
   },
   actions: {
@@ -463,7 +483,71 @@ let store = new Vuex.Store({
       commit("DELETE_FROM_FAVORITE", favoriteGameIndex);
     },
 
-    //https://api.rawg.io/api/games?&key=a93f8e4bce884b11ae59a173f67e656c&ordering=-name&platforms=1&dates=2020-01-01,2022-12-31 - запрос с сортировкой
+    //auth
+    async login({ commit }, details) {
+      const { email, password } = details;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        switch (error.code) {
+          case "auth/user-not-found":
+            alert("User not found");
+            break;
+          case "auth/wrong-password":
+            alert("Wrong password");
+            break;
+          default:
+            alert("Something went wrong");
+        }
+        return;
+      }
+      commit("SET_USER", auth.currentUser);
+      router.push({ path: "/favorite" });
+      eventBus.$emit("showLoginModal", false);
+    },
+    async register({ commit }, details) {
+      const { email, password } = details;
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            alert("Email already in use");
+            break;
+          case "auth/invalide-email":
+            alert("Invalid email");
+            break;
+          case "auth/operation-not-allowed":
+            alert("Opeartion not allowed");
+            break;
+          case "auth/weak-password":
+            alert("Weak password");
+            break;
+          default:
+            alert("Something went wrong");
+        }
+        return;
+      }
+      commit("SET_USER", auth.currentUser);
+      router.push({ path: "/favorite" });
+      eventBus.$emit("showLoginModal", false);
+    },
+    async logout({ commit }) {
+      await signOut(auth);
+      commit("CLEAR_USER");
+      router.push("/");
+    },
+
+    fetchUser({ commit }) {
+      auth.onAuthStateChanged(async (user) => {
+        if (user === null) {
+          commit("CLEAR_USER", user);
+          if (router.isReady() && router.currentRoute.value.path === "/") {
+            router.push("/");
+          }
+        }
+      });
+    },
   },
   getters: {
     GAMES(state) {
@@ -499,6 +583,9 @@ let store = new Vuex.Store({
     PLATFORMSANDROID(state) {
       return state.platformsAndroid;
     },
+  },
+  modules: {
+    auth,
   },
 });
 

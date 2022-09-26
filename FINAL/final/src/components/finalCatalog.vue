@@ -1,5 +1,5 @@
 <template>
-  <div class="finalCatalog catalog">
+  <div class="finalCatalog catalog" @mousemove="move">
     <div class="catalog__title d-flex justify-center align-start flex-column">
       <h1 class="catalog__title-text">All Games</h1>
       <div class="d-flex">
@@ -53,6 +53,7 @@
 import finalCatalogItem from "./finalCatalogItem";
 import { mapActions, mapGetters } from "vuex";
 import Vue from "vue";
+import { eventBus } from "../main";
 
 export default {
   name: "finalCatalog",
@@ -160,11 +161,16 @@ export default {
     deleteFromFavorite(favoriteGameIndex) {
       this.DELETE_FROM_FAVORITE(favoriteGameIndex);
     },
+    move($event) {
+      if ($event.pageX < 50) {
+        eventBus.$emit("isOpenSideMenu", true);
+      } else {
+        eventBus.$emit("isOpenSideMenu", false);
+      }
+    },
   },
   mounted() {
-    this.GET_POPULAR_GAMES_FROM_API().then(() => {
-      // console.log(responce);
-    });
+    this.GET_POPULAR_GAMES_FROM_API().then(() => {});
   },
 };
 </script>
@@ -244,27 +250,6 @@ export default {
         font-size: 10px;
         line-height: 12px;
       }
-      // @include maxWidth(860px) {
-      //   font-size: 55px;
-      //   line-height: 56px;
-      // }
-
-      // @include maxWidth(678px) {
-      //   font-size: 45px;
-      //   line-height: 46px;
-      // }
-      // @include maxWidth(600px) {
-      //   font-size: 40px;
-      //   line-height: 41px;
-      // }
-      // @include maxWidth(455px) {
-      //   font-size: 35px;
-      //   line-height: 36px;
-      // }
-      // @include maxWidth(400px) {
-      //   font-size: 30px;
-      //   line-height: 31px;
-      // }
     }
     .form-control {
       display: flex;
@@ -289,9 +274,9 @@ export default {
         min-width: auto;
         max-width: 90px;
         width: 90px;
-        padding:2px;
+        padding: 2px;
         font-size: 12px;
-    }
+      }
 
       &:focus {
         border-color: #6dc849 !important;
@@ -311,8 +296,6 @@ export default {
     }
   }
   &__container {
-    // display: flex;
-    // flex-wrap: wrap;
     width: 95%;
     display: grid;
     gap: 10px;
@@ -393,6 +376,24 @@ export default {
       -moz-box-shadow: 0px 0px 40px 5px rgba(#6dc849, 0.5) !important;
       box-shadow: 0px 0px 40px 5px rgba(#6dc849, 0.5) !important;
     }
+  }
+}
+
+.user__email {
+  color: #6dc849;
+  font-size: 70px;
+  @include maxWidth(1300px) {
+    font-size: 60px;
+  }
+
+  @include maxWidth(1150px) {
+    font-size: 40px;
+  }
+  @include maxWidth(860px) {
+    font-size: 30px;
+  }
+  @include maxWidth(678px) {
+    font-size: 20px;
   }
 }
 </style>

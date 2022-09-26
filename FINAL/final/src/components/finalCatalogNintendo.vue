@@ -1,5 +1,5 @@
 <template>
-  <div class="finalCatalogNintendo catalog">
+  <div class="finalCatalogNintendo catalog" @mousemove="move">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
       <h1 class="catalog__title-text">Games for Nintendo</h1>
@@ -69,6 +69,7 @@ import finalCatalogItem from "./finalCatalogItem";
 import finalHeader from "../components/finalHeader";
 import finalFooter from "./finalFooter.vue";
 import Vue from "vue";
+import { eventBus } from "../main";
 
 export default {
   name: "finalCatalogNintendo",
@@ -149,6 +150,13 @@ export default {
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
+    },
+    move($event) {
+      if ($event.pageX < 50) {
+        eventBus.$emit("isOpenSideMenu", true);
+      } else {
+        eventBus.$emit("isOpenSideMenu", false);
+      }
     },
   },
   mounted() {

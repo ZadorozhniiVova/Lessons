@@ -1,5 +1,5 @@
 <template>
-  <div class="finalCatalogBestYear catalog">
+  <div class="finalCatalogBestYear catalog" @mousemove="move">
     <finalHeader />
     <div class="catalog__title d-flex justify-center align-start flex-column">
       <h1 class="catalog__title-text">Best of the year</h1>
@@ -50,6 +50,7 @@ import finalHeader from "../components/finalHeader";
 import finalFooter from "../components/finalFooter.vue";
 import { mapActions, mapGetters } from "vuex";
 import Vue from "vue";
+import { eventBus } from "../main";
 
 export default {
   name: "finalCatalogBestYear",
@@ -129,6 +130,13 @@ export default {
     },
     addToFavorite(data) {
       this.ADD_TO_FAVORITE(data);
+    },
+    move($event) {
+      if ($event.pageX < 50) {
+        eventBus.$emit("isOpenSideMenu", true);
+      } else {
+        eventBus.$emit("isOpenSideMenu", false);
+      }
     },
   },
   mounted() {

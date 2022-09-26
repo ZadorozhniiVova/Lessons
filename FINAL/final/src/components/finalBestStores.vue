@@ -177,9 +177,7 @@
             </svg>
           </div>
           <p class="item__name">Microsoft</p>
-          <p class="item__descr">
-            «Power Your Dreams» 
-          </p>
+          <p class="item__descr">«Power Your Dreams»</p>
         </a>
         <a
           href="https://www.nintendo.ru/Nintendo-eShop/Nintendo-eShop-1806894.html"
@@ -203,9 +201,7 @@
             </svg>
           </div>
           <p class="item__name">Nintendo</p>
-          <p class="item__descr">
-            «Play it Proud»
-          </p>
+          <p class="item__descr">«Play it Proud»</p>
         </a>
       </div>
     </section>
@@ -216,7 +212,7 @@
 export default {
   data() {
     return {};
-  }
+  },
 };
 </script>
 
@@ -243,7 +239,7 @@ export default {
       line-height: 50px;
       text-align: center;
       text-transform: capitalize;
-      color: white;
+      color: #6dc849;
       @include flex-center-column;
       margin-bottom: 40px;
       @include maxWidth(1260px) {
@@ -263,14 +259,12 @@ export default {
       @include maxWidth(700px) {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
-
       }
     }
     .item {
       @include flex-center-column;
 
       width: 100%;
-      // width: calc(313px / 1300px * 100%);
       text-align: center;
       text-decoration: none;
       @include transition(0.1s);
@@ -288,23 +282,21 @@ export default {
       @include maxWidth(700px) {
         max-width: 100%;
         width: 100%;
-
       }
 
       &__poster {
         width: 50%;
         min-width: 50%;
-        height:50%;
+        height: 50%;
 
         &-img {
           width: 100%;
           @include maxWidth(700px) {
-          width: auto;
-        }
+            width: auto;
+          }
         }
       }
       &__name {
-        // font-family: $titleFont;
         font-style: normal;
         font-weight: 400;
         font-size: 24px;

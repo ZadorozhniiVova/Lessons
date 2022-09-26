@@ -1,7 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router/routes";
-// import store from "./store/store";
 import { Table, Input } from "buefy";
 import "buefy/dist/buefy.css";
 import Buefy from "buefy";
@@ -20,13 +19,11 @@ import VModal from "vue-js-modal/dist/index.nocss.js";
 import "vue-js-modal/dist/styles.css";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
-import VueSocialSharing from "vue-social-sharing";
 import Multiselect from "vue-multiselect";
 import routes from "@/router/routes.js";
 import VueAnimXYZ from "@animxyz/vue";
 import "@animxyz/core";
 import "@morioh/v-lightbox/dist/lightbox.css";
-// import Lightbox from '@morioh/v-lightbox'
 import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css";
 import VAnimateCss from "v-animate-css";
@@ -34,25 +31,23 @@ import "animate.css";
 import store from "./vuex/store";
 import Autocomplete from "@trevoreyre/autocomplete-vue";
 import "@trevoreyre/autocomplete-vue/dist/style.css";
-import ScrollUp from "vue-scroll-up";
-import "vue-scroll-up/dist/style.css";
+import Emoji from "vuejs-emojis";
 
 export const eventBus = new Vue();
 Vue.component("VueSlickCarousel", VueSlickCarousel);
 Vue.use(Buefy);
 Vue.use(Table);
 Vue.use(Input);
-
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(loader);
 Vue.use(VModal);
-Vue.use(VueSocialSharing);
 Vue.use(VueAnimXYZ);
 Vue.use(VAnimateCss);
 Vue.use(Autocomplete);
+Vue.use(store);
 
 new Vue({
   router,
@@ -63,12 +58,11 @@ new Vue({
   VueAxios,
   $,
   VModal,
-  VueSocialSharing,
   Multiselect,
   routes,
   Vuesax,
   Autocomplete,
-  ScrollUp,
+  Emoji,
 
   render: (h) => h(App),
   mounted() {},

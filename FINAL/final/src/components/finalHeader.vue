@@ -2,7 +2,11 @@
   <div class="hello" id="header">
     <header class="header">
       <div class="header__container">
-        <a href="#" class="header__container-logo logo">
+        <router-link
+          :to="{ name: 'home' }"
+          href="#"
+          class="header__container-logo logo"
+        >
           <svg
             class="logo__img"
             viewBox="0 0 396 247"
@@ -125,7 +129,7 @@
               <rect fill="none" stroke="none" visibility="hidden"></rect>
             </g>
           </svg>
-        </a>
+        </router-link>
         <finalSearchBar />
         <nav class="header__container-markets markets">
           <ul class="markets__list">
@@ -204,12 +208,12 @@
             </li>
           </ul>
 
-          <div class="buttonLogin">
+          <div class="!buttonLogin">
             <v-btn
               color="red"
               fab
               dark
-              v-if="!changeStatus"
+              v-if="!$store.state.user"
               @click="loadModal"
               variant="outline-primary"
             >
@@ -227,8 +231,8 @@
               fab
               dark
               v-else
-              @click="clearUserData"
               variant="outline-primary"
+              @click="$store.dispatch('logout')"
             >
               <VueToyFace
                 size="50"
@@ -242,17 +246,10 @@
         </nav>
       </div>
     </header>
-    <finalLoginModal
-      :show="showLogin"
-      @login="userLogIn"
-      @closeModal="closeModal($event)"
-      @changeUserStatusOnLogin="changeUserStatusOnLogin($event)"
-    />
   </div>
 </template>
 
 <script>
-import finalLoginModal from "@/components/finalLoginModal.vue";
 import finalSearchBar from "./finalSearchBar.vue";
 import VueToyFace from "vue-toy-face";
 import { eventBus } from "../main";
@@ -260,7 +257,6 @@ import { eventBus } from "../main";
 export default {
   name: "finalHeader",
   components: {
-    finalLoginModal,
     finalSearchBar,
     VueToyFace,
   },
@@ -269,52 +265,42 @@ export default {
       showLogin: false,
       password: "",
       userName: localStorage.getItem("userName"),
-      changeStatus: false,
       isOpenSideMenu: false,
+      showLoginModal: false,
     };
   },
-  computed: {},
+
   methods: {
     loadModal: function () {
-      this.showLogin = !this.showLogin;
+      this.showLoginModal = true;
+      eventBus.$emit("showLoginModal", true);
     },
-    userLogIn() {
-      this.userName = true;
-    },
-    clearUserData() {
-      localStorage.clear();
-      this.userName = false;
-      this.changeStatus = false;
-    },
-    closeModal(close) {
-      this.showLogin = close;
-    },
-    changeUserStatusOnLogin(changeStatusOnLogin) {
-      // console.log("login");
-      this.changeStatus = changeStatusOnLogin;
+    closeModal() {
+      eventBus.$emit("showLoginModal", false);
     },
     openSideMenu() {
       this.isOpenSideMenu = !this.isOpenSideMenu;
-      console.log("openSideMenu click on btn Header");
-      eventBus.$emit("openSideMenu", this.isOpenSideMenu);
+      eventBus.$emit("isOpenSideMenu", this.isOpenSideMenu);
     },
+  },
+  created() {
+    eventBus.$on("changeStatusOnLogIn", (data) => {
+      this.changeStatus = data;
+    });
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "../assets/scss/_mixins.scss";
 .header {
   width: 100%;
   background-color: #151515;
-  // background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
 
   &__container {
-    // max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    padding: 24px 40px;
+    padding: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;

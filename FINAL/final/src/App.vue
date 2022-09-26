@@ -1,21 +1,13 @@
 <template>
   <v-app class="app">
-    <finalBtnOpenSideMenu />
-    <finalBtnScrollUp />
-    <finalSideMenu
-      @openLogin="isLoginModal($event)"
-      @changeStatus="changeStatus"
-      :changeOnLogin="changeOnLogin"
-    />
+    <finalBtnOpenSideMenu class="finalBtnOpenSideMenu" />
+    <finalSideMenu />
     <!-- <preloader /> -->
     <v-main>
       <router-view />
     </v-main>
-    <finalLoginModal
-      :show="isShowModal"
-      @closeModal="closeModal($event)"
-      @changeUserStatusOnLogin="changeUserStatusOnLogin($event)"
-    />
+    <finalLoginModal />
+    <finalBtnScrollUp />
   </v-app>
 </template>
 
@@ -25,13 +17,14 @@ import finalLoginModal from "@/components/finalLoginModal.vue";
 import finalSideMenu from "@/components/finalSideMenu.vue";
 import finalBtnOpenSideMenu from "@/components/finalBtnOpenSideMenu.vue";
 import finalBtnScrollUp from "@/components/finalBtnScrollUp.vue";
+
 export default {
   name: "App",
   data() {
     return {
-      name: localStorage.userName,
-      isShowModal: false,
-      changeOnLogin: false,
+      // name: localStorage.userName,
+      // isShowModal: false,
+      // changeOnLogin: false,
     };
   },
   components: {
@@ -42,22 +35,26 @@ export default {
     finalBtnScrollUp,
   },
   methods: {
-    isLoginModal(isShow) {
-      console.log("receive");
-      this.isShowModal = isShow;
-    },
-    closeModal(close) {
-      console.log(close);
-      this.isShowModal = close;
-    },
-    changeUserStatusOnLogin(changeOnLogin) {
-      console.log("inAPPinn", this.changeOnLogin);
-      this.changeOnLogin = changeOnLogin;
-      console.log("inAPPout", this.changeOnLogin);
-    },
-    changeStatus(logOut) {
-      this.changeOnLogin = logOut;
-    },
+    // someMethod: function (event) {
+    //   this.clientMouseX = event.pageX;
+    //   console.log(this.clientMouseX)
+    // },
+    // isLoginModal(isShow) {
+    //   console.log("receive");
+    //   this.isShowModal = isShow;
+    // },
+    // closeModal(close) {
+    //   console.log(close);
+    //   this.isShowModal = close;
+    // },
+    // changeUserStatusOnLogin(changeOnLogin) {
+    //   console.log("inAPPinn", this.changeOnLogin);
+    //   this.changeOnLogin = changeOnLogin;
+    //   console.log("inAPPout", this.changeOnLogin);
+    // },
+    // changeStatus(logOut) {
+    //   this.changeOnLogin = logOut;
+    // },
   },
 };
 </script>
@@ -74,5 +71,9 @@ export default {
   align-items: center;
   background-color: #00dbde;
   background-image: linear-gradient(43deg, #00dbde 0%, #fc00ff 100%);
+}
+
+finalSideMenu {
+  z-index: 999;
 }
 </style>
