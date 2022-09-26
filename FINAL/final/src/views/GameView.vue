@@ -428,7 +428,7 @@ export default {
       return this.gameInfo.ratings_count;
     },
     move($event) {
-      if ($event.pageX < 50) {
+      if ($event.pageX < 20) {
         eventBus.$emit("isOpenSideMenu", true);
       } else {
         eventBus.$emit("isOpenSideMenu", false);

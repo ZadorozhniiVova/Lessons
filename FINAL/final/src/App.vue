@@ -2,7 +2,7 @@
   <v-app class="app">
     <finalBtnOpenSideMenu class="finalBtnOpenSideMenu" />
     <finalSideMenu />
-    <!-- <preloader /> -->
+    <preloader />
     <v-main>
       <router-view />
     </v-main>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-// import Preloader from "@/components/finalPreloader.vue";
+import Preloader from "@/components/finalPreloader.vue";
 import finalLoginModal from "@/components/finalLoginModal.vue";
 import finalSideMenu from "@/components/finalSideMenu.vue";
 import finalBtnOpenSideMenu from "@/components/finalBtnOpenSideMenu.vue";
@@ -20,42 +20,13 @@ import finalBtnScrollUp from "@/components/finalBtnScrollUp.vue";
 
 export default {
   name: "App",
-  data() {
-    return {
-      // name: localStorage.userName,
-      // isShowModal: false,
-      // changeOnLogin: false,
-    };
-  },
   components: {
-    // Preloader,
+    Preloader,
     finalSideMenu,
     finalLoginModal,
     finalBtnOpenSideMenu,
-    finalBtnScrollUp,
-  },
-  methods: {
-    // someMethod: function (event) {
-    //   this.clientMouseX = event.pageX;
-    //   console.log(this.clientMouseX)
-    // },
-    // isLoginModal(isShow) {
-    //   console.log("receive");
-    //   this.isShowModal = isShow;
-    // },
-    // closeModal(close) {
-    //   console.log(close);
-    //   this.isShowModal = close;
-    // },
-    // changeUserStatusOnLogin(changeOnLogin) {
-    //   console.log("inAPPinn", this.changeOnLogin);
-    //   this.changeOnLogin = changeOnLogin;
-    //   console.log("inAPPout", this.changeOnLogin);
-    // },
-    // changeStatus(logOut) {
-    //   this.changeOnLogin = logOut;
-    // },
-  },
+    finalBtnScrollUp
+  }
 };
 </script>
 

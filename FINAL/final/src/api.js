@@ -5,10 +5,10 @@ export default {
     return {};
   },
   getFilterFromApi(key, filterRequest) {
-    console.log(
-      "getFilterFromApi",
-      `https://api.rawg.io/api/games?&key=${key}${filterRequest}&page=1`
-    );
+    // console.log(
+    //   "getFilterFromApi",
+    //   `https://api.rawg.io/api/games?&key=${key}${filterRequest}&page=1`
+    // );
     return axios.get(
       `https://api.rawg.io/api/games?&key=${key}${filterRequest}&page=1`
     );
